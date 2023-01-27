@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";
+const sampleImage = 'http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg';
 
 const Designer = dynamic(() => import("@/components/designer"), {
     ssr: false,
@@ -10,49 +11,53 @@ const Editor = dynamic(() => import("@/components/editor"), {
 import { designTemplates } from '@/lib/constants';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import { useRouter } from 'next/router';
 
-function App() {
-    const [appLoaded, setAppLoaded] = React.useState(false);
-    const [selected, setSelected] = React.useState(false);
+function Customize() {
+    const router = useRouter();
+    const [notebookDetails, setNotebookDetails] = useState({});
     const [selectedNotebook, setSelectedNotebook] = React.useState({});
-    const [modal, setModal] = React.useState({
-        isOpen: false,
-        message: 'anjay'
-    })
+    // const [modal, setModal] = React.useState({
+    //     isOpen: false,
+    //     message: 'anjay'
+    // })
     const [bookForPurchase, setBookForPurchase] = useState([]);
-    const elStage = React.useRef();
     useEffect(() => {
-        setBookForPurchase(
-            Array.from(Array(10).keys()).map((id) => ({
+        const notebookDetails = JSON.parse(sessionStorage.getItem("notebookDetails"));
+        setNotebookDetails(notebookDetails);
+        if (Number(notebookDetails?.specifications?.quantity)) {
+            const bookSet = Array.from(Array(Number(notebookDetails.specifications.quantity)).keys(Number(notebookDetails.specifications.quantity))).map((id) => ({
                 id,
-                url: `http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg`
+                url: sampleImage,
+                isCustomizedDesign: true,
+                designId: null
             }))
-        );
-        setSelectedNotebook({
-            id: 0,
-            url: `http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg`
-        })
+
+            setBookForPurchase(bookSet);
+            setSelectedNotebook(bookSet[0])
+        } else {
+            router.push('/specification')
+        }
     }, []);
-    console.log({ selectedNotebook });
 
     // React.useEffect(() => {
     //   // console.log(tshirt)
     // }, [])
 
-    const checkDeselect = e => {
-        // deselect when clicked on empty area
-        const clickedOnEmpty = e.target === e.target.getStage();
-        if (clickedOnEmpty) {
-            setSelected(false);
-        }
-    };
+    // const checkDeselect = e => {
+    //     // deselect when clicked on empty area
+    //     const clickedOnEmpty = e.target === e.target.getStage();
+    //     if (clickedOnEmpty) {
+    //         setSelected(false);
+    //     }
+    // };
 
-    function closeModal() {
-        setModal({
-            isOpen: false,
-            message: null
-        })
-    }
+    // function closeModal() {
+    //     setModal({
+    //         isOpen: false,
+    //         message: null
+    //     })
+    // }
 
 
 
@@ -79,13 +84,71 @@ function App() {
     //     }
     // }, [appLoaded, setAppLoaded])
     const applyDesign = (bookDesign) => {
+        setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
         bookForPurchase.map((book) => {
             if (book.id === selectedNotebook.id) {
                 book.url = bookDesign.url
-                setSelectedNotebook({ ...selectedNotebook, url: bookDesign.url })
+                book.designId = bookDesign.id
+                book.isCustomizedDesign = false
+                setSelectedNotebook({ ...selectedNotebook, url: bookDesign.url, designId: bookDesign.id, isCustomizedDesign: false })
             }
         })
         setBookForPurchase([...bookForPurchase])
+    }
+
+    const handleApplyForAll = () => {
+        setNotebookDetails({ ...notebookDetails, isApplyForAll: true });
+        bookForPurchase.map((book) => {
+            book.url = selectedNotebook.url
+            book.designId = selectedNotebook.designId
+            book.isCustomizedDesign = selectedNotebook.isCustomizedDesign
+        })
+
+    }
+    const handleClearDesign = () => {
+        setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
+        bookForPurchase.map((book) => {
+            if (book.id === selectedNotebook.id) {
+                book.url = sampleImage
+                book.designId = null
+                book.isCustomizedDesign = true
+                setSelectedNotebook({ ...selectedNotebook, url: sampleImage, designId: null, isCustomizedDesign: false })
+            }
+
+        })
+    }
+
+    const handleResult = () => {
+        const resultNotebook = [];
+        const { quantity, ...rest } = notebookDetails.specifications;
+        let result = {
+            // specifications: notebookDetails.specifications,
+            isAgreeTermsAndConditions: notebookDetails.isAgreeTermsAndConditions,
+            isDesignApplyForAll: notebookDetails.isApplyForAll,
+            resultNotebook: resultNotebook,
+            quantity: Number(quantity)
+
+        }
+        if (notebookDetails.isApplyForAll) {
+            result.designId = selectedNotebook.designId
+            result.resultNotebook.push({
+                designId: selectedNotebook.designId,
+                url: selectedNotebook.url,
+                ...rest
+            })
+        } else {
+            bookForPurchase.map((book) => {
+                resultNotebook.push({
+                    id: book.id,
+                    designId: book.designId,
+                    url: book.url,
+                    ...rest
+                })
+            })
+            result.resultNotebook = resultNotebook;
+        }
+
+        console.log({ result });
     }
 
     return (
@@ -96,11 +159,15 @@ function App() {
                     selectedNotebook={selectedNotebook}
                     setSelectedNotebook={setSelectedNotebook}
                     bookForPurchase={bookForPurchase}
+                    handleApplyForAll={handleApplyForAll}
+                    handleClearDesign={handleClearDesign}
+                    notebookDetails={notebookDetails}
                 />
                 <Editor
                     designTemplates={designTemplates}
                     applyDesign={applyDesign}
-
+                    handleResult={handleResult}
+                    notebookDetails={notebookDetails}
                 />
             </div>
             <Footer />
@@ -108,4 +175,4 @@ function App() {
     );
 }
 
-export default App;
+export default Customize;

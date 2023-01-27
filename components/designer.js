@@ -17,26 +17,22 @@ export class URLImage extends React.Component {
         this.image.removeEventListener('load', this.handleLoad);
     }
     loadImage() {
-        // save to "this" to remove "load" handler on unmount
         this.image = new window.Image();
         this.image.src = this.props.src;
         this.image.addEventListener('load', this.handleLoad);
     }
     handleLoad = () => {
-        // after setState react-konva will update canvas and redraw the layer
-        // because "image" property is changed
         this.setState({
             image: this.image,
         });
-        // if you keep same image object during source updates
-        // you will have to update layer manually:
-        // this.imageNode.getLayer().batchDraw();
     };
     render() {
         return (
             <Image
-                width={300}
-                height={350}
+                x={this.props.x}
+                y={this.props.y}
+                width={this.props.width}
+                height={this.props.height}
                 image={this.state.image}
                 ref={(node) => {
                     this.imageNode = node;
@@ -47,7 +43,7 @@ export class URLImage extends React.Component {
 }
 
 
-const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook }) => {
+const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, handleApplyForAll, handleClearDesign, notebookDetails }) => {
 
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const carouselItemsRef = useRef([]);
@@ -97,8 +93,29 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook }) =>
     };
 
     return (
-        <div className="w-1/2 bg-primary py-10 h-screen text-center">
+        <div className="w-1/2 bg-indigo-500 py-10 h-screen text-center">
             <div className="carousel-container">
+                <div className="flex justify-center items-center">
+                    <div onClick={handleApplyForAll} className="text-white flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer">
+                        {
+                            notebookDetails.isApplyForAll ?
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg> :
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+
+                        }
+                        <span>{notebookDetails.isApplyForAll ? 'Applied For All' : 'Apply For All'}</span>
+                    </div>
+                    <div onClick={handleClearDesign} className="text-red-500 flex justify-center items-center flex-col  bg-indigo-800 p-3 rounded cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-center">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+                        <span>Clear Design</span>
+                    </div>
+                </div>
                 <div className="selected-image flex justify-center items-center">
                     <Stage
                         width={300}
@@ -108,14 +125,19 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook }) =>
                             bookForPurchase.map((book) => {
                                 if (selectedNotebook.id === book.id)
                                     return (
-                                        <Layer>
+                                        <Layer key={book.id}>
                                             <Group>
-                                                <URLImage src={book.url} />
+                                                <URLImage src={book.url} width={300} height={350} x={8} y={0} />
                                             </Group>
                                         </Layer>
-
                                     )
                             })
+                        }
+                        {
+                            notebookDetails?.specifications?.binding === "spiral" &&
+                            <Layer>
+                                <URLImage src={'https://cdn.discordapp.com/attachments/885481565671542824/1068526514339061864/New_Project_3.png' || '@/public/spiral.png'} width={50} x={-17} height={370} y={-10} />
+                            </Layer>
                         }
                     </Stage>
                 </div>
@@ -140,13 +162,17 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook }) =>
                         className="carousel__button carousel__button-left"
                         onClick={handleLeftClick}
                     >
-                        Prev
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                        </svg>
                     </button>
                     <button
                         className="carousel__button carousel__button-right"
                         onClick={handleRightClick}
                     >
-                        Next
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                        </svg>
                     </button>
                 </div>
             </div>

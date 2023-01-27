@@ -1,24 +1,30 @@
 import Image from "next/image";
 import cover from '@/public/cover.svg'
-import { useState } from "react";
-import { specifications } from "@/lib/constants";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import axios from "axios";
 
 const Specification = () => {
-  const [specificationValues, setSpecificationValues] = useState({
-    pages: "140",
-    size: "longBook",
-    binding: "spiral",
-    ruling: "unruled",
-    quantity: "6",
-  });
+  const [specifications, setSpecifications] = useState([]);
+  const [specificationValues, setSpecificationValues] = useState({});
 
   const handleChange = (event) => {
     console.log(event.target.name, event.target.id);
     setSpecificationValues({ ...specificationValues, [event.target.name]: event.target.id })
   }
+  useEffect(() => {
+    axios.get('/api/specifications').then((response) => {
+      setSpecifications(response.data.data);
+      setSpecificationValues(response.data.defaultValues)
+    })
+  }, [])
+
+  const submitSpecifications = () => {
+    sessionStorage.setItem("notebookDetails", JSON.stringify({ specifications: specificationValues }));
+  }
+
   return (
     <>
       <Header />
@@ -71,8 +77,8 @@ const Specification = () => {
               }
             </div>
             <div className="flex gap-3 -mx-3">
-              <Link href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-white  border font-bold text-gray-500 text-xl w-1/2">Bulk Order</Link>
-              <Link href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-indigo-500 font-bold text-white text-xl w-1/2">Continue</Link>
+              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-white  border font-bold text-gray-500 text-xl w-1/2">Bulk Order</Link>
+              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-indigo-500 font-bold text-white text-xl w-1/2">Continue</Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from 'react'
 import { default as NextImage } from 'next/image';
 import Link from 'next/link';
 
-export default function Editor({ designTemplates, applyDesign }) {
+export default function Editor({ designTemplates, applyDesign, handleResult, notebookDetails }) {
     // const [fileUpload, setFileUpload] = React.useState({});
     // const [dlImage, setDLimage] = React.useState(false)
 
@@ -172,6 +172,18 @@ export default function Editor({ designTemplates, applyDesign }) {
         <div className="w-full py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center justify-center">
             <div className="w-full px-5 lg:px-10 overflow-scroll h-screen">
                 <h1 className="mb-5 text-2xl lg:text-5xl font-bold text-gray-800">BOOK DESIGNER</h1>
+                <div className='grid gap-3 grid-cols-2 my-3'>
+                    <div className="text-white bg-indigo-500  p-3 rounded  ">
+                        <div className="font-bold uppercase">Ruling Type</div>
+                        <div className="capitalize">{notebookDetails?.specifications?.ruling}</div>
+
+                    </div>
+                    <div className="text-white bg-indigo-500  p-3 rounded">
+                        <div className="font-bold uppercase">Pages size</div>
+                        <div className="capitalize">{notebookDetails?.specifications?.size}</div>
+
+                    </div>
+                </div>
                 <div className="mb-5">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Design Nootbooks
@@ -181,7 +193,7 @@ export default function Editor({ designTemplates, applyDesign }) {
                             designTemplates.map((design) => {
                                 return (
                                     <div onClick={() => applyDesign(design)} key={design.id}>
-                                        <NextImage src={design.url} width={100} height={150} className="rounded-2xl m-3 cursor-pointer border-solid border-2 border-gray-700 " />
+                                        <NextImage src={design.url} width={100} height={150} className="rounded-2xl m-3 cursor-pointer border-solid border-2 border-gray-700 " alt="" />
                                     </div>
                                 )
                             })
@@ -216,7 +228,7 @@ export default function Editor({ designTemplates, applyDesign }) {
                     </label>
                 </div> */}
                 <div className='flex items-center justify-center text-center'>
-                    <Link href={'/'} className="bg-indigo-500 w-full  text-white p-2 " >Save & Add To Cart</Link>
+                    <button onClick={handleResult} className="bg-indigo-500 w-full  text-white p-2 " >Save & Add To Cart</button>
                 </div>
             </div>
         </div>
