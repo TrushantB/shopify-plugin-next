@@ -28,10 +28,10 @@ const Specification = () => {
   return (
     <>
       <Header />
-      <div className="bg-indigo-100 text-gray-500 rounded-3xl shadow-xl w-full">
+      <div className="bg-indigo-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-scroll">
         <div className="md:flex w-full items-center h-screen">
           <div className="w-1/2 bg-indigo-500 py-10 px-10 h-full flex items-center justify-center ">
-            <Image src={cover} height={500} width={400} />
+            <Image src={cover} height={450} width={350} />
           </div>
           <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
             <div className="text-center mb-10 leading-10">
