@@ -153,9 +153,13 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
                                         <Layer key={book.id}>
                                             <Group>
                                                 <URLImage src={book.url} width={300} height={350} x={8} y={0} />
-                                                {
+                                                {/* {
                                                     book.designId == null &&
                                                     <URLImage src={`http://localhost:3000//${front.src}` || 'https://firebasestorage.googleapis.com/v0/b/myapp-281407.appspot.com/o/front.svg?alt=media&token=edaa5bac-f766-4327-baf5-2b65258dd6d6'} width={300} x={8} height={350} y={0} />
+                                                } */}
+                                                {
+                                                    book.designId == null && !book.designs.length && notebookDetails?.specifications?.ruling === "ruled" &&
+                                                    <URLImage src={'https://i.pinimg.com/originals/10/5a/fb/105afbfb1a012b3398ff35b54772f43f.png' || '@/public/spiral.png'} width={300} x={8} height={350} y={0} />
                                                 }
                                                 {
                                                     book.designs.map((design, index) => {
@@ -199,6 +203,7 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
                                 <URLImage src={'https://cdn.discordapp.com/attachments/885481565671542824/1068526514339061864/New_Project_3.png' || '@/public/spiral.png'} width={50} x={-17} height={370} y={-10} />
                             </Layer>
                         }
+
                     </Stage>
                 </div>
                 <div className="carousel">
