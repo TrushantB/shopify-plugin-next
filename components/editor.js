@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import html2canvas from 'html2canvas'
 import { default as NextImage } from 'next/image';
-import Link from 'next/link';
 
-export default function Editor({ designTemplates, applyDesign, handleResult, notebookDetails }) {
+export default function Editor({ designTemplates, applyDesign, handleResult, notebookDetails, handleAddtext, handleAddImage }) {
+    const [text, setText] = useState('');
     // const [fileUpload, setFileUpload] = React.useState({});
     // const [dlImage, setDLimage] = React.useState(false)
 
@@ -180,7 +180,7 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                     </div>
                     <div className="text-white bg-indigo-500  p-3 rounded">
                         <div className="font-bold uppercase">Pages size</div>
-                        <div className="capitalize">{notebookDetails?.specifications?.size}</div>
+                        <div className="capitalize">{notebookDetails?.specifications?.pages} pages and {notebookDetails?.specifications?.size} </div>
 
                     </div>
                 </div>
@@ -227,6 +227,33 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                         <input id="d_back" onChange={changeDesign} className="w-full hidden" type="file" name="back" />
                     </label>
                 </div> */}
+                <div className='flex my-3 gap-3'>
+                    <div className='w-3/4'>
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Add Text On Notebook
+                        </label>
+                        <div className='flex items-center justify-center text-center gap-3'>
+                            <input type="text" id="first_name" value={text} onChange={(e) => setText(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type text here..." required />
+                            <button onClick={() => {
+                                handleAddtext(text);
+                                setText('');
+                            }} className="bg-indigo-500 w-1/3  text-white p-2 " >Add Text</button>
+                        </div>
+                    </div>
+                    <div className='w-1/3'>
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Add Image On Notebook
+                        </label>
+                        <div className='flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer' onClick={handleAddImage}>
+                            <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                            </svg>
+                            <span className="text-base leading-normal">Upload Image</span>
+                            {/* <input type='file' className="hidden" /> */}
+                        </div>
+                    </div>
+
+                </div>
                 <div className='flex items-center justify-center text-center'>
                     <button onClick={handleResult} className="bg-indigo-500 w-full  text-white p-2 " >Save & Add To Cart</button>
                 </div>

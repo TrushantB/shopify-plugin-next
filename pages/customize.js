@@ -22,6 +22,42 @@ function Customize() {
     //     message: 'anjay'
     // })
     const [bookForPurchase, setBookForPurchase] = useState([]);
+    const handleAddtext = (text) => {
+        bookForPurchase.map((book) => {
+            if (book.id === selectedNotebook.id) {
+                const design = {
+                    type: "text",
+                    isDragging: false,
+                    width: 300 / 3,
+                    x: 300 / 2 - (300 / 3) / 2,
+                    y: 350 / 2 - (350 / 3) / 2,
+                    url: '',
+                    height: 350 / 15,
+                    text: text,
+
+                }
+                book.designs.push(design);
+                setSelectedNotebook({ ...selectedNotebook })
+            }
+        })
+    }
+    const handleAddImage = (image) => {
+        bookForPurchase.map((book) => {
+            if (book.id === selectedNotebook.id) {
+                const design = {
+                    type: "image",
+                    isDragging: false,
+                    width: 300 / 3,
+                    height: 350 / 3,
+                    x: 0,
+                    y: 0,
+                    url: 'https://i.ibb.co/sskfDr1/lover-4992877-640.png'
+                }
+                book.designs.push(design);
+                setSelectedNotebook({ ...selectedNotebook })
+            }
+        })
+    }
     useEffect(() => {
         const notebookDetails = JSON.parse(sessionStorage.getItem("notebookDetails"));
         setNotebookDetails(notebookDetails);
@@ -30,7 +66,8 @@ function Customize() {
                 id,
                 url: sampleImage,
                 isCustomizedDesign: true,
-                designId: null
+                designId: null,
+                designs: []
             }))
 
             setBookForPurchase(bookSet);
@@ -162,12 +199,15 @@ function Customize() {
                     handleApplyForAll={handleApplyForAll}
                     handleClearDesign={handleClearDesign}
                     notebookDetails={notebookDetails}
+                    setBookForPurchase={setBookForPurchase}
                 />
                 <Editor
                     designTemplates={designTemplates}
                     applyDesign={applyDesign}
                     handleResult={handleResult}
                     notebookDetails={notebookDetails}
+                    handleAddtext={handleAddtext}
+                    handleAddImage={handleAddImage}
                 />
             </div>
             <Footer />

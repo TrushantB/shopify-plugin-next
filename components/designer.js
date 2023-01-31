@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Image, Transformer, Group, Text } from "react-konva";
+import useImage from "use-image";
+import front from './images/front.svg'
 
 export class URLImage extends React.Component {
     state = {
@@ -43,10 +45,23 @@ export class URLImage extends React.Component {
 }
 
 
-const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, handleApplyForAll, handleClearDesign, notebookDetails }) => {
-
+const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, handleApplyForAll, handleClearDesign, notebookDetails, setBookForPurchase }) => {
+    const [isSelected, setIsSelected] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const carouselItemsRef = useRef([]);
+    const onSelect = () => {
+        setIsSelected(!isSelected);
+    }
+    const onChange = (data, index) => {
+        bookForPurchase.map((book) => {
+            if (selectedNotebook.id === book.id) {
+                book.designs[index] = data;
+            }
+        })
+        setBookForPurchase([...bookForPurchase]);
+    }
+
+
 
     useEffect(() => {
         if (bookForPurchase && bookForPurchase[0]) {
@@ -93,7 +108,17 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
     };
 
     return (
-        <div className="w-1/2 bg-indigo-500 py-10 h-screen text-center">
+        <div className="w-1/2 bg-indigo-500  min-h-screen text-center">
+            {/* <div onClick={handleClearDesign} className="text-white flex justify-end    cursor-pointer">
+                <div className="bg-indigo-800 p-3 flex justify-center items-center flex-col">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                    </svg>
+
+                    <span >Design Back Cover</span>
+
+                </div>
+            </div> */}
             <div className="carousel-container">
                 <div className="flex justify-center items-center">
                     <div onClick={handleApplyForAll} className="text-white flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer">
@@ -123,16 +148,51 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
                     >
                         {
                             bookForPurchase.map((book) => {
-                                if (selectedNotebook.id === book.id)
+                                if (selectedNotebook.id === book.id) {
                                     return (
                                         <Layer key={book.id}>
                                             <Group>
                                                 <URLImage src={book.url} width={300} height={350} x={8} y={0} />
+                                                {
+                                                    book.designId == null &&
+                                                    <URLImage src={`http://localhost:3000//${front.src}` || 'https://firebasestorage.googleapis.com/v0/b/myapp-281407.appspot.com/o/front.svg?alt=media&token=edaa5bac-f766-4327-baf5-2b65258dd6d6'} width={300} x={8} height={350} y={0} />
+                                                }
+                                                {
+                                                    book.designs.map((design, index) => {
+                                                        if (design.type === "image") {
+                                                            return (
+                                                                <DesignImageView
+                                                                    key={index}
+                                                                    design={design}
+                                                                    onChange={onChange}
+                                                                    onSelect={onSelect}
+                                                                    isSelected={isSelected}
+                                                                    index={index}
+                                                                />
+                                                            )
+                                                        } else {
+                                                            return (
+                                                                <DesignTextView
+                                                                    key={index}
+                                                                    design={design}
+                                                                    onChange={onChange}
+                                                                    onSelect={onSelect}
+                                                                    isSelected={isSelected}
+                                                                    index={index}
+                                                                />
+                                                            )
+                                                        }
+                                                    })
+                                                }
+
                                             </Group>
                                         </Layer>
                                     )
+
+                                }
                             })
                         }
+
                         {
                             notebookDetails?.specifications?.binding === "spiral" &&
                             <Layer>
@@ -182,14 +242,13 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
 
 
 
-const DesignView = ({ isSelected, onSelect, tshirt, onChange, data }) => {
-    const [image] = useImage(tshirt.preview, 'Anonymous');
+const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
+    const [image] = useImage(design.url, 'Anonymous');
     const shapeRef = React.useRef();
     const trRef = React.useRef();
 
     React.useEffect(() => {
         if (isSelected) {
-            // we need to attach transformer manually
             trRef.current.setNode(shapeRef.current);
             trRef.current.getLayer().batchDraw();
         }
@@ -202,41 +261,21 @@ const DesignView = ({ isSelected, onSelect, tshirt, onChange, data }) => {
                 isSelected={isSelected}
                 image={image}
                 draggable
-                {...tshirt.positions}
+                width={design.width}
+                height={design.height}
+                x={design.x}
+                y={design.y}
                 onClick={onSelect}
                 onTap={onSelect}
-                onDragStart={() => {
-                    onChange({
-                        ...data,
-                        designs: {
-                            ...data.designs,
-                            [data.direction]: {
-                                ...data.designs[data.direction],
-                                positions: {
-                                    ...data.designs[data.direction].positions,
-                                    isDragging: true,
-                                }
-                            }
-                        }
-                    })
-                }}
                 onDragEnd={e => {
-                    onChange({
-                        ...data,
-                        designs: {
-                            ...data.designs,
-                            [data.direction]: {
-                                ...data.designs[data.direction],
-                                positions: {
-                                    ...data.designs[data.direction].positions,
-                                    isDragging: false,
-                                    x: e.target.x(),
-                                    y: e.target.y(),
-                                }
-                            }
-                        }
-                    })
-                }}
+                    const _design = {
+                        ...design,
+                        x: e.target.x(),
+                        y: e.target.y(),
+                    }
+                    onChange(_design, index)
+                }
+                }
                 onTransformEnd={e => {
                     // transformer is changing scale of the node
                     // and NOT its width or height
@@ -249,28 +288,136 @@ const DesignView = ({ isSelected, onSelect, tshirt, onChange, data }) => {
                     // we will reset it back
                     node.scaleX(1);
                     node.scaleY(1);
-                    onChange({
-                        ...data,
-                        designs: {
-                            ...data.designs,
-                            [data.direction]: {
-                                ...data.designs[data.direction],
-                                positions: {
-                                    ...data.designs[data.direction].positions,
-                                    x: node.x(),
-                                    y: node.y(),
-                                    // set minimal value
-                                    width: Math.max(5, node.width() * scaleX),
-                                    height: Math.max(node.height() * scaleY),
-                                }
-                            }
-                        }
-                    });
+                    const _design = {
+                        ...design,
+                        x: e.target.x(),
+                        y: e.target.y(),
+                        x: node.x(),
+                        y: node.y(),
+                        // set minimal value
+                        width: Math.max(5, node.width() * scaleX),
+                        height: Math.max(node.height() * scaleY),
+                    }
+                    onChange(_design, index);
+                    // onChange({
+                    //     ...data,
+                    //     designs: {
+                    //         ...data.designs,
+                    //         [data.direction]: {
+                    //             ...data.designs[data.direction],
+                    //             positions: {
+                    //                 ...data.designs[data.direction].positions,
+                    //                 x: node.x(),
+                    //                 y: node.y(),
+                    //                 // set minimal value
+                    //                 width: Math.max(5, node.width() * scaleX),
+                    //                 height: Math.max(node.height() * scaleY),
+                    //             }
+                    //         }
+                    //     }
+                    // });
                 }}
             />
             {isSelected && (
                 <Transformer
                     ref={trRef}
+                    boundBoxFunc={(oldBox, newBox) => {
+                        // limit resize
+                        if (newBox.width < 5 || newBox.height < 5) {
+                            return oldBox;
+                        }
+                        return newBox;
+                    }}
+                />
+            )}
+        </React.Fragment>
+    );
+};
+const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
+    const shapeRef = React.useRef();
+    const trRef = React.useRef();
+
+    React.useEffect(() => {
+        if (isSelected) {
+            trRef.current.setNode(shapeRef.current);
+            trRef.current.getLayer().batchDraw();
+        }
+    }, [isSelected]);
+
+    return (
+        <React.Fragment>
+            <Text
+                ref={shapeRef}
+                isSelected={isSelected}
+                text={design.text}
+                draggable
+                width={design.width}
+                fontSize={design.height}
+                height={design.height}
+                x={design.x}
+                y={design.y}
+                onClick={onSelect}
+                onTap={onSelect}
+                onDragEnd={e => {
+                    const _design = {
+                        ...design,
+                        x: e.target.x(),
+                        y: e.target.y(),
+                    }
+                    onChange(_design, index)
+                }
+                }
+                onTransformEnd={e => {
+                    // transformer is changing scale of the node
+                    // and NOT its width or height
+                    // but in the store we have only width and height
+                    // to match the data better we will reset scale on transform end
+                    const node = shapeRef.current;
+                    const scaleX = node.scaleX();
+                    const scaleY = node.scaleY();
+
+                    // we will reset it back
+                    node.scaleX(1);
+                    node.scaleY(1);
+                    const _design = {
+                        ...design,
+                        x: e.target.x(),
+                        y: e.target.y(),
+                        x: node.x(),
+                        y: node.y(),
+                        // set minimal value
+                        width: Math.max(5, node.width() * scaleX),
+                        height: Math.max(node.height() * scaleY),
+                    }
+                    onChange(_design, index);
+                    // onChange({
+                    //     ...data,
+                    //     designs: {
+                    //         ...data.designs,
+                    //         [data.direction]: {
+                    //             ...data.designs[data.direction],
+                    //             positions: {
+                    //                 ...data.designs[data.direction].positions,
+                    //                 x: node.x(),
+                    //                 y: node.y(),
+                    //                 // set minimal value
+                    //                 width: Math.max(5, node.width() * scaleX),
+                    //                 height: Math.max(node.height() * scaleY),
+                    //             }
+                    //         }
+                    //     }
+                    // });
+                }}
+            />
+            {isSelected && (
+                <Transformer
+                    ref={trRef}
+                    enabledAnchors={[
+                        'top-left',
+                        'top-right',
+                        'bottom-left',
+                        'bottom-right',
+                    ]}
                     boundBoxFunc={(oldBox, newBox) => {
                         // limit resize
                         if (newBox.width < 5 || newBox.height < 5) {
