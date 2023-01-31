@@ -170,7 +170,7 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
 
     return (
         <div className="w-full py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center justify-center">
-            <div className="w-full px-5 lg:px-10 overflow-scroll h-screen">
+            <div className="w-full px-5 lg:px-10  h-full">
                 <h1 className="mb-5 text-2xl lg:text-5xl font-bold text-gray-800">BOOK DESIGNER</h1>
                 <div className='grid gap-3 grid-cols-2 my-3'>
                     <div className="text-white bg-indigo-500  p-3 rounded  ">

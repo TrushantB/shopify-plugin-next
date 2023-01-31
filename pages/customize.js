@@ -139,6 +139,7 @@ function Customize() {
             book.url = selectedNotebook.url
             book.designId = selectedNotebook.designId
             book.isCustomizedDesign = selectedNotebook.isCustomizedDesign
+            book.designs = selectedNotebook.designs
         })
 
     }
@@ -149,7 +150,8 @@ function Customize() {
                 book.url = sampleImage
                 book.designId = null
                 book.isCustomizedDesign = true
-                setSelectedNotebook({ ...selectedNotebook, url: sampleImage, designId: null, isCustomizedDesign: false })
+                book.designs = []
+                setSelectedNotebook({ ...selectedNotebook, url: sampleImage, designId: null, isCustomizedDesign: false, designs: [] })
             }
 
         })
