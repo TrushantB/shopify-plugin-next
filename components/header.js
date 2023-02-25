@@ -15,14 +15,14 @@ const Header = ({ isHomePage = false }) => {
 
                     <div className="flex justify-between items-center h-14">
                         <Link href="/" className="font-bold text-xl text-indigo-600">NAVNEET</Link>
-                        <button className="border border-solid border-gray-600 px-3 py-1 rounded text-gray-600 opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
+                        {/* <button className="border border-solid border-gray-600 px-3 py-1 rounded text-gray-600 opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
                             <i className="fas fa-bars"></i>
-                        </button>
+                        </button> */}
                     </div>
                     {
                         isHomePage &&
                         <div className="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
-                            <Link href={'/specification'} className="p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600">Design Your Notebook</Link>
+                            <Link href={'/specification'} className="p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-500 hover:bg-indigo-700">Design Your Notebook</Link>
 
                         </div>
                     }

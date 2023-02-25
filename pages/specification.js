@@ -27,31 +27,32 @@ const Specification = () => {
 
   return (
     <>
+   
       <Header />
-      <div className="bg-indigo-100 text-gray-500 rounded-3xl shadow-xl w-full ">
-        <div className="flex w-full items-center h-full overflow-y-scroll">
-          <div className="w-1/2 bg-indigo-500 py-10  h-full flex items-center justify-center ">
+    
+        <div className=" items-center h-full  grid  grid-cols-1 lg:grid-cols-2">
+          <div className=" bg-indigo-500  p-8  h-full flex items-center justify-center ">
             <Image src={cover} height={450} width={350} />
           </div>
-          <div className="w-1/2 py-10 px-5 md:px-10 ">
-            <div className="text-center mb-10 leading-10">
-              <p className="text-5xl">Start By Choosing Your</p>
-              <h1 className="font-bold text-5xl text-gray-900">
+          <div className=" py-16 px-4 md:px-5 bg-slate-100 ">
+            <div className="text-center mb-10 py-3  leading-10">
+              <p className="text-2xl  lg:text-5xl pb-3">Start By Choosing Your</p>
+              <h1 className="font-bold text-2xl  lg:text-5xl text-gray-900">
                 NOTEBOOK TYPE
               </h1>
             </div>
             <div className="pr-5">
               {
                 specifications.map((specification, index) => (
-                  <div className="flex -mx-3 my-3" key={index}>
-                    <label htmlFor={specification.value} className="text-xl font-semibold mr-10 py-2 w-1/4">
+                  <div className=" my-3 grid grid-cols-1 md:grid-cols-4" key={index}>
+                    <label htmlFor={specification.value} className="text-md font-semibold  py-2 col-span-1  ">
                       {specification.label}
                     </label>
-                    <div className=" items-center justify-center w-full">
-                      <div className={`grid w-full ${specification.variations.length < 4 ? 'grid-cols-2' : 'grid-cols-5'} gap-4  rounded-full bg-gray-200 p-2`}>
+                    <div className=" items-center justify-center w-full col-span-3">
+                      <div className={`grid w-full ${specification.variations.length < 4 ? 'grid-cols-2' : 'grid-cols-5'}   rounded-full bg-white p-2`}>
                         {
                           specification.variations.map((variation, index) => (
-                            <div key={index}>
+                            <div key={index} className="flex justify-center items-center">
                               <input
                                 type="radio"
                                 name={specification.value}
@@ -62,7 +63,7 @@ const Specification = () => {
                               />
                               <label
                                 htmlFor={variation.value}
-                                className="block cursor-pointer select-none rounded-full p-3 text-center peer-checked:bg-indigo-500 peer-checked:font-bold peer-checked:text-white text-xl"
+                                className="block cursor-pointer select-none rounded-full p-2 w-full text-center peer-checked:bg-indigo-500 peer-checked:font-bold peer-checked:text-white text-sm"
                               >
                                 {variation.label}
                               </label>
@@ -76,13 +77,21 @@ const Specification = () => {
                 ))
               }
             </div>
-            <div className="flex gap-3 -mx-3">
-              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-white  border font-bold text-gray-500 text-xl w-1/2">Bulk Order</Link>
-              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="block cursor-pointer select-none rounded-full p-3 text-center bg-indigo-500 font-bold text-white text-xl w-1/2">Continue</Link>
+            <div className="grid grid-cols-1 md:grid-cols-4 py-">
+
+              <div className="col-span-1"></div>
+              <div className="flex justify-evenly md:justify-start  col-span-3 gap-2" >
+              
+              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="flex items-center justify-center cursor-pointer  rounded-full py-2 px-4 md:px-5   text-center bg-white hover:bg-indigo-500  border font-bold text-gray-500 text-sm ">Bulk Order</Link>
+              <Link onClick={submitSpecifications} href={'/term-and-conditions'} className="flex cursor-pointer select-none rounded-full  text-center bg-indigo-500 hover:bg-indigo-700 py-2 px-4 md:px-5 font-bold text-white text-sm ">Continue</Link>
+              </div>
             </div>
           </div>
+          
         </div>
-      </div>
+      
+    
+    
       <Footer />
     </>
   );

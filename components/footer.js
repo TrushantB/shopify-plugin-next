@@ -1,8 +1,8 @@
 
 const Footer = () => {
     return (
-        <footer className="bg-white text-center items-center  relative h-20 pt-7">
-            <span>© 2020 Navneet All rights reserved. Managed by Bee Online Communication Pvt Ltd</span>
+        <footer className="bg-gray-100 text-center text-xs px-2 mt-auto   ">
+            <p className="py-2">© 2023 <a href="https://www.navneet.com/">Navneet</a> All rights reserved. Managed by Bee Online Communication Pvt Ltd</p>
         </footer>
     )
 }

@@ -108,7 +108,7 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
     };
 
     return (
-        <div className="w-1/2 bg-indigo-500  min-h-screen text-center">
+        <div className=" bg-indigo-500 pb-4  min-h-screen text-center">
             {/* <div onClick={handleClearDesign} className="text-white flex justify-end    cursor-pointer">
                 <div className="bg-indigo-800 p-3 flex justify-center items-center flex-col">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -207,7 +207,7 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
                     </Stage>
                 </div>
                 <div className="carousel">
-                    <div className="carousel__images">
+                    <div className="carousel__images rounded">
                         {bookForPurchase &&
                             bookForPurchase.map((image, idx) => (
                                 < div className="flex-row" key={idx}>
@@ -215,11 +215,11 @@ const Designer = ({ bookForPurchase, selectedNotebook, setSelectedNotebook, hand
                                         onClick={() => handleSelectedImageChange(idx)}
                                         style={{ backgroundImage: `url(${image.url})` }}
                                         key={image.id}
-                                        className={`carousel__image ${selectedNotebook.id === image.id && "carousel__image-selected"
+                                        className={`carousel__image rounded ${selectedNotebook.id === image.id && "carousel__image-selected "
                                             }`}
                                         ref={(el) => (carouselItemsRef.current[idx] = el)}
                                     />
-                                    <span className="px-3 rounded-full text-white font-bold  bg-[#ffa700]">{idx + 1}</span>
+                                    <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">{idx + 1}</span>
                                 </div>
                             ))}
                     </div>

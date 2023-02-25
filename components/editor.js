@@ -169,10 +169,10 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
     // }, [])
 
     return (
-        <div className="w-full py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center justify-center">
-            <div className="w-full px-5 lg:px-10  h-full">
-                <h1 className="mb-5 text-2xl lg:text-5xl font-bold text-gray-800">BOOK DESIGNER</h1>
-                <div className='grid gap-3 grid-cols-2 my-3'>
+        <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center">
+            <div className="px-4  lg:px-10  h-full">
+                <h1 className="mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">BOOK DESIGNER</h1>
+                <div className='grid gap-3 grid-cols-1 md:grid-cols-2 my-3'>
                     <div className="text-white bg-indigo-500  p-3 rounded  ">
                         <div className="font-bold uppercase">Ruling Type</div>
                         <div className="capitalize">{notebookDetails?.specifications?.ruling}</div>
@@ -185,15 +185,15 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                     </div>
                 </div>
                 <div className="mb-5">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
                         Design Nootbooks
                     </label>
-                    <div className="grid gap-3 grid-cols-5 -m-3">
+                    <div className="grid gap-3 grid-cols-4  md:grid-cols-5 pr-5 md:gap-4 ">
                         {
                             designTemplates.map((design) => {
                                 return (
                                     <div onClick={() => applyDesign(design)} key={design.id}>
-                                        <NextImage src={design.url} width={100} height={150} className="rounded-2xl m-3 cursor-pointer border-solid border-2 border-gray-700 " alt="" />
+                                        <NextImage src={design.url} width={100} height={150} className="rounded-2xl mr-10 md:mb-10 cursor-pointer border-solid border-2  border-gray-700 " alt="" />
                                     </div>
                                 )
                             })
@@ -227,35 +227,35 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                         <input id="d_back" onChange={changeDesign} className="w-full hidden" type="file" name="back" />
                     </label>
                 </div> */}
-                <div className='flex my-3 gap-3'>
-                    <div className='w-3/4'>
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3  my-3 '>
+                    <div className='mb-2 col-span-2'>
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
                             Add Text On Notebook
                         </label>
-                        <div className='flex items-center justify-center text-center gap-3'>
-                            <input type="text" id="first_name" value={text} onChange={(e) => setText(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type text here..." required />
+                        <div className='flex items-center  text-center gap-2 '>
+                            <input type="text" id="first_name" value={text} onChange={(e) => setText(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full" placeholder="Type text here..." required />
                             <button onClick={() => {
                                 handleAddtext(text);
                                 setText('');
-                            }} className="bg-indigo-500 w-1/3  text-white p-2 " >Add Text</button>
+                            }} className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base " >Add Text</button>
                         </div>
                     </div>
-                    <div className='w-1/3'>
+                    <div className='mb-2 col-span-1'>
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Add Image On Notebook
                         </label>
-                        <div className='flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer' onClick={handleAddImage}>
-                            <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <div className='flex bg-indigo-500 hover:bg-indigo-700 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer rounded-full' onClick={handleAddImage}>
+                            <svg className="w-7 h-7 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                             </svg>
-                            <span className="text-base leading-normal">Upload Image</span>
+                            <span className="text-xs md:text-base tet-sm leading-normal ">Upload Image</span>
                             {/* <input type='file' className="hidden" /> */}
                         </div>
                     </div>
 
                 </div>
-                <div className='flex items-center justify-center text-center'>
-                    <button onClick={handleResult} className="bg-indigo-500 w-full  text-white p-2 " >Save & Add To Cart</button>
+                <div className='flex items-center text-center'>
+                    <button onClick={handleResult} className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base " >Save & Add To Cart</button>
                 </div>
             </div>
         </div>

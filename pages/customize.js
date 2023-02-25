@@ -193,7 +193,7 @@ function Customize() {
     return (
         <React.Fragment>
             <Header />
-            <div className="min-h-screen block lg:flex justify-center items-center">
+            <div className="  grid grid-cols-1 lg:grid-cols-2   ">
                 <Designer
                     selectedNotebook={selectedNotebook}
                     setSelectedNotebook={setSelectedNotebook}
