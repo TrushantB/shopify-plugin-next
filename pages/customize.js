@@ -230,7 +230,7 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "Burton Custom Freestyle 151",
+        title: "Geexu is here",
         vendor: "Burton",
         product_type: "Snowboard",
         status: "draft",
@@ -239,18 +239,16 @@ function Customize() {
     await fetch(
       "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
       {
-        method: "GET",
+        method: "POST",
         headers: {
-          Cookie:
-            "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+          "Content-Type": "application/json",
+          "X-Shopify-Access-Token": "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",
         },
+        body: JSON.stringify(add_to_cart_data),
       }
-    )
-      .then((res) => JSON.stringify(res))
-      .then((data) => console.log(data))
-      .catch((error) => {
-        console.log("post error", error);
-      });
+    ).catch((error) => {
+      console.log("post error", error);
+    });
     // localStorage.setItem("result", JSON.stringify(result));
     // const add_to_cart_data = await {
     //   product_id: result.product_id,
