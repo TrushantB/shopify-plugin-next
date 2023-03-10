@@ -230,7 +230,7 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        id: 8195271557412,
+        id: 819527155741212,
         title: "Burton Custom Freestyle 151",
         body_html: "<strong>Good snowboard!</strong>",
         vendor: "Burton",
