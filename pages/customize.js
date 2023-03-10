@@ -231,7 +231,6 @@ function Customize() {
     const add_to_cart_data = {
       product: {
         title: "Burton Custom Freestyle 151",
-        body_html: "<strong>Good snowboard!</strong>",
         vendor: "Burton",
         product_type: "Snowboard",
         status: "draft",
@@ -243,7 +242,6 @@ function Customize() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Shopify-Access-Token": "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",
         },
         body: { add_to_cart_data },
       }
