@@ -1,206 +1,222 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 // import html2canvas from 'html2canvas'
-import { default as NextImage } from 'next/image';
+import { default as NextImage } from "next/image";
 
-export default function Editor({ designTemplates, applyDesign, handleResult, notebookDetails, handleAddtext, handleAddImage }) {
-    const [text, setText] = useState('');
-    // const [fileUpload, setFileUpload] = React.useState({});
-    // const [dlImage, setDLimage] = React.useState(false)
+export default function Editor({
+  designTemplates,
+  applyDesign,
+  handleResult,
+  notebookDetails,
+  handleAddtext,
+  handleAddImage,
+}) {
+  const [text, setText] = useState("");
+  // const [fileUpload, setFileUpload] = React.useState({});
+  // const [dlImage, setDLimage] = React.useState(false)
 
-    // function chnageDirection(e) {
-    //     tshirtOnChange({
-    //         ...tshirt,
-    //         direction: e.target.value
-    //     })
-    // }
+  // function chnageDirection(e) {
+  //     tshirtOnChange({
+  //         ...tshirt,
+  //         direction: e.target.value
+  //     })
+  // }
 
-    // function _designLabel(val, direction) {
-    //     let setVal = val
-    //     let dl_front = document.getElementById("dl_front")
-    //     let dl_back = document.getElementById("dl_back")
-    //     if (setVal === null) {
-    //         if (direction === 'front') {
-    //             setVal = "Front Design"
-    //         } else {
-    //             setVal = "Back Design"
-    //         }
-    //     }
+  // function _designLabel(val, direction) {
+  //     let setVal = val
+  //     let dl_front = document.getElementById("dl_front")
+  //     let dl_back = document.getElementById("dl_back")
+  //     if (setVal === null) {
+  //         if (direction === 'front') {
+  //             setVal = "Front Design"
+  //         } else {
+  //             setVal = "Back Design"
+  //         }
+  //     }
 
-    //     if (direction === 'front') {
-    //         dl_front.innerHTML = setVal
-    //     } else {
-    //         dl_back.innerHTML = setVal
-    //     }
-    // }
+  //     if (direction === 'front') {
+  //         dl_front.innerHTML = setVal
+  //     } else {
+  //         dl_back.innerHTML = setVal
+  //     }
+  // }
 
-    // function changeDesign(e) {
-    //     const file = e.target.files[0]
-    //     console.log(file.name)
-    //     const input_name = e.target.name
-    //     const acceptedImageTypes = ['image/jpeg', 'image/png', 'image/jpg']
+  // function changeDesign(e) {
+  //     const file = e.target.files[0]
+  //     console.log(file.name)
+  //     const input_name = e.target.name
+  //     const acceptedImageTypes = ['image/jpeg', 'image/png', 'image/jpg']
 
-    //     // check is file an image
-    //     if (file && acceptedImageTypes.includes(file['type'])) {
-    //         const design = URL.createObjectURL(file)
-    //         // set label image
-    //         _designLabel(file.name, input_name)
+  //     // check is file an image
+  //     if (file && acceptedImageTypes.includes(file['type'])) {
+  //         const design = URL.createObjectURL(file)
+  //         // set label image
+  //         _designLabel(file.name, input_name)
 
-    //         // Get image width
-    //         let img = new Image();
-    //         img.src = design
-    //         img.onload = function () {
-    //             // console.log(canvas_width)
-    //             // console.log(this.width + " " + this.height);
-    //             setFileUpload({
-    //                 stream: design,
-    //                 direction: input_name,
-    //                 width: this.width,
-    //                 height: this.height
-    //             })
-    //         };
-    //     } else {
-    //         // console.log('anajay bukan gambar')
-    //         setModal({
-    //             isOpen: true,
-    //             message: 'Please upload an image file (jpg, jpeg, png)'
-    //         })
-    //         e.target.value = null
-    //     }
-    // }
+  //         // Get image width
+  //         let img = new Image();
+  //         img.src = design
+  //         img.onload = function () {
+  //             // console.log(canvas_width)
+  //             // console.log(this.width + " " + this.height);
+  //             setFileUpload({
+  //                 stream: design,
+  //                 direction: input_name,
+  //                 width: this.width,
+  //                 height: this.height
+  //             })
+  //         };
+  //     } else {
+  //         // console.log('anajay bukan gambar')
+  //         setModal({
+  //             isOpen: true,
+  //             message: 'Please upload an image file (jpg, jpeg, png)'
+  //         })
+  //         e.target.value = null
+  //     }
+  // }
 
-    // React.useEffect(() => {
-    //     function _calculate_image_size(type, originalWidth, originalHeight) {
-    //         const canvas = Math.round(40 * elStage.current.clientWidth / 100)
+  // React.useEffect(() => {
+  //     function _calculate_image_size(type, originalWidth, originalHeight) {
+  //         const canvas = Math.round(40 * elStage.current.clientWidth / 100)
 
-    //         if (originalWidth >= canvas) {
-    //             const maxWidth = canvas
-    //             const maxHeight = Math.round(55 * elStage.current.clientWidth / 100)
-    //             var ratio = 0;  // Used for aspect ratio
-    //             var width = originalWidth;    // Current image width
-    //             var height = originalHeight;  // Current image height
+  //         if (originalWidth >= canvas) {
+  //             const maxWidth = canvas
+  //             const maxHeight = Math.round(55 * elStage.current.clientWidth / 100)
+  //             var ratio = 0;  // Used for aspect ratio
+  //             var width = originalWidth;    // Current image width
+  //             var height = originalHeight;  // Current image height
 
-    //             let newWidth = maxWidth;
-    //             let newHeight = maxWidth;
+  //             let newWidth = maxWidth;
+  //             let newHeight = maxWidth;
 
-    //             if (width > maxWidth && width > height) {
-    //                 ratio = width / height;
-    //                 newHeight = maxWidth / ratio;
-    //                 newWidth = maxWidth
+  //             if (width > maxWidth && width > height) {
+  //                 ratio = width / height;
+  //                 newHeight = maxWidth / ratio;
+  //                 newWidth = maxWidth
 
-    //             } else if (height > maxHeight && height > width) {
-    //                 ratio = height / width;
-    //                 newWidth = maxHeight / ratio
-    //                 newHeight = maxHeight;
-    //             }
+  //             } else if (height > maxHeight && height > width) {
+  //                 ratio = height / width;
+  //                 newWidth = maxHeight / ratio
+  //                 newHeight = maxHeight;
+  //             }
 
-    //             if (type === 'width') {
-    //                 return newWidth
-    //             } else {
-    //                 return newHeight
-    //             }
-    //         }
-    //         return originalWidth
-    //     }
+  //             if (type === 'width') {
+  //                 return newWidth
+  //             } else {
+  //                 return newHeight
+  //             }
+  //         }
+  //         return originalWidth
+  //     }
 
-    //     if (Object.keys(fileUpload).length > 0) {
-    //         tshirtOnChange({
-    //             ...tshirt,
-    //             designs: {
-    //                 ...tshirt.designs,
-    //                 [fileUpload.direction]: {
-    //                     ...tshirt.designs[fileUpload.direction],
-    //                     preview: fileUpload.stream,
-    //                     positions: {
-    //                         ...tshirt.designs[fileUpload.direction].positions,
-    //                         width: _calculate_image_size('width', fileUpload.width, fileUpload.width),
-    //                         height: _calculate_image_size('height', fileUpload.width, fileUpload.height)
-    //                     }
-    //                 }
-    //             }
-    //         })
+  //     if (Object.keys(fileUpload).length > 0) {
+  //         tshirtOnChange({
+  //             ...tshirt,
+  //             designs: {
+  //                 ...tshirt.designs,
+  //                 [fileUpload.direction]: {
+  //                     ...tshirt.designs[fileUpload.direction],
+  //                     preview: fileUpload.stream,
+  //                     positions: {
+  //                         ...tshirt.designs[fileUpload.direction].positions,
+  //                         width: _calculate_image_size('width', fileUpload.width, fileUpload.width),
+  //                         height: _calculate_image_size('height', fileUpload.width, fileUpload.height)
+  //                     }
+  //                 }
+  //             }
+  //         })
 
-    //         setFileUpload({})
-    //     }
-    // }, [fileUpload, tshirt, tshirtOnChange, elStage])
+  //         setFileUpload({})
+  //     }
+  // }, [fileUpload, tshirt, tshirtOnChange, elStage])
 
-    // const downloadURI = (uri, name) => {
-    //     const link = document.createElement("a");
-    //     link.download = name;
-    //     link.href = uri;
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    // };
+  // const downloadURI = (uri, name) => {
+  //     const link = document.createElement("a");
+  //     link.download = name;
+  //     link.href = uri;
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  // };
 
-    // React.useEffect(() => {
-    //     if (dlImage && !selected) {
-    //         saveImage()
-    //         setDLimage(false)
-    //     }
+  // React.useEffect(() => {
+  //     if (dlImage && !selected) {
+  //         saveImage()
+  //         setDLimage(false)
+  //     }
 
-    //     function saveImage() {
-    //         let element = document.getElementById("myDesign")
-    //         const windowW = window.innerWidth
-    //         if (windowW < 1024) {
-    //             element.style.position = "fixed"
-    //             element.style.zIndex = 999
-    //             element.style.left = 0
-    //         }
+  //     function saveImage() {
+  //         let element = document.getElementById("myDesign")
+  //         const windowW = window.innerWidth
+  //         if (windowW < 1024) {
+  //             element.style.position = "fixed"
+  //             element.style.zIndex = 999
+  //             element.style.left = 0
+  //         }
 
-    //         html2canvas(element, {
-    //             allowTaint: true,
-    //             removeContainer: false,
-    //             backgroundColor: null
-    //         }).then(canvas => {
-    //             if (windowW < 1024) {
-    //                 element.style.position = null
-    //                 element.style.zIndex = null
-    //                 element.style.left = null
-    //             }
-    //             downloadURI(canvas.toDataURL('image/png'), 'tes')
-    //             // document.body.appendChild(canvas);
-    //         })
-    //     }
+  //         html2canvas(element, {
+  //             allowTaint: true,
+  //             removeContainer: false,
+  //             backgroundColor: null
+  //         }).then(canvas => {
+  //             if (windowW < 1024) {
+  //                 element.style.position = null
+  //                 element.style.zIndex = null
+  //                 element.style.left = null
+  //             }
+  //             downloadURI(canvas.toDataURL('image/png'), 'tes')
+  //             // document.body.appendChild(canvas);
+  //         })
+  //     }
 
-    // }, [dlImage, setDLimage, selected])
+  // }, [dlImage, setDLimage, selected])
 
-    // React.useEffect(() => {
-    //     console.log('editor loaded')
-    // }, [])
+  // React.useEffect(() => {
+  //     console.log('editor loaded')
+  // }, [])
 
-    return (
-        <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center">
-            <div className="px-4  lg:px-10  h-full">
-                <h1 className="mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">BOOK DESIGNER</h1>
-                <div className='grid gap-3 grid-cols-1 md:grid-cols-2 my-3'>
-                    <div className="text-white bg-indigo-500  p-3 rounded  ">
-                        <div className="font-bold uppercase">Ruling Type</div>
-                        <div className="capitalize">{notebookDetails?.specifications?.ruling}</div>
-
-                    </div>
-                    <div className="text-white bg-indigo-500  p-3 rounded">
-                        <div className="font-bold uppercase">Pages size</div>
-                        <div className="capitalize">{notebookDetails?.specifications?.pages} pages and {notebookDetails?.specifications?.size} </div>
-
-                    </div>
+  return (
+    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center">
+      <div className="px-4  lg:px-10  h-full">
+        <h1 className="mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
+          BOOK DESIGNER
+        </h1>
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 my-3">
+          <div className="text-white bg-indigo-500  p-3 rounded  ">
+            <div className="font-bold uppercase">Ruling Type</div>
+            <div className="capitalize">
+              {notebookDetails?.specifications?.ruling}
+            </div>
+          </div>
+          <div className="text-white bg-indigo-500  p-3 rounded">
+            <div className="font-bold uppercase">Pages size</div>
+            <div className="capitalize">
+              {notebookDetails?.specifications?.pages} pages and{" "}
+              {notebookDetails?.specifications?.size}{" "}
+            </div>
+          </div>
+        </div>
+        <div className="mb-5">
+          <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
+            Design Nootbooks
+          </label>
+          <div className="grid gap-3 grid-cols-4  md:grid-cols-5 pr-5 md:gap-4 ">
+            {designTemplates.map((design) => {
+              return (
+                <div onClick={() => applyDesign(design)} key={design.id}>
+                  <NextImage
+                    src={design.url}
+                    width={100}
+                    height={150}
+                    className="rounded-2xl mr-10 md:mb-10 cursor-pointer border-solid border-2  border-gray-700 "
+                    alt=""
+                  />
                 </div>
-                <div className="mb-5">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
-                        Design Nootbooks
-                    </label>
-                    <div className="grid gap-3 grid-cols-4  md:grid-cols-5 pr-5 md:gap-4 ">
-                        {
-                            designTemplates.map((design) => {
-                                return (
-                                    <div onClick={() => applyDesign(design)} key={design.id}>
-                                        <NextImage src={design.url} width={100} height={150} className="rounded-2xl mr-10 md:mb-10 cursor-pointer border-solid border-2  border-gray-700 " alt="" />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-                {/* <div className="mb-5">
+              );
+            })}
+          </div>
+        </div>
+        {/* <div className="mb-5">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Directon
                     </label>
@@ -214,7 +230,7 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                         </div>
                     </div>
                 </div> */}
-                {/* <div className="mb-10">
+        {/* <div className="mb-10">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Designs
                     </label>
@@ -227,37 +243,68 @@ export default function Editor({ designTemplates, applyDesign, handleResult, not
                         <input id="d_back" onChange={changeDesign} className="w-full hidden" type="file" name="back" />
                     </label>
                 </div> */}
-                <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3  my-3 '>
-                    <div className='mb-2 col-span-2'>
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
-                            Add Text On Notebook
-                        </label>
-                        <div className='flex items-center  text-center gap-2 '>
-                            <input type="text" id="first_name" value={text} onChange={(e) => setText(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full" placeholder="Type text here..." required />
-                            <button onClick={() => {
-                                handleAddtext(text);
-                                setText('');
-                            }} className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base " >Add Text</button>
-                        </div>
-                    </div>
-                    <div className='mb-2 col-span-1'>
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                            Add Image On Notebook
-                        </label>
-                        <div className='flex bg-indigo-500 hover:bg-indigo-700 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer rounded-full' onClick={handleAddImage}>
-                            <svg className="w-7 h-7 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                            </svg>
-                            <span className="text-xs md:text-base tet-sm leading-normal ">Upload Image</span>
-                            {/* <input type='file' className="hidden" /> */}
-                        </div>
-                    </div>
-
-                </div>
-                <div className='flex items-center text-center'>
-                    <button onClick={handleResult} className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base " >Save & Add To Cart</button>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3  my-3 ">
+          <div className="mb-2 col-span-2">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
+              Add Text On Notebook
+            </label>
+            <div className="flex items-center  text-center gap-2 ">
+              <input
+                type="text"
+                id="first_name"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                placeholder="Type text here..."
+                required
+              />
+              <button
+                onClick={() => {
+                  handleAddtext(text);
+                  setText("");
+                }}
+                className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base "
+              >
+                Add Text
+              </button>
             </div>
+          </div>
+          <div className="mb-2 col-span-1">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Add Image On Notebook
+            </label>
+            <div
+              className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
+              // onClick={handleAddImage}
+            >
+              <svg
+                className="w-8 h-8"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+              </svg>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={(event) => handleAddImage(event)}
+              />
+              {/* <span className="text-base leading-normal">Upload Image</span> */}
+              {/* <input type='file' className="hidden" /> */}
+            </div>
+          </div>
         </div>
-    )
+        <div className="flex items-center text-center">
+          <button
+            onClick={handleResult}
+            className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base "
+          >
+            Save & Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
