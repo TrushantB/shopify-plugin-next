@@ -230,40 +230,43 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "Demo Shirt",
-        vendor: "Burton",
-        product_type: "Snowboard",
+        // title: "Demo Shirt",
+        // vendor: "Burton",
+        // product_type: "Snowboard",
+        // status: "active",
+        id: 8195593535780,
+        title: "Scrum product",
         status: "active",
       },
     };
-    await fetch(
-      "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie:
-            "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
-          "X-Shopify-Access-Token": "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",
-        },
-        body: JSON.stringify(add_to_cart_data),
-      }
-    ).catch((error) => {
-      console.log("post error", error);
-    });
-
-    // await fetch("https://ekartbook.myshopify.com/cart/add.json", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Cookie:
-    //       "_cmp_a=%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22merchant_geo%22%3A%22IN%22%2C%22sale_of_data_region%22%3Afalse%7D; _s=1ffb9963-b7af-4c44-8f39-f97a6e1084cc; _shopify_s=1ffb9963-b7af-4c44-8f39-f97a6e1084cc; _shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; cart=bfb0b3947f50a724db51c5ac4838e17c; cart_currency=INR; cart_sig=f2c451151e2818f2db8d3adb6e62b60a; cart_ts=1678175473; cart_ver=gcp-us-east1%3A1; secure_customer_sig=",
-    //     "X-Shopify-Access-Token": "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",
-    //   },
-    //   body: JSON.stringify(add_to_cart_data),
-    // }).catch((error) => {
+    // await fetch(
+    //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Cookie:
+    //         "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+    //       "X-Shopify-Access-Token": "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",
+    //     },
+    //     body: JSON.stringify(add_to_cart_data),
+    //   }
+    // ).catch((error) => {
     //   console.log("post error", error);
     // });
+
+    await fetch("https://ekartbook.myshopify.com/cart/add.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie:
+          "_cmp_a=%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22merchant_geo%22%3A%22IN%22%2C%22sale_of_data_region%22%3Afalse%7D; _s=1ffb9963-b7af-4c44-8f39-f97a6e1084cc; _shopify_s=1ffb9963-b7af-4c44-8f39-f97a6e1084cc; _shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; cart=bfb0b3947f50a724db51c5ac4838e17c; cart_currency=INR; cart_sig=f2c451151e2818f2db8d3adb6e62b60a; cart_ts=1678175473; cart_ver=gcp-us-east1%3A1; secure_customer_sig=",
+        "X-Shopify-Access-Token": "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",
+      },
+      body: JSON.stringify(add_to_cart_data),
+    }).catch((error) => {
+      console.log("post error", error);
+    });
 
     // localStorage.setItem("result", JSON.stringify(result));
     // const add_to_cart_data = await {
