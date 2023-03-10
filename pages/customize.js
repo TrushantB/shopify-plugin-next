@@ -237,7 +237,14 @@ function Customize() {
       },
     };
     await fetch(
-      "https://ekartbook.myshopify.com/admin/api/2023-01/products.json"
+      "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
+      {
+        method: "GET",
+        headers: {
+          Cookie:
+            "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+        },
+      }
     )
       .then((res) => JSON.stringify(res))
       .then((data) => console.log(data))
