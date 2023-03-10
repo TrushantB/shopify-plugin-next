@@ -230,7 +230,7 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "Abhishek ics HERE",
+        title: "Pune in Maharastra",
         vendor: "Burton",
         product_type: "Snowboard",
         status: "draft",
@@ -242,6 +242,8 @@ function Customize() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Cookie:
+            "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
         },
         body: JSON.stringify(add_to_cart_data),
       }
