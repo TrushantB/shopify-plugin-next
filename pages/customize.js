@@ -230,7 +230,7 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "Pune in Maharastra",
+        title: "Work Done",
         vendor: "Burton",
         product_type: "Snowboard",
         status: "active",
