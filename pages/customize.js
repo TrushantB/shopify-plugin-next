@@ -234,6 +234,7 @@ function Customize() {
         vendor: "Burton",
         product_type: "Snowboard",
         status: "active",
+        "Access-Control-Allow-Origin": "*",
       },
     };
     await fetch("https://ekartbook.myshopify.com/cart/add.json", {
