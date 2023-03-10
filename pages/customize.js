@@ -243,7 +243,7 @@ function Customize() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: { add_to_cart_data },
+        body: JSON.stringify(add_to_cart_data),
       }
     ).catch((error) => {
       console.log("post error", error);
