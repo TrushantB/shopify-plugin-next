@@ -236,19 +236,16 @@ function Customize() {
         status: "active",
       },
     };
-    await fetch(
-      "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie:
-            "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
-          "X-Shopify-Access-Token": "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",
-        },
-        body: JSON.stringify(add_to_cart_data),
-      }
-    ).catch((error) => {
+    await fetch("https://ekartbook.myshopify.com/cart/add.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie:
+          "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+        "X-Shopify-Access-Token": "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",
+      },
+      body: JSON.stringify(add_to_cart_data),
+    }).catch((error) => {
       console.log("post error", error);
     });
     // localStorage.setItem("result", JSON.stringify(result));
