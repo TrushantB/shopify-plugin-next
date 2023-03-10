@@ -233,7 +233,7 @@ function Customize() {
         title: "Pune in Maharastra",
         vendor: "Burton",
         product_type: "Snowboard",
-        status: "draft",
+        status: "active",
       },
     };
     await fetch(
