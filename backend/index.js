@@ -75,7 +75,7 @@ app.get("/", async (request, res) => {
     },
     body: JSON.stringify({
       id: 44643287630116,
-      quantity: 1,
+      quantity: 10,
     }),
   })
     .catch((error) => {
