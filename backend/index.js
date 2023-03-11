@@ -5,7 +5,7 @@ const PORT = 8080;
 const add_to_cart_data = {
   product: {
     id: 123123123,
-    title: "AA12",
+    title: "A123",
     body_html: "<strong>Good snowboard!</strong>",
     vendor: "Burton",
     product_type: "Snowboard",
@@ -21,7 +21,7 @@ const add_to_cart_data = {
     variants: [
       {
         id: 1231231231212,
-        product_id: 8195593535780,
+        product_id: 121212,
         title: "A",
         price: "0.00",
         sku: "",
@@ -85,7 +85,7 @@ app.get("/", async (request, res) => {
       "X-Shopify-Access-Token": "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",
     },
     body: JSON.stringify({
-      id: 1231231231212,
+      id: 121212,
       quantity: 10,
     }),
   });
