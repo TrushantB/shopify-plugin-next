@@ -4,7 +4,7 @@ const app = express();
 const PORT = 8080;
 const add_to_cart_data = {
   product: {
-    id: 123123,
+    id: 123123123,
     title: "AA",
     body_html: "<strong>Good snowboard!</strong>",
     vendor: "Burton",
@@ -85,7 +85,7 @@ app.get("/", async (request, res) => {
       "X-Shopify-Access-Token": "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",
     },
     body: JSON.stringify({
-      id: 123123,
+      id: 123123123,
       quantity: 10,
     }),
   });
