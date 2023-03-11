@@ -4,8 +4,8 @@ const app = express();
 const PORT = 8080;
 const add_to_cart_data = {
   product: {
-    id: 8195593535780,
-    title: "Scrum produc",
+    id: 123123,
+    title: "AA",
     body_html: "<strong>Good snowboard!</strong>",
     vendor: "Burton",
     product_type: "Snowboard",
@@ -20,9 +20,9 @@ const add_to_cart_data = {
     admin_graphql_api_id: "gid://shopify/Product/8195593535780",
     variants: [
       {
-        id: 44805664342308,
+        id: 123123123,
         product_id: 8195593535780,
-        title: "Default Title",
+        title: "A",
         price: "0.00",
         sku: "",
         position: 1,
@@ -63,8 +63,19 @@ const add_to_cart_data = {
 };
 
 app.get("/", async (request, res) => {
-  res.send("Welcome to root URL of Server");
-
+  await fetch(
+    "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie:
+          "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+        "X-Shopify-Access-Token": "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",
+      },
+      body: JSON.stringify(add_to_cart_data),
+    }
+  );
   await fetch("https://ekartbook.myshopify.com/cart/add.json", {
     method: "POST",
     headers: {
@@ -74,15 +85,10 @@ app.get("/", async (request, res) => {
       "X-Shopify-Access-Token": "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",
     },
     body: JSON.stringify({
-      id: 44643287630116,
+      id: 123123,
       quantity: 10,
     }),
-  })
-    .catch((error) => {
-      console.log("post error", error);
-    })
-    .then((res) => res.json())
-    .then((result) => console.log(result));
+  });
   //   const result = await fetch("https://ekartbook.myshopify.com/cart/add.json", {
   //     method: "POST",
   //     headers: {
