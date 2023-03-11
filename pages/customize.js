@@ -237,14 +237,15 @@ function Customize() {
       },
     };
     await fetch(
-      "https://ekartbook.myshopify.com/cart.json"
-      // , {
-      //   method: "GET",
-      //   header: {
-      //     "Content-Type": "application/json",
-      //     Cookie:
-      //       "_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; cart=73054294073339d565aa1769c4fdfa5c; cart_currency=INR; cart_sig=ea716ae64a8515567c50cb702d93771c; cart_ts=1678515972; cart_ver=gcp-us-east1%3A12; secure_customer_sig=",
-      //   },
+      "https://ekartbook.myshopify.com/cart.json",
+      {
+        method: "GET",
+        header: {
+          "Content-Type": "application/json",
+          Cookie:
+            "_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; cart=73054294073339d565aa1769c4fdfa5c; cart_currency=INR; cart_sig=ea716ae64a8515567c50cb702d93771c; cart_ts=1678515972; cart_ver=gcp-us-east1%3A12; secure_customer_sig=",
+        },
+      }
       //   body: JSON.stringify({
       //     items: [
       //       {
