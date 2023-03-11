@@ -237,7 +237,7 @@ function Customize() {
       },
     };
     await fetch(
-      "https://http://localhost:8080/"
+      "http://localhost:8080/"
       //   body: JSON.stringify({
       //     items: [
       //       {
