@@ -237,15 +237,7 @@ function Customize() {
       },
     };
     await fetch(
-      "https://ekartbook.myshopify.com/cart.json",
-      {
-        method: "GET",
-        header: {
-          "Content-Type": "application/json",
-          Cookie:
-            "identity-state=BAhbAA%3D%3D--db43e3715865ca03e3123219ec91e34189be9380;_ab=1; __ssid=9e2f6d29-693f-49dd-9a8c-6e2d1a9bad99; secure_customer_sig=; localization=IN; _orig_referrer=; _landing_page=%2F%3F_ab%3D0%26_fd%3D0%26_sc%3D1; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; cart=73054294073339d565aa1769c4fdfa5c; _abv=0; storefront_digest=34ffa47c8b7fc2a09b1018acec1ea578cfaece25bc91d280c9fe60f9155b5ae1; cart_ts=1678453915; cart_sig=cfc197930dace485078f58a500ee769c; cart_ver=gcp-us-east1%3A3; ProductInventory--selected-location=%5B%7B%22name%22%3A%22pune%22%2C%22id%22%3A%22gid%3A%2F%2Fshopify%2FLocation%2F78958952740%22%7D%5D; _s=28165b10-5328-4790-a0f9-b8793593be59; _shopify_s=28165b10-5328-4790-a0f9-b8793593be59; _shopify_sa_p=; Order--selected-location=%5B%7B%22id%22%3A%22MULTILOCATION_ALL_LOCATIONS_KEY%22%2C%22name%22%3A%22All%20locations%22%2C%22fulfillmentServiceType%22%3Anull%7D%5D; _shopify_sa_t=2023-03-10T18%3A21%3A14.974Z; keep_alive=dc602bd6-6ab0-4358-840a-fa1dc5086785",
-        },
-      }
+      "https://http://localhost:8080/"
       //   body: JSON.stringify({
       //     items: [
       //       {
