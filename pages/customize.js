@@ -236,29 +236,34 @@ function Customize() {
         status: "active",
       },
     };
-    await fetch("https://ekartbook.myshopify.com/cart/add.json", {
-      method: "POST",
-      header: {
-        "Content-Type": "application/json",
-        Cookie:
-          "_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; cart=73054294073339d565aa1769c4fdfa5c; cart_currency=INR; cart_sig=ea716ae64a8515567c50cb702d93771c; cart_ts=1678515972; cart_ver=gcp-us-east1%3A12; secure_customer_sig=",
-      },
-      body: JSON.stringify({
-        items: [
-          {
-            id: 44643284582692,
-            properties: {
-              No_of_pages: 100,
-              binding_type: "spiral",
-              lines: 1,
-              cover_type: "soft",
-            },
-            quantity: 1,
-            variant_id: 44643284582692,
-          },
-        ],
-      }),
-    });
+    await fetch(
+      "https://ekartbook.myshopify.com/cart.json"
+      // , {
+      //   method: "GET",
+      //   header: {
+      //     "Content-Type": "application/json",
+      //     Cookie:
+      //       "_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_s=10ce970a-9f27-4608-bcec-7657a318880d; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; cart=73054294073339d565aa1769c4fdfa5c; cart_currency=INR; cart_sig=ea716ae64a8515567c50cb702d93771c; cart_ts=1678515972; cart_ver=gcp-us-east1%3A12; secure_customer_sig=",
+      //   },
+      //   body: JSON.stringify({
+      //     items: [
+      //       {
+      //         id: 44643284582692,
+      //         properties: {
+      //           No_of_pages: 100,
+      //           binding_type: "spiral",
+      //           lines: 1,
+      //           cover_type: "soft",
+      //         },
+      //         quantity: 1,
+      //         variant_id: 44643284582692,
+      //       },
+      //     ],
+      //   }),
+      // }
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data));
     // await fetch(
     //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     //   {
