@@ -230,8 +230,8 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "ok data",
-        // properties: result,
+        title: "ok",
+        properties: result,
         vendor: "Burton",
         product_type: "Snowboard",
         status: "active",
