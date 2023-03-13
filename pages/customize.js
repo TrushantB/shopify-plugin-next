@@ -241,7 +241,7 @@ function Customize() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(result),
+      body: JSON.stringify({ result }),
       quantity: 5,
     });
     //   .then((response) => response.json())
