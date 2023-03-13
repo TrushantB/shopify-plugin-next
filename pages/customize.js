@@ -245,7 +245,7 @@ function Customize() {
       body: JSON.stringify(add_to_cart_data),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log("data is HERE", data));
     // await fetch(
     //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     //   {
