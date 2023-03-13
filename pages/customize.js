@@ -242,6 +242,7 @@ function Customize() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(result),
+      quantity: 5,
     });
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));

@@ -4,7 +4,6 @@ const app = express();
 app.use(express.json());
 const PORT = 8080;
 app.post("/", async (req, res) => {
-  res.send({ "Test ": "Ok" });
   const response = await fetch(
     "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     {
@@ -44,7 +43,7 @@ app.post("/", async (req, res) => {
     },
     body: JSON.stringify({
       id: addedData.product.variants[0].id,
-      quantity: 10,
+      quantity: req.quantity,
     }),
   }).then((res) =>
     res.json().then((result) => console.log("Result is here", result))
