@@ -232,8 +232,8 @@ function Customize() {
       product: {
         title: "dummy data",
         properties: result,
-        // vendor: "Burton",
-        // product_type: "Snowboard",
+        vendor: "Burton",
+        product_type: "Snowboard",
         status: "active",
       },
     };
