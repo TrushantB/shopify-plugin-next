@@ -18,7 +18,7 @@ app.post("/", async (req, res) => {
     }
   );
   const addedData = await response.json();
-  console.log(addedData);
+  console.log("========>", addedData);
   // app.get("/", async (request, res) => {
   //   await fetch(
   //     "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
