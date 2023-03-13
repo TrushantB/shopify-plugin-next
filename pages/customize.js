@@ -230,12 +230,11 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "ok1",
+        title: "Custom Book",
         variants: { result },
-        vendor: "Burton",
-        product_type: "Snowboard",
+        // vendor: "Burton",
+        // product_type: "Snowboard",
         status: "active",
-        // variants: [],
       },
     };
     // const products = {};
