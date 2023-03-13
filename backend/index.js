@@ -4,7 +4,6 @@ const app = express();
 app.use(express.json());
 const PORT = 8080;
 app.post("/", async (req, res) => {
-  console.log(req.body);
   const response = await fetch(
     "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     {
@@ -17,7 +16,9 @@ app.post("/", async (req, res) => {
       },
       body: JSON.stringify(req.body),
     }
-  );
+  )
+    .then((res) => rsvgVersion.json())
+    .then((data) => console.log("data===>", data));
   const addedData = await response.json();
   console.log(addedData);
   // app.get("/", async (request, res) => {
