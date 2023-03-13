@@ -236,25 +236,12 @@ function Customize() {
         status: "active",
       },
     };
-    await fetch(
-      "http://localhost:8080/"
-      //   body: JSON.stringify({
-      //     items: [
-      //       {
-      //         id: 44643284582692,
-      //         properties: {
-      //           No_of_pages: 100,
-      //           binding_type: "spiral",
-      //           lines: 1,
-      //           cover_type: "soft",
-      //         },
-      //         quantity: 1,
-      //         variant_id: 44643284582692,
-      //       },
-      //     ],
-      //   }),
-      // }
-    )
+    await fetch("http://localhost:8080/", {
+      method: "POST",
+      headers: {
+        body: JSON.stringify(result),
+      },
+    })
       .then((response) => response.json())
       .then((data) => console.log(data));
     // await fetch(
