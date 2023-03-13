@@ -15,7 +15,7 @@ app.post("/", async (req, res) => {
           "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
         "X-Shopify-Access-Token": "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",
       },
-      body: JSON.stringify({ products: req.body }),
+      body: JSON.stringify(req.body),
     }
   );
   const addedData = await response.json();
