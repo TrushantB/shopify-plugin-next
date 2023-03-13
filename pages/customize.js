@@ -241,7 +241,7 @@ function Customize() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(add_to_cart_data),
+      body: JSON.stringify(result),
     });
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));
