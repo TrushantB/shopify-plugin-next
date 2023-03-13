@@ -235,6 +235,7 @@ function Customize() {
         vendor: "Burton",
         product_type: "Snowboard",
         status: "active",
+        variants: [],
       },
     };
     // const products = {};
