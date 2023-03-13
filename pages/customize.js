@@ -245,7 +245,6 @@ function Customize() {
     });
     const data = response.json();
     console.log("data is HERE", data);
-    alert("hello");
     // await fetch(
     //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     //   {
