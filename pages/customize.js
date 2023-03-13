@@ -236,15 +236,18 @@ function Customize() {
     //     status: "active",
     //   },
     // };
+    const products = {};
+    products.properties = result;
+    console.log("okk", products);
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(result),
-    });
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
+      body: JSON.stringify(products),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
     // await fetch(
     //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     //   {
