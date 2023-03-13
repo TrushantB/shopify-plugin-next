@@ -17,7 +17,7 @@ app.post("/", async (req, res) => {
       body: JSON.stringify(req.body),
     }
   )
-    .then((res) => rsvgVersion.json())
+    .then((res) => res.json())
     .then((data) => console.log("data===>", data));
   const addedData = await response.json();
   console.log(addedData);
