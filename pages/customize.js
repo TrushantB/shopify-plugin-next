@@ -228,23 +228,24 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    // const add_to_cart_data = {
-    //   product: {
-    //     title: "dummy data",
-    //     vendor: "Burton",
-    //     product_type: "Snowboard",
-    //     status: "active",
-    //   },
-    // };
-    const products = {};
-    products.properties = result;
-    console.log("okk", products);
+    const add_to_cart_data = {
+      product: {
+        title: "dummy data",
+        properties: result,
+        // vendor: "Burton",
+        // product_type: "Snowboard",
+        status: "active",
+      },
+    };
+    // const products = {};
+    // products.properties = result;
+    // console.log("okk", products);
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(products),
+      body: JSON.stringify(add_to_cart_data),
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
