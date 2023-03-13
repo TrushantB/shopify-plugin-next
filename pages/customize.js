@@ -228,18 +228,15 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    console.log(result.quantity);
     const add_to_cart_data = {
       product: {
         title: "Custom Book",
         variants: { result },
         quantity: result.quantity,
         status: "active",
+        price: result.quantity * 10,
       },
     };
-    // const products = {};
-    // products.properties = result;
-    // console.log("okk", products);
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
