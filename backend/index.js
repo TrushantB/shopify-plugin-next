@@ -11,7 +11,7 @@ const add_to_cart_data = {
   },
 };
 app.get("/", async (request, res) => {
-  console.log(req.body);
+  console.log(request.body);
   // const response = await fetch(
   //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
   //   {
