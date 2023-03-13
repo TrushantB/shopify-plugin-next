@@ -10,7 +10,8 @@ const add_to_cart_data = {
     status: "active",
   },
 };
-app.get("/", async (request, res) => {
+app.post("/", async (request, res) => {
+  res.send("welcome to web");
   console.log(request.body);
   // const response = await fetch(
   //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
