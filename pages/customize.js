@@ -228,14 +228,14 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    const add_to_cart_data = {
-      product: {
-        title: "dummy data",
-        vendor: "Burton",
-        product_type: "Snowboard",
-        status: "active",
-      },
-    };
+    // const add_to_cart_data = {
+    //   product: {
+    //     title: "dummy data",
+    //     vendor: "Burton",
+    //     product_type: "Snowboard",
+    //     status: "active",
+    //   },
+    // };
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
