@@ -237,6 +237,7 @@ function Customize() {
       },
     };
     await fetch("http://localhost:8080/", {
+      method: "POST",
       headers: {
         body: JSON.stringify({
           items: [
