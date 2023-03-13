@@ -239,7 +239,7 @@ function Customize() {
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
-        body: JSON.stringify(result),
+        body: JSON.stringify(add_to_cart_data),
       },
     })
       .then((response) => response.json())
