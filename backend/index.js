@@ -11,8 +11,8 @@ const add_to_cart_data = {
   },
 };
 app.post("/", async (request, res) => {
-  res.send("welcome to web");
-  console.log(request.body);
+  // res.send("welcome to web");
+  console.log("Govind is here", request.body);
   // const response = await fetch(
   //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
   //   {
