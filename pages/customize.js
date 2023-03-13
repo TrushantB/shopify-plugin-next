@@ -239,21 +239,7 @@ function Customize() {
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
-        body: JSON.stringify({
-          items: [
-            {
-              id: 44643284582692,
-              properties: {
-                No_of_pages: 100,
-                binding_type: "spiral",
-                lines: 1,
-                cover_type: "soft",
-              },
-              quantity: 1,
-              variant_id: 44643284582692,
-            },
-          ],
-        }),
+        body: JSON.stringify(add_to_cart_data),
       },
     })
       .then((response) => response.json())
