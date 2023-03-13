@@ -47,6 +47,10 @@ app.post("/", async (req, res) => {
       id: addedData.product.variants[0].id,
       quantity: req.body.product.quantity,
       price: req.body.product.price,
+      original_price: req.body.product.price * 100,
+      discounted_price: req.body.product.price * 100,
+      line_price: req.body.product.price * 100,
+      original_line_price: req.body.product.price * 100,
     }),
   }).then((res) =>
     res.json().then((result) => console.log("Result is here", result))
