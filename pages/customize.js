@@ -228,12 +228,12 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
+    console.log(result.quantity);
     const add_to_cart_data = {
       product: {
         title: "Custom Book",
         variants: { result },
-        // vendor: "Burton",
-        // product_type: "Snowboard",
+        quantity: result.quantity,
         status: "active",
       },
     };
