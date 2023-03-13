@@ -234,18 +234,17 @@ function Customize() {
         variants: { result },
         quantity: result.quantity,
         status: "active",
-        price: result.quantity * 10,
       },
     };
-    await fetch("http://localhost:8080/", {
+    const response = await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(add_to_cart_data),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("data is HERE", data));
+    });
+    const data = response.json();
+    console.log("data is HERE", data);
     // await fetch(
     //   "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
     //   {
