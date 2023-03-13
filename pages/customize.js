@@ -228,20 +228,20 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    // const add_to_cart_data = {
-    //   product: {
-    //     title: "dummy data",
-    //     vendor: "Burton",
-    //     product_type: "Snowboard",
-    //     status: "active",
-    //   },
-    // };
+    const add_to_cart_data = {
+      product: {
+        title: "dummy data",
+        vendor: "Burton",
+        product_type: "Snowboard",
+        status: "active",
+      },
+    };
     await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(result),
+      body: JSON.stringify(add_to_cart_data),
       quantity: 5,
     });
     //   .then((response) => response.json())
