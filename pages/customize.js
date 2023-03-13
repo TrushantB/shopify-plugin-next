@@ -230,7 +230,7 @@ function Customize() {
     }
     const add_to_cart_data = {
       product: {
-        title: "ok",
+        title: "ok1",
         variants: { result },
         vendor: "Burton",
         product_type: "Snowboard",
