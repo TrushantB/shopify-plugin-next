@@ -44,7 +44,7 @@ app.post("/", async (req, res) => {
     },
     body: JSON.stringify({
       id: addedData.product.variants[0].id,
-      quantity: req.quantity,
+      quantity: 10,
     }),
   }).then((res) =>
     res.json().then((result) => console.log("Result is here", result))

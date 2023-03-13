@@ -242,7 +242,6 @@ function Customize() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(add_to_cart_data),
-      quantity: 5,
     });
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));
