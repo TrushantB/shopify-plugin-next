@@ -3,18 +3,7 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 const PORT = 8080;
-const add_to_cart_data = {
-  product: {
-    title: "A2",
-    vendor: "Burton",
-    product_type: "Snowboard",
-    status: "active",
-  },
-};
-
 app.post("/", async (req, res) => {
-  // res.send("welcome to web");
-  console.log("body is here", req.body);
   res.send({ "Test ": "Ok" });
   const response = await fetch(
     "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
@@ -30,8 +19,6 @@ app.post("/", async (req, res) => {
     }
   );
   const addedData = await response.json();
-  console.log(addedData.product.variants[0].id);
-  console.log(addedData.product.variant_id);
   // app.get("/", async (request, res) => {
   //   await fetch(
   //     "https://ekartbook.myshopify.com/admin/api/2023-01/products.json",
