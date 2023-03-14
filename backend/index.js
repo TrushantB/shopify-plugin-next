@@ -12,7 +12,7 @@ app.post("/", async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Cookie:
-          "_ab=1; __ssid=9e2f6d29-693f-49dd-9a8c-6e2d1a9bad99; secure_customer_sig=; localization=IN; _orig_referrer=; _landing_page=/?_ab=0&_fd=0&_sc=1; _y=2c66f8db-3806-4014-ae91-84b77ba09a27; _shopify_y=2c66f8db-3806-4014-ae91-84b77ba09a27; _abv=0; storefront_digest=34ffa47c8b7fc2a09b1018acec1ea578cfaece25bc91d280c9fe60f9155b5ae1; cart=c465e57728cbe4931b8dc23e40983988; cart_ts=1678715859; cart_ver=gcp-us-east1:153; preview_theme=1; _secure_session_id=0a3fe3a0d736b99c024a7c828e6feb6d; _s=50d3a425-ee09-40f6-8485-0f6f03daee1f; _shopify_s=50d3a425-ee09-40f6-8485-0f6f03daee1f; _shopify_sa_p=; cart_sig=f782500a0e1cd2a53489dfd97faab88f; _shopify_sa_t=2023-03-14T09:39:46.246Z; keep_alive=cd5c3426-8f31-41f0-8571-74be99213df0",
+          "_s=c7aac837-18ca-4be8-a3d3-4346e92c7fc7; _shopify_s=c7aac837-18ca-4be8-a3d3-4346e92c7fc7; _shopify_y=53f69282-fd10-4c17-b1a4-e1f6e43a23f3; _y=53f69282-fd10-4c17-b1a4-e1f6e43a23f3; cart=c465e57728cbe4931b8dc23e40983988; cart_currency=INR; cart_sig=c7ed7f39eb28023fef015f2c1505d8a8; cart_ts=1678787103; cart_ver=gcp-us-east1%3A159; secure_customer_sig=",
         "X-Shopify-Access-Token": "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",
       },
       body: JSON.stringify(req.body),
