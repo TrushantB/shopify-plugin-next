@@ -12,7 +12,7 @@ app.post("/", async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Cookie:
-          "_shopify_y=a8cd7c12-cf1d-4017-b630-a35366b87981; _y=a8cd7c12-cf1d-4017-b630-a35366b87981; secure_customer_sig=",
+          "localization=IN; _orig_referrer=; _landing_page=/cart; _y=ffe8ef8a-a95e-4ad9-a92d-36abee3c885e; _shopify_y=ffe8ef8a-a95e-4ad9-a92d-36abee3c885e; _secure_session_id=20ad62ccbe3c62684a33e73321eab382; customer_auth_session_created_at=2023-03-13+13:25:40+UTC; customer_auth_provider=customer_identity;identity-state-e21096938c817d272f77cf773fdcb547=BAh7DEkiDnJldHVybi10bwY6BkVUSSI/L2NoZWNrb3V0cy9jL2JhYWU5YzBlM2UwYWNlNDJlYjQ5NmYxOTUzY2JmOGZjP2xvY2FsZT1lbi1JTgY7AFRJIhFyZWRpcmVjdC11cmkGOwBUSSI/aHR0cHM6Ly9la2FydGJvb2subXlzaG9waWZ5LmNvbS9jdXN0b21lcl9pZGVudGl0eS9jYWxsYmFjawY7AFRJIhBzZXNzaW9uLWtleQY7AFQ6DWN1c3RvbWVySSIPY3JlYXRlZC1hdAY7AFRmFzE2Nzg3MTgzNzMuMTA4NTY5NkkiCm5vbmNlBjsAVEkiJWJiYzZhYTVhNDI1NzM2ZmY1NmMxYzc4YWEwNDY5NGIzBjsARkkiCnNjb3BlBjsAVFsHSSILb3BlbmlkBjsAVEkiCmVtYWlsBjsAVEkiD2NvbmZpZy1rZXkGOwBUSSINY3VzdG9tZXIGOwBU--8fcb81fcf85c32de941f831623d7ff31b86fa5d3; identity-state=BAhbBkkiJWUyMTA5NjkzOGM4MTdkMjcyZjc3Y2Y3NzNmZGNiNTQ3BjoGRUY=--cf61fcffe89b60f604ef1679b740c18202b220f3; secure_customer_sig=515efb1e4e4e4e5c67b5655c53be8947; cart=c00485a3ea89a37df8e951cc002901a1; cart_ts=1678769651; cart_sig=24cc025ff4245f947c691e9c8e4a0c1b; cart_ver=gcp-us-east1:2; _s=b465f7af-6c04-4e62-86d7-95190fb4e485; _shopify_s=b465f7af-6c04-4e62-86d7-95190fb4e485; _shopify_sa_p=; _shopify_sa_t=2023-03-14T09:35:33.826Z; keep_alive=3e796084-86ea-4b00-9795-7a3f3d661ca0",
         "X-Shopify-Access-Token": "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",
       },
       body: JSON.stringify(req.body),
