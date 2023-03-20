@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // import html2canvas from 'html2canvas'
 import { default as NextImage } from "next/image";
+import { ChromePicker } from "react-color";
+import { Popover, Whisper, Button } from "rsuite";
 
 export default function Editor({
   designTemplates,
@@ -8,9 +10,11 @@ export default function Editor({
   handleResult,
   notebookDetails,
   handleAddtext,
+  handleTextColor,
   handleAddImage,
 }) {
   const [text, setText] = useState("");
+
   // const [fileUpload, setFileUpload] = React.useState({});
   // const [dlImage, setDLimage] = React.useState(false)
 
@@ -174,14 +178,69 @@ export default function Editor({
   // React.useEffect(() => {
   //     console.log('editor loaded')
   // }, [])
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [color, setColor] = useState();
+  const [fillColor, setFillColor] = useState(false);
+  const handleColorPicker = () => {
+    console.log("handleColorPicker");
+    setDisplayColorPicker(!displayColorPicker);
+  };
+  // handleClick = () => {
+  //   this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  // };
 
+  const handleClose = () => {
+    setDisplayColorPicker(!displayColorPicker);
+  };
+  const popover = {
+    position: "absolute",
+    zIndex: "2",
+  };
+  const cover = {
+    position: "fixed",
+    top: "0px",
+    right: "0px",
+    bottom: "0px",
+    left: "0px",
+  };
+  const handleChange = (color) => {
+    // this.setState({ color: color.rgb })
+    setColor(color.hex);
+    console.log(color.hex);
+    handleTextColor("", color.hex);
+    setFillColor(true);
+  };
+  // const handleTextColor = (event) => {
+  //   if (event.target.classList.contains("bg-blue-900")) {
+  //     console.log("blue");
+  //     setColor("blue");
+  //   }
+  //   if (event.target.classList.contains("bg-black")) {
+  //     console.log("black");
+  //     setColor("black");
+
+  //   }
+  //   if (event.target.classList.contains("bg-red-900")) {
+  //     console.log("red");
+  //     setColor("red");
+
+  //   }
+  //   if (event.target.classList.contains("bg-green-900")) {
+  //     setColor("green");
+  //     console.log("green");
+  //   }
+  //   if (event.target.classList.contains("bg-yellow-300")) {
+  //     setColor("yellow");
+  //     console.log("yellow");
+  //   }
+  // };
   return (
-    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center">
+    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
       <div className="px-4  lg:px-10  h-full">
         <h1 className="mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
           BOOK DESIGNER
         </h1>
-        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 my-3">
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 my-3 ">
           <div className="text-white bg-indigo-500  p-3 rounded  ">
             <div className="font-bold uppercase">Ruling Type</div>
             <div className="capitalize">
@@ -245,28 +304,107 @@ export default function Editor({
                 </div> */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3  my-3 ">
           <div className="mb-2 col-span-2">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
-              Add Text On Notebook
-            </label>
-            <div className="flex items-center  text-center gap-2 ">
-              <input
-                type="text"
-                id="first_name"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
-                placeholder="Type text here..."
-                required
-              />
-              <button
-                onClick={() => {
-                  handleAddtext(text);
-                  setText("");
+            <div className="mb-2 col-span-2">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
+                Add Text On Notebook
+              </label>
+              <div className="flex items-center  text-center gap-2 ">
+                <input
+                  type="text"
+                  id="first_name"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onKeyUp={(e) => {
+                    if (e.key == "Enter") {
+                      console.log(e.key);
+                      handleAddtext(text);
+                      setText("");
+                    }
+                  }}
+                  className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
+                  placeholder="Type text here..."
+                  required
+                />
+                <button
+                  onClick={() => {
+                    handleAddtext(text);
+                    setText("");
+                  }}
+                  className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base "
+                >
+                  Add Text
+                </button>
+              </div>
+            </div>
+            <div className="flex">
+              <div
+                onClick={(event) => {
+                  handleTextColor(event, "blue");
+                  setColor("blue");
                 }}
-                className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base "
-              >
-                Add Text
-              </button>
+                className="w-12 m-2 h-12 bg-blue-900 rounded-full"
+              ></div>
+              <div
+                onClick={(event) => {
+                  handleTextColor(event, "purple");
+                  setColor("purple");
+                }}
+                className="w-12 m-2 h-12 bg-purple-900 rounded-full"
+              ></div>
+              <div
+                onClick={(event) => {
+                  handleTextColor(event, "red");
+                  setColor("red");
+                }}
+                className="w-12 m-2 h-12 bg-red-900 rounded-full"
+              ></div>
+              <div
+                onClick={(event) => {
+                  handleTextColor(event, "green");
+                  setColor("green");
+                }}
+                className="w-12 m-2 h-12 bg-green-900 rounded-full"
+              ></div>
+              <div
+                onClick={(event) => {
+                  handleTextColor(event, "yellow");
+                  setColor("yellow");
+                }}
+                className="w-12 m-2 h-12 bg-yellow-300 rounded-full"
+              ></div>
+              <div>
+                {/* <button onClick={handleColorPicker}>Pick Color</button> */}
+                {!fillColor ? (
+                  <span onClick={handleColorPicker}>
+                    <img
+                      alt="img"
+                      src="/images/gradent_color.webp"
+                      className="mx-2 p-2 w-24"
+                    />
+                  </span>
+                ) : (
+                  <div
+                    className="mx-2 p-2 w-24 h-12 rounded-2xl my-2"
+                    onClick={handleColorPicker}
+                    style={{ background: color }}
+                  ></div>
+                )}
+                {displayColorPicker ? (
+                  <div style={popover}>
+                    <div style={cover} onClick={handleClose} />
+
+                    <ChromePicker color={color} onChange={handleChange} />
+                  </div>
+                ) : null}
+              </div>
+              {/* <span onClick={handleColorPicker}>
+                <img
+                  alt="img"
+                  src="/images/gradent_color.webp"
+                  className="mx-2 p-2 w-24"
+                />
+                <ChromePicker />
+              </span> */}
             </div>
           </div>
           <div className="mb-2 col-span-1">

@@ -24,9 +24,11 @@
     "node-fetch": "^3.3.0",
     "nodemon": "^2.0.21",
     "react": "18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "18.2.0",
     "react-konva": "^18.2.3",
     "react-konva-utils": "^0.3.2",
+    "rsuite": "^5.28.2",
     "use-image": "^1.1.0"
   },
   "devDependencies": {

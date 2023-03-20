@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Image, Transformer, Group, Text } from "react-konva";
 import useImage from "use-image";
-// import front from "./images/front.svg";
+import { Html } from "react-konva-utils";
 
 export class URLImage extends React.Component {
   state = {
@@ -57,7 +57,8 @@ const Designer = ({
   const [isSelected, setIsSelected] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const carouselItemsRef = useRef([]);
-  const onSelect = () => {
+  const onSelect = (event) => {
+    console.log("yes here is me", event.target._id, bookForPurchase);
     setIsSelected(!isSelected);
   };
   const onChange = (data, index) => {
@@ -112,19 +113,8 @@ const Designer = ({
       handleSelectedImageChange(newIdx);
     }
   };
-
   return (
     <div className=" bg-indigo-500 pb-4  min-h-screen text-center">
-      {/* <div onClick={handleClearDesign} className="text-white flex justify-end    cursor-pointer">
-                <div className="bg-indigo-800 p-3 flex justify-center items-center flex-col">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                    </svg>
-
-                    <span >Design Back Cover</span>
-
-                </div>
-            </div> */}
       <div className="carousel-container">
         <div className="flex justify-center items-center">
           <div
@@ -223,10 +213,6 @@ const Designer = ({
                         x={8}
                         y={0}
                       />
-                      {/* {
-                                                    book.designId == null &&
-                                                    <URLImage src={`http://localhost:3000//${front.src}` || 'https://firebasestorage.googleapis.com/v0/b/myapp-281407.appspot.com/o/front.svg?alt=media&token=edaa5bac-f766-4327-baf5-2b65258dd6d6'} width={300} x={8} height={350} y={0} />
-                                                } */}
                       {book.designId == null &&
                         !book.designs.length &&
                         notebookDetails?.specifications?.ruling === "ruled" && (
@@ -360,8 +346,8 @@ const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
 
   React.useEffect(() => {
     if (isSelected) {
-      trRef.current.setNode(shapeRef.current);
-      trRef.current.getLayer().batchDraw();
+      trRef?.current?.setNode(shapeRef.current);
+      trRef?.current?.getLayer().batchDraw();
     }
   }, [isSelected]);
 
@@ -446,78 +432,143 @@ const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
 const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
+  const [editableText, setEditableText] = useState(true);
+  const [inputValue, setInputValue] = useState(design.text);
+  // const textFields = [];
+  // textFields.push(design);
+  console.log("designnnn", isSelected);
 
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  // const handleKeyUp = (e) => {
+  //   if (e.keyCode === 13) {
+  //     handleBlur();
+  //   }
+  // };
+  const handleBlur = () => {
+    setEditableText(true);
+    const _design = {
+      ...design,
+      text: inputValue,
+    };
+    onChange(_design, index);
+  };
+  const handleFocus = (event) => {
+    event.target.setSelectionRange(inputValue.length, inputValue.length);
+  };
+  const handleClick = () => {
+    console.log("handle click");
+    setIsSelected(!isSelected);
+  };
   React.useEffect(() => {
     if (isSelected) {
-      trRef.current.setNode(shapeRef.current);
-      trRef.current.getLayer().batchDraw();
+      console.log(shapeRef.current._id);
+      trRef?.current?.setNode(shapeRef.current);
+      trRef?.current?.getLayer().batchDraw();
     }
   }, [isSelected]);
-
   return (
     <React.Fragment>
-      <Text
-        ref={shapeRef}
-        isSelected={isSelected}
-        text={design.text}
-        draggable
-        width={design.width}
-        fontSize={design.height}
-        height={design.height}
-        x={design.x}
-        y={design.y}
-        onClick={onSelect}
-        onTap={onSelect}
-        onDragEnd={(e) => {
-          const _design = {
-            ...design,
-            x: e.target.x(),
-            y: e.target.y(),
-          };
-          onChange(_design, index);
-        }}
-        onTransformEnd={(e) => {
-          // transformer is changing scale of the node
-          // and NOT its width or height
-          // but in the store we have only width and height
-          // to match the data better we will reset scale on transform end
-          const node = shapeRef.current;
-          const scaleX = node.scaleX();
-          const scaleY = node.scaleY();
-
-          // we will reset it back
-          node.scaleX(1);
-          node.scaleY(1);
-          const _design = {
-            ...design,
-            x: e.target.x(),
-            y: e.target.y(),
-            x: node.x(),
-            y: node.y(),
-            // set minimal value
-            width: Math.max(5, node.width() * scaleX),
-            height: Math.max(node.height() * scaleY),
-          };
-          onChange(_design, index);
-          // onChange({
-          //     ...data,
-          //     designs: {
-          //         ...data.designs,
-          //         [data.direction]: {
-          //             ...data.designs[data.direction],
-          //             positions: {
-          //                 ...data.designs[data.direction].positions,
-          //                 x: node.x(),
-          //                 y: node.y(),
-          //                 // set minimal value
-          //                 width: Math.max(5, node.width() * scaleX),
-          //                 height: Math.max(node.height() * scaleY),
-          //             }
-          //         }
-          //     }
-          // });
-        }}
-      />
+      {editableText ? (
+        <Text
+          ref={shapeRef}
+          // isSelected={isSelected}
+          text={design.text}
+          // text="123123123"
+          draggable
+          width={design.width}
+          // fontSize={5}
+          fontSize={design.height}
+          height={design.height}
+          x={design.x}
+          y={design.y}
+          fill={design.color}
+          onClick={onSelect}
+          onTap={handleClick}
+          onDblClick={() => setEditableText(false)}
+          onDragEnd={(e) => {
+            const _design = {
+              ...design,
+              x: e.target.x(),
+              y: e.target.y(),
+            };
+            console.log("X", _design, index);
+            onChange(_design, index);
+          }}
+          onTransformEnd={(e) => {
+            // transformer is changing scale of the node
+            // and NOT its width or height
+            // but in the store we have only width and height
+            // to match the data better we will reset scale on transform end
+            const node = shapeRef.current;
+            const scaleX = node.scaleX();
+            const scaleY = node.scaleY();
+            // we will reset it back
+            node.scaleX(1);
+            node.scaleY(1);
+            const _design = {
+              ...design,
+              x: e.target.x(),
+              y: e.target.y(),
+              x: node.x(),
+              y: node.y(),
+              // set minimal value
+              width: Math.max(5, node.width() * scaleX),
+              height: Math.max(node.height() * scaleY),
+            };
+            onChange(_design, index);
+            // onChange({
+            //     ...data,
+            //     designs: {
+            //         ...data.designs,
+            //         [data.direction]: {
+            //             ...data.designs[data.direction],
+            //             positions: {
+            //                 ...data.designs[data.direction].positions,
+            //                 x: node.x(),
+            //                 y: node.y(),
+            //                 // set minimal value
+            //                 width: Math.max(5, node.width() * scaleX),
+            //                 height: Math.max(node.height() * scaleY),
+            //             }
+            //         }
+            //     }
+            // });
+          }}
+        />
+      ) : (
+        <Html
+          divProps={{
+            style: {
+              opacity: 1,
+              position: "absolute",
+              left: `${design.x}px`,
+              top: `${design.y - 10}px`,
+              border: 0,
+              padding: 0,
+              margin: 0,
+              color: `${design.color}`,
+            },
+          }}
+        >
+          <textarea
+            value={inputValue}
+            className="bg-transparent border-transparent outline-none cursor-text"
+            onChange={handleChange}
+            // onKeyUp={handleKeyUp}
+            autoFocus
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={{
+              fontSize: `${design.height}px`,
+              // height: `${design.height}px`,
+              width: "100%",
+              resize: "none",
+            }}
+          />
+        </Html>
+      )}
       {isSelected && (
         <Transformer
           ref={trRef}

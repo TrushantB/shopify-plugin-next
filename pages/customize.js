@@ -18,6 +18,7 @@ function Customize() {
   const router = useRouter();
   const [notebookDetails, setNotebookDetails] = useState({});
   const [selectedNotebook, setSelectedNotebook] = React.useState({});
+  const [color, setColor] = useState();
   const [image, setImage] = useState();
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -39,11 +40,39 @@ function Customize() {
           url: "",
           height: 350 / 15,
           text: text,
+          color: color,
+          isSelected: false,
         };
         book.designs.push(design);
+        console.log("===>", design);
         setSelectedNotebook({ ...selectedNotebook });
       }
     });
+  };
+  const handleTextColor = (event, param) => {
+    // if (event.target.classList.contains("bg-blue-900")) {
+    //   console.log("blue");
+    //   console.log(param);
+    //   setColor("blue");
+    // }
+    // if (event.target.classList.contains("bg-purple-900")) {
+    //   console.log("black");
+    //   setColor("purple");
+    // }
+    // if (event.target.classList.contains("bg-red-900")) {
+    //   console.log("red");
+    //   setColor("red");
+    // }
+    // if (event.target.classList.contains("bg-green-900")) {
+    //   setColor("green");
+    //   console.log("green");
+    // }
+    // if (event.target.classList.contains("bg-yellow-300")) {
+    //   setColor("yellow");
+    //   console.log("yellow");
+    // }
+    console.log("here", param);
+    setColor(param);
   };
   const handleAddImage = async (event) => {
     await setImage(URL.createObjectURL(event.target.files[0]));
@@ -228,21 +257,24 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-
-    const add_to_cart_data = {
+    const add_to_product_data = {
       product: {
-        title: "Custom Book",
-        variants: { result },
+        title: "Custom Book1212",
+        properties: resultNotebook,
         quantity: result.quantity,
         status: "active",
+        vendor: "navneet",
+        product_type: "customised",
+        image: "https://picsum.photos/200",
       },
     };
+    console.log(result);
     const response = await fetch("http://localhost:8080/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(add_to_cart_data),
+      body: JSON.stringify(add_to_product_data),
     });
 
     const data = response.json();
@@ -270,6 +302,7 @@ function Customize() {
           notebookDetails={notebookDetails}
           handleAddtext={handleAddtext}
           handleAddImage={handleAddImage}
+          handleTextColor={handleTextColor}
         />
       </div>
       <Footer />

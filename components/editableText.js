@@ -1,9 +1,12 @@
 import React from "react";
 import { EditableTextInput } from "./EditableTextInput";
+import { Html } from "react-konva-utils";
 
 const RETURN_KEY = 13;
 const ESCAPE_KEY = 27;
-
+function handleTextChange(e) {
+  console.log("yess", e.target.value);
+}
 export function EditableText({
   x,
   y,
@@ -23,21 +26,11 @@ export function EditableText({
     }
   }
 
-  function handleTextChange(e) {
-    onChange(e.currentTarget.value);
-  }
-
   //   if (isEditing) {
   return (
-    <EditableTextInput
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      value={text}
-      onChange={handleTextChange}
-      onKeyDown={handleEscapeKeys}
-    />
+    <Html groupProps={{ x, y }}>
+      <textarea value={text} onChange={onChange} />
+    </Html>
   );
   //   }
   //   return (
