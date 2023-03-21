@@ -257,17 +257,26 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    const add_to_product_data = [
-      (product = {
-        title: "Custom Book1212",
-        properties: resultNotebook,
-        quantity: result.quantity,
-        status: "active",
-        vendor: "navneet",
-        product_type: "customised",
-        image: "https://picsum.photos/200",
-      }),
-    ];
+    const add_to_product_data = {
+      product: {
+        title: "Burton Custom Freestyle 151",
+        body_html: "<strong>Good snowboard!</strong>",
+        vendor: "Burton",
+        product_type: "Snowboard",
+        status: "draft",
+      },
+    };
+    // [
+    //   (product = {
+    //     title: "Custom Book1212",
+    //     properties: resultNotebook,
+    //     quantity: result.quantity,
+    //     status: "active",
+    //     vendor: "navneet",
+    //     product_type: "customised",
+    //     image: "https://picsum.photos/200",
+    //   }),
+    // ];
     console.log(result);
     const response = await fetch("http://localhost:3200/", {
       method: "POST",
