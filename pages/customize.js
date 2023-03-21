@@ -269,7 +269,7 @@ function Customize() {
       },
     };
     console.log("before hit API", result);
-    const response = await fetch("https://localhost:3200/addbook", {
+    const response = await fetch("http://localhost:3200/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
