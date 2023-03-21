@@ -269,7 +269,7 @@ function Customize() {
       },
     };
     console.log(result);
-    const response = await fetch("http://localhost:8080/", {
+    const response = await fetch("http://localhost:3200/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
