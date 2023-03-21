@@ -269,7 +269,7 @@ function Customize() {
       },
     };
     console.log("before hit API", result);
-    const response = await fetch("http://localhost:3200/", {
+    const response = await fetch("https://shopify-backend-xyix.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
