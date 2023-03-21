@@ -268,7 +268,7 @@ function Customize() {
         image: "https://picsum.photos/200",
       },
     };
-    console.log(result);
+    console.log("before hit API", result);
     const response = await fetch("https://localhost:3200/addbook", {
       method: "POST",
       headers: {
@@ -278,7 +278,7 @@ function Customize() {
     });
 
     const data = await response.json();
-    console.log("data is HERE", data);
+    console.log("response", data);
   };
 
   return (
