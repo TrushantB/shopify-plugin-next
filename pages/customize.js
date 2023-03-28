@@ -268,7 +268,7 @@ function Customize() {
         image: "https://picsum.photos/200",
       },
     };
-    console.log("before hit API", result);
+    console.log("before hit API", result); //http://localhost:3200/
     const response = await fetch("https://shopify-backend-x0gg.onrender.com/", {
       method: "POST",
       headers: {

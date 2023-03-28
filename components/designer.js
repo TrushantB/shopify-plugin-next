@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Image, Transformer, Group, Text } from "react-konva";
 import useImage from "use-image";
 import { Html } from "react-konva-utils";
+import Carousel from "better-react-carousel";
 
 export class URLImage extends React.Component {
   state = {
@@ -274,7 +275,7 @@ const Designer = ({
             )}
           </Stage>
         </div>
-        <div className="carousel">
+        {/* <div className="carousel">
           <div className="carousel__images rounded">
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
@@ -333,7 +334,49 @@ const Designer = ({
               />
             </svg>
           </button>
-        </div>
+        </div> */}
+        <Carousel cols={5} rows={1} gap={1} loop>
+          {bookForPurchase &&
+            bookForPurchase.map((image) => (
+              <Carousel.Item key={image.id}>
+                <img width="100px" src={image.url} />
+              </Carousel.Item>
+            ))}
+        </Carousel>
+        {/* <Carousel cols={2} rows={1} gap={10} loop>
+        {bookForPurchase &&
+              bookForPurchase.map((image, idx) => (
+                <div className="flex-row" key={idx}>
+                  <div
+                    onClick={() => handleSelectedImageChange(idx)}
+                    style={{ backgroundImage: `url(${image.url})` }}
+                    key={image.id}
+                    className={`carousel__image rounded ${
+                      selectedNotebook.id === image.id &&
+                      "carousel__image-selected "
+                    }`}
+                    ref={(el) => (carouselItemsRef.current[idx] = el)}
+                  />
+                  <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">
+                    {idx + 1}
+                  </span>
+                <Carousel.Item>
+                     <img width="100%" src={image.url} />
+                </Carousel.Item>
+              ))}
+        </Carousel> */}
+
+        {/* <Carousel.Item>
+            <img width="100%" src="https://picsum.photos/800/600?random=1" />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img width="100%" src="https://picsum.photos/800/600?random=2" />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img width="100%" src="https://picsum.photos/800/600?random=3" />
+          </Carousel.Item>
+          <Carousel.Item>
+          </Carousel.Item> */}
       </div>
     </div>
   );
