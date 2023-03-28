@@ -269,7 +269,7 @@ function Customize() {
       },
     };
     console.log("before hit API", result); //http://localhost:3200/
-    const response = await fetch("https://shopify-backend-x0gg.onrender.com/", {
+    const response = await fetch("https://shopify-backend-x0gg.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
