@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import $ from "jquery";
 const sampleImage =
   "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
 
@@ -268,8 +269,8 @@ function Customize() {
         image: "https://picsum.photos/200",
       },
     };
-    console.log("before hit API", result); //http://localhost:3200/
-    const response = await fetch("https://shopify-backend-x0gg.onrender.com", {
+    console.log("before hit API", result); //https://shopify-backend-x0gg.onrender.com/
+    const response = await fetch("http://localhost:3500", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -277,8 +278,33 @@ function Customize() {
       body: JSON.stringify(add_to_product_data),
     });
 
-    const data = await response.json();
-    console.log("response", data);
+    //   const data = await response.json();
+    //   console.log("response", data);
+    // const routes = {
+    //   root: "/", // replace with the actual root URL of your Shopify store
+    //   cart: "/cart",
+    // };
+    // const url = window.Shopify.routes.root + "cart/add.js";
+    // const form = new FormData(
+    //   document.querySelector('form[action$="/cart/add"]')
+    // );
+
+    // fetch(url, {
+    //   method: "POST",
+    //   body: form,
+    // })
+    //   .then((response) => {
+    //     // handle the response from Shopify here
+    //     console.log("response is here", response);
+    //   })
+    //   .catch((error) => {
+    //     // handle any errors here
+    //     console.log("error is here", error);
+    //   });
+    // $.post(
+    //   window.Shopify.routes.root + "cart/add.js",
+    //   $('form[action$="/cart/add"]').serialize()
+    // );
   };
 
   return (
