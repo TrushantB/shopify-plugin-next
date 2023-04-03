@@ -276,12 +276,12 @@ function Customize() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(add_to_product_data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Data Added", data);
-        window.location = "https://ekartbook.myshopify.com/";
-      });
+    });
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   console.log("Data Added", data);
+    //   window.location = "https://ekartbook.myshopify.com/";
+    // });
     //   const data = await response.json();
     //   console.log("response", data);
     // const routes = {
