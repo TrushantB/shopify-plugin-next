@@ -277,7 +277,7 @@ function Customize() {
       },
       body: JSON.stringify(add_to_product_data),
     });
-
+    location.href = "https://ekartbook.myshopify.com/";
     //   const data = await response.json();
     //   console.log("response", data);
     // const routes = {
