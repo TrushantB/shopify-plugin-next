@@ -230,7 +230,7 @@ function Customize() {
 
     return result;
   }
-  const handleResult = () => {
+  const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
     let result = {
@@ -273,15 +273,18 @@ function Customize() {
 
     console.log("your result is here===>", result);
     try {
-      fetch("https://shopify-backend-x0gg.onrender.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(add_to_product_data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      const response = await fetch(
+        "https://shopify-backend-x0gg.onrender.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }
+      );
+      const data = response.json();
+      console.log(data);
     } catch (err) {
       console.log("Error is here", error);
     }
