@@ -270,7 +270,7 @@ function Customize() {
       },
     };
 
-    console.log("before hit API", result);
+    console.log("your result", result);
     await fetch("https://shopify-backend-x0gg.onrender.com", {
       method: "POST",
       headers: {
