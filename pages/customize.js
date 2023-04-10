@@ -14,6 +14,7 @@ import { designTemplates } from "@/lib/constants";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useRouter } from "next/router";
+import { json } from "body-parser";
 
 function Customize() {
   const router = useRouter();
@@ -230,7 +231,7 @@ function Customize() {
 
     return result;
   }
-  const handleResult = async () => {
+  const handleResult = () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
     let result = {
@@ -271,7 +272,7 @@ function Customize() {
       },
     };
 
-    console.log("your result is here2", result);
+    console.log("your result is here3", result);
     try {
       fetch("https://shopify-backend-x0gg.onrender.com", {
         method: "POST",
@@ -279,10 +280,11 @@ function Customize() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(add_to_product_data),
-      }).then((response) => console.log("response===>", response));
-      // .then((data) => console.log(data));
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     } catch (err) {
-      console.log("Error is here", err);
+      console.log("Error is here", error);
     }
   };
 
