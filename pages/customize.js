@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import $ from "jquery";
 const sampleImage =
   "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
 
@@ -231,7 +230,7 @@ function Customize() {
 
     return result;
   }
-  const handleResult = async () => {
+  const handleResult = () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
     let result = {
@@ -272,9 +271,9 @@ function Customize() {
       },
     };
 
-    console.log("your result is here 4", result);
+    console.log("your result is here===>", result);
     try {
-      await fetch("https://shopify-backend-x0gg.onrender.com", {
+      fetch("https://shopify-backend-x0gg.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
