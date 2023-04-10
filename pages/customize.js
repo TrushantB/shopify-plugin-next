@@ -279,8 +279,8 @@ function Customize() {
       body: await JSON.stringify(add_to_product_data),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
-    // .catch((error) => console.log("your error", error));
+      .then((data) => console.log(data))
+      .catch((error) => console.log("Error is here", error));
     console.log("here are you");
   };
 
