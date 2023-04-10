@@ -278,7 +278,7 @@ function Customize() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(add_to_product_data),
+        body: add_to_product_data,
       })
         .then((response) => response.json())
         .then((data) => console.log(data));
