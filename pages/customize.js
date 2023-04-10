@@ -275,7 +275,6 @@ function Customize() {
     await fetch("https://shopify-backend-x0gg.onrender.com", {
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
       body: await JSON.stringify(add_to_product_data),
