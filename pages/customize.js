@@ -231,7 +231,7 @@ function Customize() {
 
     return result;
   }
-  const handleResult = () => {
+  const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
     let result = {
@@ -272,9 +272,9 @@ function Customize() {
       },
     };
 
-    console.log("your result is here===>", result);
+    console.log("your result is here 4", result);
     try {
-      fetch("https://shopify-backend-x0gg.onrender.com", {
+      await fetch("https://shopify-backend-x0gg.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
