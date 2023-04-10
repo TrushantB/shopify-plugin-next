@@ -271,7 +271,7 @@ function Customize() {
       },
     };
 
-    console.log("your result is here1", result);
+    console.log("your result is here2", result);
     try {
       fetch("https://shopify-backend-x0gg.onrender.com", {
         method: "POST",
