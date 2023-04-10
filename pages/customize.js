@@ -269,7 +269,6 @@ function Customize() {
         image: "https://picsum.photos/200",
       },
     };
-    // c
 
     console.log("before hit API", result);
     await fetch("https://shopify-backend-x0gg.onrender.com", {
@@ -280,7 +279,8 @@ function Customize() {
       body: await JSON.stringify(add_to_product_data),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((error) => console.log("your error", error));
     console.log("here are you");
   };
 
