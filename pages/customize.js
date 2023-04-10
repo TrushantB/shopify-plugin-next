@@ -269,46 +269,20 @@ function Customize() {
         image: "https://picsum.photos/200",
       },
     };
+    // c
+
     console.log("before hit API", result); //https://shopify-backend-x0gg.onrender.com
-    const response = await fetch("https://shopify-backend-x0gg.onrender.com", {
+    await fetch("https://shopify-backend-x0gg.onrender.com", {
       method: "POST",
       headers: {
+        "access-control-allow-origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(add_to_product_data),
-    });
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   console.log("Data Added", data);
-    //   window.location = "https://ekartbook.myshopify.com/";
-    // });
-    //   const data = await response.json();
-    //   console.log("response", data);
-    // const routes = {
-    //   root: "/", // replace with the actual root URL of your Shopify store
-    //   cart: "/cart",
-    // };
-    // const url = window.Shopify.routes.root + "cart/add.js";
-    // const form = new FormData(
-    //   document.querySelector('form[action$="/cart/add"]')
-    // );
-
-    // fetch(url, {
-    //   method: "POST",
-    //   body: form,
-    // })
-    //   .then((response) => {
-    //     // handle the response from Shopify here
-    //     console.log("response is here", response);
-    //   })
-    //   .catch((error) => {
-    //     // handle any errors here
-    //     console.log("error is here", error);
-    //   });
-    // $.post(
-    //   window.Shopify.routes.root + "cart/add.js",
-    //   $('form[action$="/cart/add"]').serialize()
-    // );
+      body: await JSON.stringify(add_to_product_data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+    console.log("here are you");
   };
 
   return (
