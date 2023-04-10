@@ -283,7 +283,7 @@ function Customize() {
           body: JSON.stringify(add_to_product_data),
         }
       );
-      const data = response.json();
+      const data = await response.json();
       console.log(data);
     } catch (err) {
       console.log("Error is here", err);
