@@ -271,7 +271,7 @@ function Customize() {
       },
     };
 
-    console.log("your result is here===>", result);
+    console.log("your result is here---===>", result);
     try {
       const response = await fetch(
         "https://shopify-backend-x0gg.onrender.com",
@@ -286,7 +286,7 @@ function Customize() {
       const data = response.json();
       console.log(data);
     } catch (err) {
-      console.log("Error is here", error);
+      console.log("Error is here", err);
     }
   };
 
