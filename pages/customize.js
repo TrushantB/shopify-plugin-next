@@ -271,11 +271,11 @@ function Customize() {
     };
     // c
 
-    console.log("before hit API", result); //https://shopify-backend-x0gg.onrender.com
+    console.log("before hit API", result);
     await fetch("https://shopify-backend-x0gg.onrender.com", {
       method: "POST",
       headers: {
-        "access-control-allow-origin": "*",
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
       body: await JSON.stringify(add_to_product_data),
