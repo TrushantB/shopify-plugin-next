@@ -279,9 +279,8 @@ function Customize() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(add_to_product_data),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      }).then((response) => console.log("response===>", response));
+      // .then((data) => console.log(data));
     } catch (err) {
       console.log("Error is here", err);
     }
