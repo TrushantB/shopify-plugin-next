@@ -267,6 +267,7 @@ function Customize() {
         vendor: "navneet",
         product_type: "customised",
         image: "https://picsum.photos/200",
+        product_type: "custumised",
       },
     };
 
