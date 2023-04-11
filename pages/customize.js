@@ -298,29 +298,29 @@ function Customize() {
   return (
     <React.Fragment>
       <Header />
-      {/* {!loading ? ( */}
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <Designer
-          selectedNotebook={selectedNotebook}
-          setSelectedNotebook={setSelectedNotebook}
-          bookForPurchase={bookForPurchase}
-          handleApplyForAll={handleApplyForAll}
-          handleClearDesign={handleClearDesign}
-          handleAllClearDesign={handleAllClearDesign}
-          notebookDetails={notebookDetails}
-          setBookForPurchase={setBookForPurchase}
-        />
-        <Editor
-          designTemplates={designTemplates}
-          applyDesign={applyDesign}
-          handleResult={handleResult}
-          notebookDetails={notebookDetails}
-          handleAddtext={handleAddtext}
-          handleAddImage={handleAddImage}
-          handleTextColor={handleTextColor}
-        />
-      </div>
-      {/* ) : (
+      {!loading ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <Designer
+            selectedNotebook={selectedNotebook}
+            setSelectedNotebook={setSelectedNotebook}
+            bookForPurchase={bookForPurchase}
+            handleApplyForAll={handleApplyForAll}
+            handleClearDesign={handleClearDesign}
+            handleAllClearDesign={handleAllClearDesign}
+            notebookDetails={notebookDetails}
+            setBookForPurchase={setBookForPurchase}
+          />
+          <Editor
+            designTemplates={designTemplates}
+            applyDesign={applyDesign}
+            handleResult={handleResult}
+            notebookDetails={notebookDetails}
+            handleAddtext={handleAddtext}
+            handleAddImage={handleAddImage}
+            handleTextColor={handleTextColor}
+          />
+        </div>
+      ) : (
         <div className="w-auto h-auto flex items-center justify-center">
           <FadeLoader
             color="#36d7b7"
@@ -331,7 +331,7 @@ function Customize() {
             width={3}
           />
         </div>
-      )} */}
+      )}
       <Footer />
     </React.Fragment>
   );
