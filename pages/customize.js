@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { FadeLoader } from "react-spinners";
 const sampleImage =
   "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
 
@@ -21,6 +22,7 @@ function Customize() {
   const [selectedNotebook, setSelectedNotebook] = React.useState({});
   const [color, setColor] = useState();
   const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -273,6 +275,7 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
+      setLoading(true);
       fetch("https://shopify-backend-x0gg.onrender.com/cart", {
         method: "POST",
         headers: {
@@ -284,6 +287,7 @@ function Customize() {
         .then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
+            setLoading(false);
             window.location.replace("https://ekartbook.myshopify.com/");
           }
         })
@@ -295,7 +299,7 @@ function Customize() {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header />({loading}? (
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <Designer
           selectedNotebook={selectedNotebook}
@@ -317,6 +321,8 @@ function Customize() {
           handleTextColor={handleTextColor}
         />
       </div>
+      ) : (<FadeLoader color="#36d7b7" />
+      ))
       <Footer />
     </React.Fragment>
   );
