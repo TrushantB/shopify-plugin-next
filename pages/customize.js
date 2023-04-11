@@ -273,7 +273,7 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
-      fetch("https://shopify-backend-x0gg.onrender.com", {
+      fetch("https://shopify-backend-x0gg.onrender.com/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
