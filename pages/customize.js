@@ -276,7 +276,7 @@ function Customize() {
       new Promise(function (resolve, reject) {
         fetch("https://shopify-backend-x0gg.onrender.com"),
           {
-            method: "POST",
+            method: "post",
             headers: {
               "Content-Type": "application/json",
             },
