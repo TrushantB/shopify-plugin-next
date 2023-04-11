@@ -299,33 +299,34 @@ function Customize() {
 
   return (
     <React.Fragment>
-      <Header />({loading}? (
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <Designer
-          selectedNotebook={selectedNotebook}
-          setSelectedNotebook={setSelectedNotebook}
-          bookForPurchase={bookForPurchase}
-          handleApplyForAll={handleApplyForAll}
-          handleClearDesign={handleClearDesign}
-          handleAllClearDesign={handleAllClearDesign}
-          notebookDetails={notebookDetails}
-          setBookForPurchase={setBookForPurchase}
-        />
-        <Editor
-          designTemplates={designTemplates}
-          applyDesign={applyDesign}
-          handleResult={handleResult}
-          notebookDetails={notebookDetails}
-          handleAddtext={handleAddtext}
-          handleAddImage={handleAddImage}
-          handleTextColor={handleTextColor}
-        />
-      </div>
+      <Header />
+      {loading ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <Designer
+            selectedNotebook={selectedNotebook}
+            setSelectedNotebook={setSelectedNotebook}
+            bookForPurchase={bookForPurchase}
+            handleApplyForAll={handleApplyForAll}
+            handleClearDesign={handleClearDesign}
+            handleAllClearDesign={handleAllClearDesign}
+            notebookDetails={notebookDetails}
+            setBookForPurchase={setBookForPurchase}
+          />
+          <Editor
+            designTemplates={designTemplates}
+            applyDesign={applyDesign}
+            handleResult={handleResult}
+            notebookDetails={notebookDetails}
+            handleAddtext={handleAddtext}
+            handleAddImage={handleAddImage}
+            handleTextColor={handleTextColor}
+          />
+        </div>
       ) : (
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <FadeLoader color="#36d7b7" />
-      </div>
-      ))
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <FadeLoader color="#36d7b7" />
+        </div>
+      )}
       <Footer />
     </React.Fragment>
   );
