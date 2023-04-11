@@ -321,7 +321,10 @@ function Customize() {
           handleTextColor={handleTextColor}
         />
       </div>
-      ) : (<FadeLoader color="#36d7b7" />
+      ) : (
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <FadeLoader color="#36d7b7" />
+      </div>
       ))
       <Footer />
     </React.Fragment>
