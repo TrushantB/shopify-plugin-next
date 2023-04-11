@@ -273,7 +273,7 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     var p = Promise.race([
-      fetch("/https://shopify-backend-x0gg.onrender.com"),
+      fetch("https://shopify-backend-x0gg.onrender.com"),
       {
         method: "POST",
         headers: {
