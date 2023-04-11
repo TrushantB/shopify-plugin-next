@@ -272,7 +272,7 @@ function Customize() {
     };
 
     console.log("your result is here---===>", result);
-    var p = Promise.race([
+    var response = Promise.race([
       fetch("https://shopify-backend-x0gg.onrender.com"),
       {
         method: "POST",
@@ -282,11 +282,11 @@ function Customize() {
         body: JSON.stringify(add_to_product_data),
       },
       new Promise(function (resolve, reject) {
-        setTimeout(() => reject(new Error("request timeout")), 50000);
+        setTimeout(() => reject(new Error("request timeout")), 5000);
       }),
     ]);
-    p.then((response) => console.log("Your response ===>", response));
-    p.catch((error) => console.log(error));
+    response.then((resp) => console.log("Your response ===>", resp));
+    response.catch((error) => console.log(error));
     // try {
     //   const response = await fetch(
     //     "https://shopify-backend-x0gg.onrender.com",
