@@ -281,7 +281,12 @@ function Customize() {
         },
         body: JSON.stringify(add_to_product_data),
       })
-        .then((resp) => console.log(resp))
+        .then((resp) => {
+          console.log("response", resp);
+          if (resp.response.status === 200) {
+            window.location.replace("https://codefrontend.com");
+          }
+        })
         .catch((err) => console.log("error", err));
     } catch (err) {
       console.log("Error is here", err);
