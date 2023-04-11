@@ -181,6 +181,7 @@ export default function Editor({
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [color, setColor] = useState();
   const [fillColor, setFillColor] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleColorPicker = () => {
     console.log("handleColorPicker");
     setDisplayColorPicker(!displayColorPicker);
