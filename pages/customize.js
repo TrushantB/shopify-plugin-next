@@ -284,7 +284,7 @@ function Customize() {
         .then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
-            window.location.replace("https://codefrontend.com");
+            window.location.replace("https://ekartbook.myshopify.com/");
           }
         })
         .catch((err) => console.log("error", err));
