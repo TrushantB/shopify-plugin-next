@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { FadeLoader } from "react-spinners";
 const sampleImage =
   "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
 
@@ -273,6 +274,7 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
+      <FadeLoader color="#36d7b7" />;
       fetch("https://shopify-backend-x0gg.onrender.com/cart", {
         method: "POST",
         headers: {
