@@ -285,7 +285,7 @@ function Customize() {
         setTimeout(() => reject(new Error("request timeout")), 5000);
       }),
     ]);
-    p.then((response) => console.log(response));
+    p.then((response) => console.log("Your response ===>", response));
     p.catch((error) => console.log(error));
     // try {
     //   const response = await fetch(
