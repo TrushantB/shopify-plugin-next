@@ -272,36 +272,22 @@ function Customize() {
     };
 
     console.log("your result is here---===>", result);
-    var response = Promise.race([
-      new Promise(function (resolve, reject) {
-        fetch("https://shopify-backend-x0gg.onrender.com"),
-          {
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(add_to_product_data),
-          };
-      }),
-    ]);
-    response.then((resp) => console.log("Your response ===>", resp));
-    response.catch((error) => console.log(error));
-    // try {
-    //   const response = await fetch(
-    //     "https://shopify-backend-x0gg.onrender.com",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(add_to_product_data),
-    //     }
-    //   );
-    //   const data = await response.json();
-    //   console.log(data);
-    // } catch (err) {
-    //   console.log("Error is here", err);
-    // }
+    try {
+      const response = await fetch(
+        "https://shopify-backend-x0gg.onrender.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log("Error is here", err);
+    }
   };
 
   return (
