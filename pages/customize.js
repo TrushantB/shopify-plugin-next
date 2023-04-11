@@ -277,6 +277,7 @@ function Customize() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(add_to_product_data),
       })
