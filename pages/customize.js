@@ -274,7 +274,7 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
-      <FadeLoader color="#36d7b7" />;
+      // <FadeLoader color="#36d7b7" />;
       fetch("https://shopify-backend-x0gg.onrender.com/cart", {
         method: "POST",
         headers: {
