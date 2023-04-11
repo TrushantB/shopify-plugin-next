@@ -282,7 +282,7 @@ function Customize() {
         body: JSON.stringify(add_to_product_data),
       },
       new Promise(function (resolve, reject) {
-        setTimeout(() => reject(new Error("request timeout")), 5000);
+        setTimeout(() => reject(new Error("request timeout")), 50000);
       }),
     ]);
     p.then((response) => console.log("Your response ===>", response));
