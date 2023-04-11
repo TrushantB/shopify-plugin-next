@@ -283,15 +283,13 @@ function Customize() {
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(add_to_product_data),
-      })
-        .then((resp) => {
-          console.log("response", resp);
-          if (resp.status === 200) {
-            setLoading(false);
-            window.location.replace("https://ekartbook.myshopify.com/");
-          }
-        })
-        .catch((err) => console.log("error", err));
+      }).then((resp) => {
+        console.log("response", resp);
+        if (resp.status === 200) {
+          window.location.replace("https://ekartbook.myshopify.com/");
+          setLoading(false);
+        }
+      });
     } catch (err) {
       console.log("Error is here", err);
     }
@@ -300,7 +298,7 @@ function Customize() {
   return (
     <React.Fragment>
       <Header />
-      {loading ? (
+      {!loading ? (
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <Designer
             selectedNotebook={selectedNotebook}
@@ -323,8 +321,15 @@ function Customize() {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <FadeLoader color="#36d7b7" />
+        <div className="w-auto h-auto flex items-center justify-center">
+          <FadeLoader
+            color="#36d7b7"
+            height={18}
+            loading
+            margin={13}
+            radius={0}
+            width={3}
+          />
         </div>
       )}
       <Footer />
