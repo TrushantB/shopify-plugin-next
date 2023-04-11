@@ -286,7 +286,7 @@ function Customize() {
       }).then((resp) => {
         console.log("response", resp);
         if (resp.status === 200) {
-          window.location.replace("https://ekartbook.myshopify.com/");
+          window.location.replace("https://ekartbook.myshopify.com/cart");
           setLoading(false);
         }
       });
@@ -330,6 +330,7 @@ function Customize() {
             radius={0}
             width={3}
           />
+          <h3>Adding product to cart</h3>
         </div>
       )}
       <Footer />
