@@ -29,8 +29,6 @@ const Specification = () => {
   //     window.removeEventListener("beforeunload", handleTabClose);
   //   };
   // }, []);
-  let myURL = new URL(window.location.href);
-  console.log(myURL);
   const handleChange = (event) => {
     console.log(event.target.name, event.target.id);
     setSpecificationValues({
