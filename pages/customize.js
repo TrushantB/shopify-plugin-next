@@ -276,11 +276,11 @@ function Customize() {
     console.log("your result is here---===>", result);
     try {
       setLoading(true);
-      fetch("https://shopify-backend-x0gg.onrender.com/cookie", {
-        method: "GET",
-      }).then((response) => {
-        console.log(response);
-      });
+      // fetch("https://shopify-backend-x0gg.onrender.com/cookie", {
+      //   method: "GET",
+      // }).then((response) => {
+      //   console.log(response);
+      // });
       fetch("https://shopify-backend-x0gg.onrender.com/cart", {
         method: "POST",
         headers: {

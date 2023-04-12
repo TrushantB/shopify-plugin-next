@@ -5,11 +5,16 @@ import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import axios from "axios";
-import Prompt from "react-router-dom";
-
+// import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 const Specification = () => {
   const [specifications, setSpecifications] = useState([]);
   const [specificationValues, setSpecificationValues] = useState({});
+  // const queryParams = new URLSearchParams(window.location.search);
+  // const term = queryParams.get("term");
+  // const location = queryParams.get("location");
+  useEffect(() => {
+    console.log(window.location);
+  }, []);
 
   // useEffect(() => {
   //   const handleTabClose = (event) => {
