@@ -5,16 +5,18 @@ import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+
 // import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 const Specification = () => {
   const [specifications, setSpecifications] = useState([]);
   const [specificationValues, setSpecificationValues] = useState({});
+  const [cookies, setCookie] = useCookies();
   // const queryParams = new URLSearchParams(window.location.search);
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
-    const cookie = document.cookie;
-    console.log("cookies", cookie);
+    console.log("cookies", cookies);
     console.log(window.location);
     const url = window.location.search;
     const cartID = url.split("?");
