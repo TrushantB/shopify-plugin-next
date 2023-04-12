@@ -16,7 +16,7 @@ const Specification = () => {
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
-    console.log("cookies", cookies);
+    console.log("cookies==>", cookies);
     console.log(window.location);
     const url = window.location.search;
     const cartID = url.split("?");
