@@ -14,6 +14,9 @@ const Specification = () => {
   // const location = queryParams.get("location");
   useEffect(() => {
     console.log(window.location);
+    const url = window.location.search;
+    const cartID = url.split("?");
+    console.log(cartID);
   }, []);
 
   // useEffect(() => {
