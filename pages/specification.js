@@ -13,6 +13,8 @@ const Specification = () => {
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
+    const cookie = document.cookie;
+    console.log("cookies", cookie);
     console.log(window.location);
     const url = window.location.search;
     const cartID = url.split("?");
