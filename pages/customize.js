@@ -328,6 +328,11 @@ function Customize() {
       // document.cookie = "myValue=5;path=/;domain=geexu.org";
       const cookies = document.cookie.split("; ");
       console.log("===>", cookies);
+      const cartId = cookies.forEach((element) => {
+        if (element.splice(0, 4) === "cart") {
+          console.log("cartID", element);
+        }
+      });
 
       console.log("cookies== geexu>", document.cookie);
       // console.log(window.location);
