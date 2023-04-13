@@ -318,15 +318,18 @@ function Customize() {
         status: "active",
         vendor: "navneet",
         product_type: "customised",
-        image: "https://picsum.photos/200",
         product_type: "Snowboard",
-        featured_image: {
-          aspect_ratio: 1.046,
-          alt: "Example T-Shirt",
-          height: 822,
-          url: "https://cdn.shopify.com/s/files/1/0723/9424/4388/products/345-3452055_kids-shopping-png-transparent-png.png?v=1678455607",
-          width: 860,
-        },
+        images: [
+          {
+            position: 1,
+            created_at: "2018-01-08T12:34:47-05:00",
+            updated_at: "2018-01-08T12:34:47-05:00",
+            width: 110,
+            height: 140,
+            src: "http://example.com/burton.jpg",
+            variant_ids: [{}],
+          },
+        ],
       },
     };
 
