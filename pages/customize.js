@@ -326,7 +326,7 @@ function Customize() {
             updated_at: "2018-01-08T12:34:47-05:00",
             width: 110,
             height: 140,
-            src: "http://example.com/burton.jpg",
+            src: "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fjpg&psig=AOvVaw1L_D6ACrt85zpaGB5IVuY1&ust=1681474556012000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNit5vbqpv4CFQAAAAAdAAAAABAE",
             variant_ids: [{}],
           },
         ],
