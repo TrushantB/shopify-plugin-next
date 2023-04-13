@@ -11,13 +11,13 @@ import { useCookies } from "react-cookie";
 const Specification = () => {
   const [specifications, setSpecifications] = useState([]);
   const [specificationValues, setSpecificationValues] = useState({});
-  const [cookies, setCookie] = useCookies();
+  // const [cookies, setCookie] = useCookies();
   // const queryParams = new URLSearchParams(window.location.search);
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
     document.cookie = "domain= .geexu.org";
-    console.log("cookies== geexuuu>", cookies);
+    console.log("cookies== geexu>", document.cookie);
     console.log(window.location);
     const url = window.location.search;
     const cartID = url.split("?");
