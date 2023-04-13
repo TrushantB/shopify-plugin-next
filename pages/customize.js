@@ -26,19 +26,19 @@ function Customize() {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  useEffect(() => {
-    if (isSave) {
-      window.addEventListener("beforeunload", (ev) => {
-        ev.preventDefault();
-        ev.returnValue = "Are you sure you want to close?";
-      });
-    }
-    // return () => {
-    window.removeEventListener("beforeunload", () => {
-      console.log("called 2");
-    });
-    // };
-  }, [isSave]);
+  // useEffect(() => {
+  //   if (isSave) {
+  //     window.addEventListener("beforeunload", (ev) => {
+  //       ev.preventDefault();
+  //       ev.returnValue = "Are you sure you want to close?";
+  //     });
+  //   }
+  //   // return () => {
+  //   window.removeEventListener("beforeunload", () => {
+  //     console.log("called 2");
+  //   });
+  //   // };
+  // }, [isSave]);
   useEffect(() => {
     if (!isSave) {
       window.removeEventListener("beforeunload", () => {
@@ -264,13 +264,13 @@ function Customize() {
       });
     });
     setIsSave(false);
-    window.removeEventListener(
-      "beforeunload",
-      () => {
-        alert("called 2");
-      },
-      false
-    );
+    // window.removeEventListener(
+    //   "beforeunload",
+    //   () => {
+    //     alert("called 2");
+    //   },
+    //   false
+    // );
   };
 
   function generateString(length) {
@@ -321,12 +321,14 @@ function Customize() {
         product_type: "Snowboard",
         images: [
           {
+            id: 850703190,
+            product_id: 632910392,
             position: 1,
             created_at: "2018-01-08T12:34:47-05:00",
             updated_at: "2018-01-08T12:34:47-05:00",
             width: 110,
             height: 140,
-            src: "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fjpg&psig=AOvVaw1L_D6ACrt85zpaGB5IVuY1&ust=1681474556012000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNit5vbqpv4CFQAAAAAdAAAAABAE",
+            src: "http://example.com/burton.jpg",
             variant_ids: [{}],
           },
         ],
