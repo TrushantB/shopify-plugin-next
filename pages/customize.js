@@ -14,7 +14,6 @@ import { designTemplates } from "@/lib/constants";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useRouter } from "next/router";
-import { json } from "body-parser";
 
 function Customize() {
   const router = useRouter();
@@ -23,8 +22,47 @@ function Customize() {
   const [color, setColor] = useState();
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
+  const [isSave, setIsSave] = useState(false);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  useEffect(() => {
+    if (isSave) {
+      window.addEventListener("beforeunload", (ev) => {
+        ev.preventDefault();
+        ev.returnValue = "Are you sure you want to close?";
+      });
+    }
+    // return () => {
+    window.removeEventListener("beforeunload", () => {
+      console.log("called 2");
+    });
+    // };
+  }, [isSave]);
+  useEffect(() => {
+    if (!isSave) {
+      window.removeEventListener("beforeunload", () => {
+        console.log("called 2");
+      });
+    }
+    // return () => {
+    //   second
+    // }
+  }, [isSave]);
+
+  // const beforeUnloadListener = (event) => {
+  //   event.preventDefault();
+  //   event.returnValue = "";
+  // };
+
+  // // A function that invokes a callback when the page has unsaved changes.
+  //   window.addEventListener("beforeunload", beforeUnloadListener);
+  // };
+
+  // // A function that invokes a callback when the page's unsaved changes are resolved.
+  //   alert("saved");
+  //   window.removeEventListener("beforeunload", beforeUnloadListener);
+  // };
 
   // const [modal, setModal] = React.useState({
   //     isOpen: false,
@@ -51,6 +89,7 @@ function Customize() {
         setSelectedNotebook({ ...selectedNotebook });
       }
     });
+    setIsSave(true);
   };
   const handleTextColor = (event, param) => {
     // if (event.target.classList.contains("bg-blue-900")) {
@@ -92,6 +131,7 @@ function Customize() {
         };
         book.designs.push(design);
         setSelectedNotebook({ ...selectedNotebook });
+        setIsSave(true);
       }
     });
   };
@@ -174,6 +214,7 @@ function Customize() {
           designId: bookDesign.id,
           isCustomizedDesign: false,
         });
+        setIsSave(true);
       }
     });
     setBookForPurchase([...bookForPurchase]);
@@ -187,6 +228,7 @@ function Customize() {
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
     });
+    setIsSave(true);
   };
   const handleClearDesign = () => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
@@ -206,7 +248,7 @@ function Customize() {
       }
     });
   };
-  const handleAllClearDesign = () => {
+  const handleAllClearDesign = async () => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
     bookForPurchase.map((book) => {
       book.url = sampleImage;
@@ -221,6 +263,14 @@ function Customize() {
         designs: [],
       });
     });
+    setIsSave(false);
+    window.removeEventListener(
+      "beforeunload",
+      () => {
+        alert("called 2");
+      },
+      false
+    );
   };
 
   function generateString(length) {
@@ -293,6 +343,7 @@ function Customize() {
         if (resp.status === 200) {
           window.location.replace("https://ekartbook.myshopify.com/cart");
           setLoading(false);
+          setIsSave(false);
         }
       });
     } catch (err) {
