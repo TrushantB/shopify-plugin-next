@@ -349,7 +349,7 @@ function Customize() {
       }).then((resp) => {
         console.log("response", resp);
         if (resp.status === 200) {
-          window.location.replace("https://ekartbook.myshopify.com/cart");
+          // window.location.replace("https://ekartbook.myshopify.com/cart");
           setLoading(false);
           setIsSave(false);
         }
