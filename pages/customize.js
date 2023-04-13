@@ -329,7 +329,7 @@ function Customize() {
       const cookies = document.cookie.split("; ");
       console.log("===>", cookies);
       const cartId = cookies.forEach((element) => {
-        if (element.splice(0, 4) === "cart") {
+        if (element.substring(0, 4) === "cart") {
           console.log("cartID", element);
         }
       });
