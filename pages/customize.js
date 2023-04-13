@@ -39,16 +39,16 @@ function Customize() {
   //   });
   //   // };
   // }, [isSave]);
-  useEffect(() => {
-    if (!isSave) {
-      window.removeEventListener("beforeunload", () => {
-        console.log("called 2");
-      });
-    }
-    // return () => {
-    //   second
-    // }
-  }, [isSave]);
+  // useEffect(() => {
+  //   if (!isSave) {
+  //     window.removeEventListener("beforeunload", () => {
+  //       console.log("called 2");
+  //     });
+  //   }
+  // return () => {
+  //   second
+  // }
+  // }, [isSave]);
 
   // const beforeUnloadListener = (event) => {
   //   event.preventDefault();
@@ -85,7 +85,7 @@ function Customize() {
           isSelected: false,
         };
         book.designs.push(design);
-        console.log("===>", design);
+        // console.log("===>", design);
         setSelectedNotebook({ ...selectedNotebook });
       }
     });
@@ -113,7 +113,7 @@ function Customize() {
     //   setColor("yellow");
     //   console.log("yellow");
     // }
-    console.log("here", param);
+    // console.log("here", param);
     setColor(param);
   };
   const handleAddImage = async (event) => {
@@ -335,15 +335,15 @@ function Customize() {
       },
     };
 
-    console.log("your result is here---===>", result);
+    // console.log("your result is here---===>", result);
     try {
       // document.cookie = "myValue=5;path=/;domain=geexu.org";
       const cookies = document.cookie.split("; ");
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      console.log("cart===>", cartId);
-      console.log("cookies== geexu>", document.cookie);
+      // console.log("cart===>", cartId);
+      // console.log("cookies== geexu>", document.cookie);
 
       setLoading(true);
       // fetch("https://shopify-backend-x0gg.onrender.com/cookie", {
