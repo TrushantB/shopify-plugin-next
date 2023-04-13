@@ -319,19 +319,18 @@ function Customize() {
         vendor: "navneet",
         product_type: "customised",
         product_type: "Snowboard",
-        images: [
-          {
-            id: 850703190,
-            product_id: 632910392,
-            position: 1,
-            created_at: "2018-01-08T12:34:47-05:00",
-            updated_at: "2018-01-08T12:34:47-05:00",
-            width: 110,
-            height: 140,
-            src: "http://example.com/burton.jpg",
-            variant_ids: [{}],
-          },
-        ],
+        image: {
+          position: 1,
+          metafields: [
+            {
+              key: "new",
+              value: "newvalue",
+              type: "single_line_text_field",
+              namespace: "global",
+            },
+          ],
+          src: "https://fastly.picsum.photos/id/563/200/200.jpg?hmac=AUY3PTIdje13MIMulUogg4h4AYMKO4XfeEZQaEGw8fQ",
+        },
       },
     };
 
