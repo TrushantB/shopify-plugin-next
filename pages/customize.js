@@ -325,15 +325,13 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
-      useEffect(() => {
-        // document.cookie = "myValue=5;path=/;domain=geexu.org";
-        console.log("cookies== geexu>", document.cookie);
-        // console.log(window.location);
-        // const url = window.location.search;
-        // const cartID = url.split("?");
-        // console.log(cartID);
-      }, []);
-      setLoading(true);
+      // document.cookie = "myValue=5;path=/;domain=geexu.org";
+      console.log("cookies== geexu>", document.cookie);
+      // console.log(window.location);
+      // const url = window.location.search;
+      // const cartID = url.split("?");
+      // console.log(cartID);
+      setLoading(false);
       // fetch("https://shopify-backend-x0gg.onrender.com/cookie", {
       //   method: "GET",
       // }).then((response) => {
