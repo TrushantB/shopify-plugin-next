@@ -326,6 +326,9 @@ function Customize() {
     console.log("your result is here---===>", result);
     try {
       // document.cookie = "myValue=5;path=/;domain=geexu.org";
+      const cookies = document.cookie.split("; ");
+      console.log("===>", cookies);
+
       console.log("cookies== geexu>", document.cookie);
       // console.log(window.location);
       // const url = window.location.search;
