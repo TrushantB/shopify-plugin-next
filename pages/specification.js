@@ -16,7 +16,7 @@ const Specification = () => {
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
-    document.cookie = "hello=world; domain=geexu.org; Secure";
+    document.cookie = "domain=geexu.org";
     console.log("cookies== geexu>", cookies);
     console.log(window.location);
     const url = window.location.search;
