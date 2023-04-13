@@ -312,7 +312,7 @@ function Customize() {
     }
     const add_to_product_data = {
       product: {
-        title: "Custom Book1212",
+        title: "Custom Book",
         properties: resultNotebook,
         quantity: result.quantity,
         status: "active",
@@ -334,7 +334,7 @@ function Customize() {
       },
     };
 
-    // console.log("your result is here---===>", result);
+    console.log("your result is here---===>", result);
     try {
       // document.cookie = "myValue=5;path=/;domain=geexu.org";
       const cookies = document.cookie.split("; ");
