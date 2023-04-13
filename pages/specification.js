@@ -16,8 +16,8 @@ const Specification = () => {
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
   useEffect(() => {
-    document.cookie = "domain= .geexu.org";
-    console.log("cookies== geexu>", document.cookie);
+    document.cookie = { domain: ".geexu.org" };
+    console.log("cookies== geexuii>", document.cookie);
     console.log(window.location);
     const url = window.location.search;
     const cartID = url.split("?");
