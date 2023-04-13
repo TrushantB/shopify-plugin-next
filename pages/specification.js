@@ -15,15 +15,6 @@ const Specification = () => {
   // const queryParams = new URLSearchParams(window.location.search);
   // const term = queryParams.get("term");
   // const location = queryParams.get("location");
-  useEffect(() => {
-    // document.cookie = "myValue=5;path=/;domain=geexu.org";
-    console.log("cookies== geexu>", document.cookie);
-    console.log(window.location);
-    const url = window.location.search;
-    const cartID = url.split("?");
-    console.log(cartID);
-  }, []);
-
   // useEffect(() => {
   //   const handleTabClose = (event) => {
   //     event.preventDefault();
