@@ -241,222 +241,237 @@ export default function Editor({
   // };
   return (
     <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
-      <div className="px-4  lg:px-10  h-full">
-        <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
-          CUSTOMISE YOUR NOTEBOOK
-        </h1>
-        <div
-          className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
-          // onClick={handleAddImage}
+    <div className="px-4  lg:px-10  h-full w-10/12 mx-auto">
+      <h5 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pb-10  font-bold text-gray-800">
+        CUSTOMISE YOUR NOTEBOOK
+      </h5>
+      <div
+        className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
+        // onClick={handleAddImage}
+      >
+        {/* <svg
+          className="w-8 h-8"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
         >
-          <svg
-            className="w-8 h-8"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-          </svg>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={(event) => handleAddImage(event)}
-          />
-        </div>
-        <div>
-          <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
-            OR
-          </label>
-        </div>
-        <div className="mb-2">
-          <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-2">
-            PICK YOUR DESIGN TEMPLATE
-          </label>
-          <div className="grid gap-3 grid-cols-4  md:grid-cols-5 pr-5 md:gap-4 ">
-            {designTemplates.map((design) => {
-              return (
-                <div onClick={() => applyDesign(design)} key={design.id}>
-                  <NextImage
-                    src={design.url}
-                    width={100}
-                    height={150}
-                    className="rounded-2xl mr-10 md:mb-10 cursor-pointer border-solid border-2  border-gray-700 "
-                    alt=""
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        {/* <div className="mb-5">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Directon
-                    </label>
-                    <div className="relative">
-                        <select onChange={chnageDirection} className="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="direction">
-                            <option value="front">Front</option>
-                            <option value="back">Back</option>
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-                        </div>
-                    </div>
-                </div> */}
-        {/* <div className="mb-10">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Designs
-                    </label>
-                    <label className="w-full block cursor-pointer mb-3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" htmlFor="d_front">
-                        <span className="truncate block" id="dl_front">Front Design</span>
-                        <input id="d_front" onChange={changeDesign} className="w-full hidden" type="file" name="front" />
-                    </label>
-                    <label className="w-full block cursor-pointer mb-3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" htmlFor="d_back">
-                        <span className="truncate block" id="dl_back">Back Design</span>
-                        <input id="d_back" onChange={changeDesign} className="w-full hidden" type="file" name="back" />
-                    </label>
-                </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3  my-3 ">
-          <div className="mb-2 col-span-2">
-            <div className="mb-2 col-span-2">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-1">
-                Add Text On Notebook
-              </label>
-              <div className="flex items-center  text-center gap-2 ">
-                <input
-                  type="text"
-                  id="first_name"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  onKeyUp={(e) => {
-                    if (e.key == "Enter") {
-                      console.log(e.key);
-                      handleAddtext(text);
-                      setText("");
-                    }
-                  }}
-                  className=" border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full"
-                  placeholder="Type text here..."
-                  required
+          <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg> */}
+        <input
+        className="text-black p-2 "
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={(event) => handleAddImage(event)}
+        />
+      </div>
+      <div>
+        <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
+          OR
+        </label>
+      </div>
+      <div className="mb-2">
+        <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-4 pt-2">
+          PICK YOUR DESIGN TEMPLATE
+        </label>
+        <div className="grid gap-4 lg:gap-3 md:gap-5  grid-cols-2  md:grid-cols-5  ">
+          {designTemplates.map((design) => {
+            return (
+              <div className=" w-[90px] h-28" onClick={() => applyDesign(design)} key={design.id}>
+                <NextImage
+                  src={design.url}
+                  width={100}
+                  height={75}
+                  
+                  className="   cursor-pointer border-solid border-2  image-grid "
+                  alt=""
                 />
-                <button
-                  onClick={() => {
-                    handleAddtext(text);
-                    setText("");
-                  }}
-                  className="bg-indigo-500 hover:bg-indigo-700 py-2.5 text-white  md:py-1.5 px-3 rounded-full text-xs md:text-base "
-                >
-                  Add Text
-                </button>
               </div>
-            </div>
-            <div className="flex">
-              <div
-                onClick={(event) => {
-                  handleTextColor(event, "blue");
-                  setColor("blue");
-                }}
-                className="w-12 m-2 h-12 bg-blue-900 rounded-full"
-              ></div>
-              <div
-                onClick={(event) => {
-                  handleTextColor(event, "purple");
-                  setColor("purple");
-                }}
-                className="w-12 m-2 h-12 bg-purple-900 rounded-full"
-              ></div>
-              <div
-                onClick={(event) => {
-                  handleTextColor(event, "red");
-                  setColor("red");
-                }}
-                className="w-12 m-2 h-12 bg-red-900 rounded-full"
-              ></div>
-              <div
-                onClick={(event) => {
-                  handleTextColor(event, "green");
-                  setColor("green");
-                }}
-                className="w-12 m-2 h-12 bg-green-900 rounded-full"
-              ></div>
-              <div
-                onClick={(event) => {
-                  handleTextColor(event, "yellow");
-                  setColor("yellow");
-                }}
-                className="w-12 m-2 h-12 bg-yellow-300 rounded-full"
-              ></div>
-              <div>
-                {/* <button onClick={handleColorPicker}>Pick Color</button> */}
-                {!fillColor ? (
-                  <span onClick={handleColorPicker}>
-                    <img
-                      alt="img"
-                      src="/images/gradent_color.webp"
-                      className="mx-2 p-2 w-24"
-                    />
-                  </span>
-                ) : (
-                  <div
-                    className="mx-2 p-2 w-24 h-12 rounded-2xl my-2"
-                    onClick={handleColorPicker}
-                    style={{ background: color }}
-                  ></div>
-                )}
-                {displayColorPicker ? (
-                  <div style={popover}>
-                    <div style={cover} onClick={handleClose} />
-
-                    <ChromePicker color={color} onChange={handleChange} />
-                  </div>
-                ) : null}
-              </div>
-              {/* <span onClick={handleColorPicker}>
-                <img
-                  alt="img"
-                  src="/images/gradent_color.webp"
-                  className="mx-2 p-2 w-24"
-                />
-                <ChromePicker />
-              </span> */}
-            </div>
-          </div>
-          <div className="mb-2 col-span-1">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Add Image On Notebook
-            </label>
-            {/* <div
-              className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
-              // onClick={handleAddImage}
-            >
-              <svg
-                className="w-8 h-8"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-              </svg>
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={(event) => handleAddImage(event)}
-              />
-            </div> */}
-          </div>
-        </div>
-        <div className="flex items-center text-center">
-          <button
-            // onClick={handleResult}
-            onClick={handleResult}
-            // onClick={handleSaveAndContinue}
-            className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base "
-          >
-            Save & Continue
-          </button>
+            );
+          })}
         </div>
       </div>
+      {/* <div className="mb-5">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                      Directon
+                  </label>
+                  <div className="relative">
+                      <select onChange={chnageDirection} className="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="direction">
+                          <option value="front">Front</option>
+                          <option value="back">Back</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                      </div>
+                  </div>
+              </div> */}
+      {/* <div className="mb-10">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                      Designs
+                  </label>
+                  <label className="w-full block cursor-pointer mb-3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" htmlFor="d_front">
+                      <span className="truncate block" id="dl_front">Front Design</span>
+                      <input id="d_front" onChange={changeDesign} className="w-full hidden" type="file" name="front" />
+                  </label>
+                  <label className="w-full block cursor-pointer mb-3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" htmlFor="d_back">
+                      <span className="truncate block" id="dl_back">Back Design</span>
+                      <input id="d_back" onChange={changeDesign} className="w-full hidden" type="file" name="back" />
+                  </label>
+              </div> */}
+              {/* add text input */}
+
+
+      <div className="grid   my-3 py-3 pt-4 ">
+        <div className="mb-2 w-full">
+          <div className="mb-2  flex items-center flex-col flex-sm-row ">
+            <label className=" uppercase tracking-wide inline-block text-gray-700 text-xl font-bold w-3/12 ">
+              Add Text 
+            </label>
+            <div className="flex flex-col flex-sm-row items-center gap-3 sm:gap-0  text-center w-9/12   ">
+              <input
+                type="text"
+                id="first_name"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onKeyUp={(e) => {
+                  if (e.key == "Enter") {
+                    console.log(e.key);
+                    handleAddtext(text);
+                    setText("");
+                  }
+                }}
+                className=" border border-gray-300 text-black text-sm   focus:ring-blue-500 rounded focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                placeholder="Enter your text here"
+                required
+              />
+              <button
+                onClick={() => {
+                  handleAddtext(text);
+                  setText("");
+                }}
+                className="bg-[#fbb900]  py-3 text-black sm:-ml-[130px] w-full sm:w-[initial]  md:py-3 px-5 rounded text-xs md:text-base  "
+              >
+                ADD
+              </button>
+            </div>
+          </div>
+
+
+        <div className="flex flex-wrap items-center py-4">
+            <div
+              onClick={(event) => {
+                handleTextColor(event, "blue");
+                setColor("blue");
+              }}
+              className="w-12 m-2 h-12 bg-blue-900 "
+            ></div>
+            <div
+              onClick={(event) => {
+                handleTextColor(event, "purple");
+                setColor("purple");
+              }}
+              className="w-12 m-2 h-12 bg-purple-900 "
+            ></div>
+            <div
+              onClick={(event) => {
+                handleTextColor(event, "red");
+                setColor("red");
+              }}
+              className="w-12 m-2 h-12 bg-red-900 "
+            ></div>
+            <div
+              onClick={(event) => {
+                handleTextColor(event, "green");
+                setColor("green");
+              }}
+              className="w-12 m-2 h-12 bg-green-900 "
+            ></div>
+            <div
+              onClick={(event) => {
+                handleTextColor(event, "yellow");
+                setColor("yellow");
+              }}
+              className="w-12 m-2 h-12 bg-yellow-300 "
+            ></div>
+            <div className="flex flex-col">
+              <button onClick={handleColorPicker}>Pick Color</button> 
+              {!fillColor ? (
+                <span onClick={handleColorPicker}>
+                  <img
+                    alt="img"
+                    src="/images/gradent_color.webp"
+                    className="mx-2 p-2 w-24"
+                  />
+                </span>
+              ) : (
+                <div
+                  className="mx-2 p-2 w-24 h-12 rounded-2xl my-2"
+                  onClick={handleColorPicker}
+                  style={{ background: color }}
+                ></div>
+              )}
+               {displayColorPicker ? (
+                <div style={popover}>
+                  <div style={cover} onClick={handleClose} />
+
+                  <ChromePicker color={color} onChange={handleChange} />
+                </div>
+              ) : null}  
+            </div>
+            {/* <span onClick={handleColorPicker}>
+              <img
+                alt="img"
+                src="/images/gradent_color.webp"
+                className="mx-2 p-2 w-24"
+              />
+              <ChromePicker />
+            </span>   */}
+          </div>  
+        </div>
+       {/* <div className="mb-2 col-span-1">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Add Image On Notebook
+          </label>
+          <div
+            className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
+             onClick={handleAddImage}
+          >
+            <svg
+              className="w-8 h-8"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+            </svg>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(event) => handleAddImage(event)}
+            />
+          </div>
+        </div>  */}
+      </div>
+      <div className="flex flex-col flex-md-row items-center text-center gap-5 ">
+      <button
+          // onClick={handleResult}
+          // onClick={handleResult}
+          // onClick={handleSaveAndContinue}
+          className="w-3/4 md:w-1/2 border-2 font-bold  border-[#0035ff] p-3 rounded text-base md:text-xl "
+        >
+          GO BACK
+        </button>
+        <button
+          // onClick={handleResult}
+          // onClick={handleResult}
+          onClick={handleResult}
+          className="bg-[#0035ff] w-3/4 md:w-1/2 font-bold text-white p-3 rounded  md:text-xl text-base "
+        >
+          SAVE AND CONTINUE
+        </button>
+      </div>
     </div>
+  </div>
   );
 }
