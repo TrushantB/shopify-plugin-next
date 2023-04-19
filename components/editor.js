@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-// import html2canvas from 'html2canvas'
+import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { ChromePicker } from "react-color";
 import { Popover, Whisper, Button } from "rsuite";
+import Link from "next/link";
 
 export default function Editor({
   designTemplates,
@@ -14,7 +15,7 @@ export default function Editor({
   handleAddImage,
 }) {
   const [text, setText] = useState("");
-
+  const router = useRouter();
   // const [fileUpload, setFileUpload] = React.useState({});
   // const [dlImage, setDLimage] = React.useState(false)
 
@@ -211,6 +212,9 @@ export default function Editor({
     handleTextColor("", color.hex);
     setFillColor(true);
   };
+  const handleSaveAndContinue = () => {
+    router.push("/finalpreviews");
+  };
   // const handleTextColor = (event) => {
   //   if (event.target.classList.contains("bg-blue-900")) {
   //     console.log("blue");
@@ -238,27 +242,36 @@ export default function Editor({
   return (
     <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
       <div className="px-4  lg:px-10  h-full">
-        <h1 className="mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
-          BOOK DESIGNER
+        <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
+          CUSTOMISE YOUR NOTEBOOK
         </h1>
-        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 my-3 ">
-          <div className="text-white bg-indigo-500  p-3 rounded  ">
-            <div className="font-bold uppercase">Ruling Type</div>
-            <div className="capitalize">
-              {notebookDetails?.specifications?.ruling}
-            </div>
-          </div>
-          <div className="text-white bg-indigo-500  p-3 rounded">
-            <div className="font-bold uppercase">Pages size</div>
-            <div className="capitalize">
-              {notebookDetails?.specifications?.pages} pages and{" "}
-              {notebookDetails?.specifications?.size}{" "}
-            </div>
-          </div>
+        <div
+          className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
+          // onClick={handleAddImage}
+        >
+          <svg
+            className="w-8 h-8"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+          </svg>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(event) => handleAddImage(event)}
+          />
         </div>
-        <div className="mb-5">
-          <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
-            Design Nootbooks
+        <div>
+          <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">
+            OR
+          </label>
+        </div>
+        <div className="mb-2">
+          <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-2">
+            PICK YOUR DESIGN TEMPLATE
           </label>
           <div className="grid gap-3 grid-cols-4  md:grid-cols-5 pr-5 md:gap-4 ">
             {designTemplates.map((design) => {
@@ -412,7 +425,7 @@ export default function Editor({
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Add Image On Notebook
             </label>
-            <div
+            {/* <div
               className="flex bg-indigo-500 text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
               // onClick={handleAddImage}
             >
@@ -430,17 +443,17 @@ export default function Editor({
                 accept="image/*"
                 onChange={(event) => handleAddImage(event)}
               />
-              {/* <span className="text-base leading-normal">Upload Image</span> */}
-              {/* <input type='file' className="hidden" /> */}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex items-center text-center">
           <button
-            onClick={handleResult}
+            // onClick={handleResult}
+            // onClick={handleResult}
+            onClick={handleSaveAndContinue}
             className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base "
           >
-            Save & Add To Cart
+            Save & Continue
           </button>
         </div>
       </div>

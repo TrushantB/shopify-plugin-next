@@ -324,7 +324,6 @@ function Customize() {
 
     console.log("your result is here---===>", result);
     try {
-      // document.cookie = "myValue=5;path=/;domain=geexu.org";
       const cookies = document.cookie.split("; ");
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
@@ -333,11 +332,6 @@ function Customize() {
       // console.log("cookies== geexu>", document.cookie);
 
       setLoading(true);
-      // fetch("https://shopify-backend-x0gg.onrender.com/cookie", {
-      //   method: "GET",
-      // }).then((response) => {
-      //   console.log(response);
-      // });
       if (cartId.length !== 0) {
         fetch(
           `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
