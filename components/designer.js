@@ -115,10 +115,11 @@ const Designer = ({
     }
   };
   return (
-    <div className=" bg-indigo-500 pb-4  min-h-screen text-center">
+      <div className=" bg-[#ffedc4] pb-4 py-10  min-h-screen text-center">
       <div className="carousel-container">
         <div className="flex justify-center items-center">
-          <div
+          {/* apply for all */}
+          {/* <div
             onClick={handleApplyForAll}
             className="text-white flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer"
           >
@@ -158,8 +159,10 @@ const Designer = ({
                 ? "Applied For All"
                 : "Apply For All"}
             </span>
-          </div>
-          <div
+          </div> */}
+
+          {/* clear design */}
+          {/* <div
             onClick={handleClearDesign}
             className="text-red-500 flex justify-center items-center flex-col  bg-indigo-800 p-3 rounded cursor-pointer"
           >
@@ -178,8 +181,10 @@ const Designer = ({
               />
             </svg>
             <span>Clear Design</span>
-          </div>
-          <div
+          </div> */}
+
+          {/* clear all design */}
+          {/* <div
             onClick={handleAllClearDesign}
             className="text-red-500 flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer"
           >
@@ -198,9 +203,13 @@ const Designer = ({
               />
             </svg>
             <span>Clear All Design</span>
-          </div>
+          </div> */}
+
         </div>
-        <div className="selected-image flex justify-center items-center">
+
+        {/* Notebook image div */}
+
+        <div className="selected-image flex justify-center flex-col gap-10 items-center  ">
           <Stage width={300} height={350}>
             {bookForPurchase.map((book) => {
               if (selectedNotebook.id === book.id) {
@@ -274,8 +283,92 @@ const Designer = ({
               </Layer>
             )}
           </Stage>
+
+
+
+
+          {/* apply clear all div */}
+          <div className="flex flex-col flex-sm-row w-full h-14 justify-center gap-2 my-10   "> 
+
+          <div
+            onClick={handleClearDesign}
+            className="flex justify-center items-center flex-col mx-3  w-12/12 sm:w-4/12 p-3 rounded cursor-pointer border-2 border-[#0035ff]"
+          >
+           
+            <span className="text-xl font-bold">CLEAR DESIGN</span>
+          </div> 
+
+          {/* clear all design */}
+          <div
+            onClick={handleAllClearDesign}
+            className=" flex justify-center items-center flex-col mx-3  w-12/12 sm:w-4/12 p-3 rounded cursor-pointer border-2 border-[#0035ff]"
+          >
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 text-center"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+              />
+            </svg> */}
+            <span className="text-xl font-bold">CLEAR ALL  </span>
+          </div>
+
+
+
+
+                   {/* apply for all */}
+          <div
+            onClick={handleApplyForAll}
+            className="text-white flex justify-center items-center flex-col mx-3 bg-[#0035ff] p-3 w-12/12 sm:w-4/12 rounded cursor-pointer"
+          >
+            {/* {notebookDetails.isApplyForAll ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+            )} */}
+            <span className="text-xl font-bold text-white">
+              {notebookDetails.isApplyForAll
+                ? "Applied For All"
+                : "APPLY TO ALL"}
+            </span>
+          </div>
         </div>
-        <div className="carousel">
+          </div>
+          
+        {/* <div className="carousel">
           <div className="carousel__images rounded">
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
@@ -334,15 +427,15 @@ const Designer = ({
               />
             </svg>
           </button>
-        </div>
-        {/* <Carousel cols={5} rows={1} gap={1} loop>
+        </div> */}
+        <Carousel className="mt-10" cols={5} rows={1} gap={7} loop>
           {bookForPurchase &&
             bookForPurchase.map((image) => (
               <Carousel.Item key={image.id}>
-                <img width="100px" src={image.url} />
+                <img width="100px" height="250px" src={image.url} />
               </Carousel.Item>
             ))}
-        </Carousel> */}
+        </Carousel>
         {/* <Carousel cols={2} rows={1} gap={10} loop>
         {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
