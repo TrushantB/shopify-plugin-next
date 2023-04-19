@@ -64,9 +64,8 @@ const Specification = () => {
         </div>
         <div className=" py-16 px-4 md:px-5  w-10/12 mx-auto">
           <div className="text-center mb-10 py-3  leading-10">
-           
             <h4 className="font-bold text-2xl  lg:text-3xl text-gray-900">
-            CHOOSE YOUR  NOTEBOOK TYPE
+              CHOOSE YOUR NOTEBOOK TYPE
             </h4>
           </div>
           <div className="pr-5">
@@ -130,7 +129,7 @@ const Specification = () => {
               </Link> */}
               <Link
                 onClick={submitSpecifications}
-                href={"/term-and-conditions"}
+                href={"/customize"}
                 className=" cursor-pointer select-none w-full flex justify-center text-center bg-[#0035ff] rounded p-3  px-4 md:px-5 font-bold text-white text-xl "
               >
                 CONTINUE
@@ -138,21 +137,19 @@ const Specification = () => {
             </div>
           </div>
           <div className="bg-[#edf7fa] p-4 mt-5 rounded">
-          <h3 className=" text-xl font-semibold mb-4" >THINGS TO KNOW</h3>
-          <ul class='marker:text-[#0035ff] list-outside list-disc ml-6'>
-  <li>Minimum Pack Size is 6</li>
-  <li> Shipping Charges Rs.80</li>
-  <li> MRP inclusive of tax</li>
-  <li> Cover page type- Soft cover</li>
-  <li> Customize order take 5-7 days to dispatch & 2-3 days to delivery</li>
-
-
-</ul>
+            <h3 className=" text-xl font-semibold mb-4">THINGS TO KNOW</h3>
+            <ul class="marker:text-[#0035ff] list-outside list-disc ml-6">
+              <li>Minimum Pack Size is 6</li>
+              <li> Shipping Charges Rs.80</li>
+              <li> MRP inclusive of tax</li>
+              <li> Cover page type- Soft cover</li>
+              <li>
+                {" "}
+                Customize order take 5-7 days to dispatch & 2-3 days to delivery
+              </li>
+            </ul>
           </div>
         </div>
-      
-        
-        
       </div>
 
       <Footer />
