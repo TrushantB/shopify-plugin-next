@@ -1,21 +1,92 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FadeLoader } from "react-spinners";
+const FinalPreview = (props) => {
+  const [flag, setFlag] = useState(false);
+  let [result, setResult] = useState();
+  const router = useRouter();
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const dataString = decodeURIComponent(searchParams.get("data"));
+    const data = deserialize(dataString);
+    setResult(data);
+    data.resultNotebook.map((item) => {
+      if (item.designId === null) {
+        setFlag(true);
+      }
+    });
+  }, []);
+  const deserialize = (str) => {
+    const revive = (key, value) => {
+      if (typeof value === "string" && /^function\s*\(/.test(value)) {
+        return eval(`(${value})`);
+      } else if (value === "[Circular]") {
+        return { __circular__: true };
+      } else {
+        return value;
+      }
+    };
+    return JSON.parse(str, revive);
+  };
+  const handleModifyDesign = () => {
+    router.push("/customize");
+  };
+  const handleCloseButton = () => {
+    router.push("/customize");
+  };
+  const handleAddToCartButton = () => {
+    const add_to_product_data = {
+      product: {
+        title: "Custom Book",
+        properties: result.resultNotebook,
+        quantity: result.quantity,
+        status: "active",
+        vendor: "navneet",
+        product_type: "customised",
+        product_type: "Snowboard",
+      },
+    };
+    try {
+      const cookies = document.cookie.split("; ");
+      const cartId = cookies.filter(
+        (element) => element.substring(0, 4) === "cart"
+      );
+      // console.log("cart===>", cartId);
+      // console.log("cookies== geexu>", document.cookie);
 
-const FinalPreview = () => {
-  const [image, setImage] = useState([]);
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/photos")
-  //     .then((resp) => resp.json())
-  //     .then((data) => setImage(data));
-  //   console.log(image);
-  // }, []);
-  const data = [
-    { id: 1, url: "https://picsum.photos/200/300" },
-    { id: 2, url: "https://picsum.photos/200/301" },
-    { id: 3, url: "https://picsum.photos/200/302" },
-    { id: 4, url: "https://picsum.photos/200/303" },
-    { id: 5, url: "https://picsum.photos/200/304" },
-    { id: 6, url: "https://picsum.photos/200/305" },
-  ];
+      // setLoading(true);
+      if (cartId.length !== 0) {
+        fetch(
+          `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(add_to_product_data),
+          }
+        ).then((resp) => {
+          console.log("response", resp);
+          if (resp.status === 200) {
+            window.location.replace("https://ekartbook.myshopify.com/cart");
+            // setLoading(false);
+            // setIsSave(false);
+          }
+        });
+      } else {
+        alert("invalid Cart ID");
+      }
+    } catch (err) {
+      console.log("Error is here", err);
+    }
+  };
+  // data.map((item) => {
+  //   if (item.designId === "") {
+  //     setFlag(true);
+  //   }
+  // });
+
   return (
     <>
       <div>
@@ -28,13 +99,64 @@ const FinalPreview = () => {
           <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
         </div>
         <div className="flex">
-          {data.map((item) => {
-            return (
-              <div className="m-4" key={item.id}>
-                <img src={item.url}></img>
-              </div>
-            );
-          })}
+          {result ? (
+            result.resultNotebook.map((item) => {
+              return (
+                <div className="m-4" key={item.id}>
+                  <img src={item.url} />
+                  {item.designId === null ? (
+                    <button
+                      onClick={handleModifyDesign}
+                      className="rounded-full text-center border"
+                    >
+                      Add
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleModifyDesign}
+                      className="rounded-full text-center border"
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <>
+              {" "}
+              <FadeLoader
+                color="#36d7b7"
+                height={18}
+                loading
+                margin={13}
+                radius={0}
+                width={3}
+              />
+            </>
+          )}
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="flex justify-evenly md:justify-start col-span-3 gap-2">
+            <a
+              onClick={handleCloseButton}
+              className="flex items-center justify-center cursor-pointer rounded-full py-2 px-4 md:px-5 text-center bg-white hover:bg-indigo-500 border font-bold text-gray-500 text-sm "
+            >
+              CLOSE
+            </a>
+            {flag ? (
+              <a className="flex cursor-pointer select-none rounded-full text-center bg-slate-400 py-2 px-4 md:px-5 font-bold text-white text-sm pointer-events-none">
+                ADD TO CART
+              </a>
+            ) : (
+              <a
+                onClick={handleAddToCartButton}
+                className="flex cursor-pointer select-none rounded-full text-center bg-indigo-500 hover:bg-indigo-700 py-2 px-4 md:px-5 font-bold text-white text-sm "
+              >
+                ADD TO CART
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </>

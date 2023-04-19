@@ -212,9 +212,9 @@ export default function Editor({
     handleTextColor("", color.hex);
     setFillColor(true);
   };
-  const handleSaveAndContinue = () => {
-    router.push("/finalpreviews");
-  };
+  // const handleSaveAndContinue = () => {
+  //   router.push("/finalpreviews");
+  // };
   // const handleTextColor = (event) => {
   //   if (event.target.classList.contains("bg-blue-900")) {
   //     console.log("blue");
@@ -449,8 +449,8 @@ export default function Editor({
         <div className="flex items-center text-center">
           <button
             // onClick={handleResult}
-            // onClick={handleResult}
-            onClick={handleSaveAndContinue}
+            onClick={handleResult}
+            // onClick={handleSaveAndContinue}
             className="bg-indigo-500 w-full hover:bg-indigo-700  text-white p-2.5 rounded-full text-xs md:text-base "
           >
             Save & Continue

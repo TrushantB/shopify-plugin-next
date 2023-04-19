@@ -88,8 +88,8 @@ const Designer = ({
       setSelectedImageIndex(newIdx);
       if (carouselItemsRef?.current[newIdx]) {
         carouselItemsRef?.current[newIdx]?.scrollIntoView({
-          inline: "center",
-          behavior: "smooth",
+          // inline: "center",
+          // behavior: "smooth",
         });
       }
     }
@@ -275,7 +275,7 @@ const Designer = ({
             )}
           </Stage>
         </div>
-        {/* <div className="carousel">
+        <div className="carousel">
           <div className="carousel__images rounded">
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
@@ -334,15 +334,15 @@ const Designer = ({
               />
             </svg>
           </button>
-        </div> */}
-        <Carousel cols={5} rows={1} gap={1} loop>
+        </div>
+        {/* <Carousel cols={5} rows={1} gap={1} loop>
           {bookForPurchase &&
             bookForPurchase.map((image) => (
               <Carousel.Item key={image.id}>
                 <img width="100px" src={image.url} />
               </Carousel.Item>
             ))}
-        </Carousel>
+        </Carousel> */}
         {/* <Carousel cols={2} rows={1} gap={10} loop>
         {bookForPurchase &&
               bookForPurchase.map((image, idx) => (

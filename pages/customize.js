@@ -310,55 +310,70 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    const add_to_product_data = {
-      product: {
-        title: "Custom Book",
-        properties: resultNotebook,
-        quantity: result.quantity,
-        status: "active",
-        vendor: "navneet",
-        product_type: "customised",
-        product_type: "Snowboard",
-      },
-    };
+    // const add_to_product_data = {
+    //   product: {
+    //     title: "Custom Book",
+    //     properties: resultNotebook,
+    //     quantity: result.quantity,
+    //     status: "active",
+    //     vendor: "navneet",
+    //     product_type: "customised",
+    //     product_type: "Snowboard",
+    //   },
+    // };
 
     console.log("your result is here---===>", result);
-    try {
-      const cookies = document.cookie.split("; ");
-      const cartId = cookies.filter(
-        (element) => element.substring(0, 4) === "cart"
-      );
-      // console.log("cart===>", cartId);
-      // console.log("cookies== geexu>", document.cookie);
+    // try {
+    //   const cookies = document.cookie.split("; ");
+    //   const cartId = cookies.filter(
+    //     (element) => element.substring(0, 4) === "cart"
+    //   );
+    //   // console.log("cart===>", cartId);
+    //   // console.log("cookies== geexu>", document.cookie);
 
-      setLoading(true);
-      if (cartId.length !== 0) {
-        fetch(
-          `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify(add_to_product_data),
-          }
-        ).then((resp) => {
-          console.log("response", resp);
-          if (resp.status === 200) {
-            window.location.replace("https://ekartbook.myshopify.com/cart");
-            setLoading(false);
-            setIsSave(false);
-          }
-        });
-      } else {
-        alert("invalid Cart ID");
-      }
-    } catch (err) {
-      console.log("Error is here", err);
-    }
+    //   setLoading(true);
+    //   if (cartId.length !== 0) {
+    //     fetch(
+    //       `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
+    //       {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           "Access-Control-Allow-Origin": "*",
+    //         },
+    //         body: JSON.stringify(add_to_product_data),
+    //       }
+    //     ).then((resp) => {
+    //       console.log("response", resp);
+    //       if (resp.status === 200) {
+    //         window.location.replace("https://ekartbook.myshopify.com/cart");
+    //         setLoading(false);
+    //         setIsSave(false);
+    //       }
+    //     });
+    //   } else {
+    //     alert("invalid Cart ID");
+    //   }
+    // } catch (err) {
+    //   console.log("Error is here", err);
+    // }
+    const serializedData = serialize(result);
+    router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
   };
-
+  const serialize = (obj) => {
+    const cache = new WeakSet();
+    return JSON.stringify(obj, (key, value) => {
+      if (typeof value === "function") {
+        return value.toString();
+      } else if (typeof value === "object" && value !== null) {
+        if (cache.has(value)) {
+          return "[Circular]";
+        }
+        cache.add(value);
+      }
+      return value;
+    });
+  };
   return (
     <React.Fragment>
       <Header />
