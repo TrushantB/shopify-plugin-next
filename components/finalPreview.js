@@ -35,13 +35,52 @@ const FinalPreview = (props) => {
     router.push("/customize");
   };
   const handleAddToCartButton = () => {
-    alert("Product added");
+    const add_to_product_data = {
+      product: {
+        title: "Custom Book",
+        properties: result.resultNotebook,
+        quantity: result.quantity,
+        status: "active",
+        vendor: "navneet",
+        product_type: "customised",
+        product_type: "Snowboard",
+      },
+    };
+    try {
+      const cookies = document.cookie.split("; ");
+      const cartId = cookies.filter(
+        (element) => element.substring(0, 4) === "cart"
+      );
+      // console.log("cart===>", cartId);
+      // console.log("cookies== geexu>", document.cookie);
+
+      // setLoading(true);
+      if (cartId.length !== 0) {
+        fetch(
+          `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(add_to_product_data),
+          }
+        ).then((resp) => {
+          console.log("response", resp);
+          if (resp.status === 200) {
+            window.location.replace("https://ekartbook.myshopify.com/cart");
+            // setLoading(false);
+            // setIsSave(false);
+          }
+        });
+      } else {
+        alert("invalid Cart ID");
+      }
+    } catch (err) {
+      console.log("Error is here", err);
+    }
   };
-  // data.map((item) => {
-  //   if (item.designId === "") {
-  //     setFlag(true);
-  //   }
-  // });
 
   return (
     <>
