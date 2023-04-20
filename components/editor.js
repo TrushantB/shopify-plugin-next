@@ -266,7 +266,7 @@ export default function Editor({
         </div>
       </div>
 
-      <div className="bg-[#edf7fa] p-4 my-5 rounded">
+      {/* <div className="bg-[#edf7fa] p-4 my-5 rounded">
             <h3 className=" text-xl font-semibold mb-4">Quick Tips</h3>
             <ul class="marker:text-[#0035ff] list-outside list-disc ml-6">
               <li>Image size should not exceed 10MB & video size should not exceed 100MB</li>
@@ -277,7 +277,7 @@ export default function Editor({
               Please Check final preview to see if the designs are placed as you wish.
               </li>
             </ul>
-          </div>
+          </div> */}
     </div>
   );
 }
