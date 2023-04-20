@@ -59,7 +59,7 @@ const Specification = () => {
       <Header />
 
       <div className=" items-center h-full  grid  grid-cols-1 lg:grid-cols-2">
-        <div className=" bg-[#ffedc4] p-8  h-full flex items-center justify-center ">
+        <div className=" bg-[#ffedc4] book  p-8  h-full flex items-center justify-center ">
           <Image src={cover} height={450} width={350} />
         </div>
         <div className=" py-16 px-4 md:px-5  w-10/12 mx-auto">
