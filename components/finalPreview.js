@@ -37,7 +37,7 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = () => {
     const add_to_product_data = {
       product: {
-        title: "Custom Book",
+        title: "Customm Book",
         properties: result.resultNotebook,
         quantity: result.quantity,
         status: "active",
@@ -67,7 +67,7 @@ const FinalPreview = (props) => {
         }).then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
-            window.location.replace("https://ekartbook.myshopify.com/cart");
+            window.location.replace("https://navneet.geexu.org/cart");
             // setLoading(false);
             // setIsSave(false);
           }
