@@ -4,17 +4,29 @@ import { FadeLoader } from "react-spinners";
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState();
+  let [count, setCount] = useState();
   const router = useRouter();
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const dataString = decodeURIComponent(searchParams.get("data"));
     const data = deserialize(dataString);
     setResult(data);
-    data.resultNotebook.map((item) => {
-      if (item.designId === null) {
-        setFlag(true);
+    setCount(data.quantity);
+    console.log(data);
+    if (data.isDesignApplyForAll) {
+      const notebook = data.resultNotebook[0];
+      let i = 1;
+      while (i < data.quantity) {
+        data.resultNotebook.push(notebook);
+        i++;
       }
-    });
+    } else {
+      data.resultNotebook.map((item) => {
+        if (item.designId === null) {
+          setFlag(true);
+        }
+      });
+    }
   }, []);
   const deserialize = (str) => {
     const revive = (key, value) => {
@@ -37,7 +49,7 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = () => {
     const add_to_product_data = {
       product: {
-        title: "Customm Book",
+        title: "Navneet Book",
         properties: result.resultNotebook,
         quantity: result.quantity,
         status: "active",
@@ -52,22 +64,19 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      console.log("cartid===>", cartId);
+      console.log("cartid===>", cartId[0]);
       // console.log("cookies== geexu>", document.cookie);
 
       // setLoading(true);
       if (cartId.length !== 0) {
-        fetch(
-          `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify(add_to_product_data),
-          }
-        ).then((resp) => {
+        fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }).then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
             window.location.replace("https://navneet.geexu.org/cart");
@@ -92,7 +101,7 @@ const FinalPreview = (props) => {
       </div>
       <div>
         <div>
-          <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
+          <h3>{count} NOTEBOOK SELECTED IN PACK</h3>
         </div>
         <div className="flex">
           {result ? (
