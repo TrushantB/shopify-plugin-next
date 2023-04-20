@@ -217,6 +217,7 @@ export default function Editor({
           </button>
         </div>
       </div>
+<<<<<<< HEAD
 
       <div className="bg-[#edf7fa] p-4 my-5 rounded">
             <h3 className=" text-xl font-semibold mb-4">Quick Tips</h3>
@@ -230,6 +231,8 @@ export default function Editor({
               </li>
             </ul>
           </div>
+=======
+>>>>>>> a3a9bff (debugging)
     </div>
   );
 }

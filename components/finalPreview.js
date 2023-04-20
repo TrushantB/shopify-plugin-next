@@ -195,9 +195,9 @@ const FinalPreview = (props) => {
             FINAL PREVIEW
           </h1>
         </div>
-        <div className="main">
-          <div className="   lg:px-[70px]  text-xl font-bold">
-            <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
+        <div>
+          <div>
+            <h3>{count} NOTEBOOK SELECTED IN PACK</h3>
           </div>
           <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-7 final sm:px-16 ">
             {result ? (
