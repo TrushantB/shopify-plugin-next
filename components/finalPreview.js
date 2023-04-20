@@ -48,10 +48,11 @@ const FinalPreview = (props) => {
     };
     try {
       const cookies = document.cookie.split("; ");
+      console.log("all cookies", cookies);
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      // console.log("cart===>", cartId);
+      console.log("cartid===>", cartId);
       // console.log("cookies== geexu>", document.cookie);
 
       // setLoading(true);
