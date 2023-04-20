@@ -4,8 +4,6 @@ import useImage from "use-image";
 import { Html } from "react-konva-utils";
 import Carousel from "better-react-carousel";
 import Slider from "react-slick";
-// import "~slick-carousel/slick/slick.css";
-// import "~slick-carousel/slick/slick-theme.css";
 
 export class URLImage extends React.Component {
   state = {
@@ -98,125 +96,13 @@ const Designer = ({
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
       setSelectedImageIndex(newIdx);
-      if (carouselItemsRef?.current[newIdx]) {
-        carouselItemsRef?.current[newIdx]?.scrollIntoView({
-          // inline: "center",
-          // behavior: "smooth",
-        });
-      }
     }
   };
 
-  const handleRightClick = () => {
-    if (bookForPurchase && bookForPurchase.length > 0) {
-      let newIdx = selectedImageIndex + 1;
-      if (newIdx >= bookForPurchase.length) {
-        newIdx = 0;
-      }
-      handleSelectedImageChange(newIdx);
-    }
-  };
-
-  const handleLeftClick = () => {
-    if (bookForPurchase && bookForPurchase.length > 0) {
-      let newIdx = selectedImageIndex - 1;
-      if (newIdx < 0) {
-        newIdx = bookForPurchase.length - 1;
-      }
-      handleSelectedImageChange(newIdx);
-    }
-  };
   return (
-    <div  className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
+    <div className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
       <div className="carousel-container">
-        <div className="flex justify-center items-center">
-          {/* apply for all */}
-          {/* <div
-            onClick={handleApplyForAll}
-            className="text-white flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer"
-          >
-            {notebookDetails.isApplyForAll ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
-                />
-              </svg>
-            )}
-            <span>
-              {notebookDetails.isApplyForAll
-                ? "Applied For All"
-                : "Apply For All"}
-            </span>
-          </div> */}
-
-          {/* clear design */}
-          {/* <div
-            onClick={handleClearDesign}
-            className="text-red-500 flex justify-center items-center flex-col  bg-indigo-800 p-3 rounded cursor-pointer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-center"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-              />
-            </svg>
-            <span>Clear Design</span>
-          </div> */}
-
-          {/* clear all design */}
-          {/* <div
-            onClick={handleAllClearDesign}
-            className="text-red-500 flex justify-center items-center flex-col mx-3 bg-indigo-800 p-3 rounded cursor-pointer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-center"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-              />
-            </svg>
-            <span>Clear All Design</span>
-          </div> */}
-        </div>
+        <div className="flex justify-center items-center"></div>
 
         {/* Notebook image div */}
 
@@ -309,20 +195,6 @@ const Designer = ({
               onClick={handleAllClearDesign}
               className=" flex justify-center items-center flex-col mx-3  w-12/12 sm:w-4/12 p-3 rounded cursor-pointer border-2 border-[#0035ff]"
             >
-              {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-center"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-              />
-            </svg> */}
               <span className="text-xl font-bold">CLEAR ALL </span>
             </div>
 
@@ -331,37 +203,6 @@ const Designer = ({
               onClick={handleApplyForAll}
               className="text-white flex justify-center items-center flex-col mx-3 bg-[#0035ff] p-3 w-12/12 sm:w-4/12 rounded cursor-pointer"
             >
-              {/* {notebookDetails.isApplyForAll ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
-                />
-              </svg>
-            )} */}
               <span className="text-xl font-bold text-white">
                 {notebookDetails.isApplyForAll
                   ? "Applied For All"
@@ -370,92 +211,8 @@ const Designer = ({
             </div>
           </div>
         </div>
-
-        {/* <div className="carousel">
-          <div className="carousel__images rounded">
-            {bookForPurchase &&
-              bookForPurchase.map((image, idx) => (
-                <div className="flex-row" key={idx}>
-                  <div
-                    onClick={() => handleSelectedImageChange(idx)}
-                    style={{ backgroundImage: `url(${image.url})` }}
-                    key={image.id}
-                    className={`carousel__image rounded ${
-                      selectedNotebook.id === image.id &&
-                      "carousel__image-selected "
-                    }`}
-                    ref={(el) => (carouselItemsRef.current[idx] = el)}
-                  />
-                  <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">
-                    {idx + 1}
-                  </span>
-                </div>
-              ))}
-          </div>
-          <button
-            className="carousel__button carousel__button-left"
-            onClick={handleLeftClick}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-              />
-            </svg>
-          </button>
-          <button
-            className="carousel__button carousel__button-right"
-            onClick={handleRightClick}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-              />
-            </svg>
-          </button>
-        </div> */}
-        {/* <Carousel className="mt-10" cols={5} rows={1} gap={7} loop>
-          {bookForPurchase &&
-            bookForPurchase.map((image) => (
-              <Carousel.Item key={image.id}>
-                <img width="100px" height="250px" src={image.url} />
-              </Carousel.Item>
-            ))}
-        </Carousel> */}
-        <div className=" mt-24 carousel-img">
-          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}>
-            {/* {bookForPurchase &&
-              bookForPurchase.map((image, idx) => (
-                <div className="flex-row" key={idx}>
-                  <div
-                    style={{ backgroundImage: `url(${image.url})` }}
-                    key={image.id}
-                    className={`carousel__image rounded ${
-                      selectedNotebook.id === image.id &&
-                      "carousel__image-selected "
-                    }`}
-                    ref={(el) => (carouselItemsRef.current[idx] = el)}
-                  />
-                </div>
-              ))} */}
-          </Slider>
+        <div>
+          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}></Slider>
           <Slider
             asNavFor={nav1}
             ref={(slider) => (slider2 = slider)}
@@ -474,60 +231,8 @@ const Designer = ({
                   />
                 </Carousel.Item>
               ))}
-            {/* <div>
-              <h3>1</h3>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div> */}
           </Slider>
         </div>
-        {/* <Carousel cols={2} rows={1} gap={10} loop>
-        {bookForPurchase &&
-              bookForPurchase.map((image, idx) => (
-                <div className="flex-row" key={idx}>
-                  <div
-                    onClick={() => handleSelectedImageChange(idx)}
-                    style={{ backgroundImage: `url(${image.url})` }}
-                    key={image.id}
-                    className={`carousel__image rounded ${
-                      selectedNotebook.id === image.id &&
-                      "carousel__image-selected "
-                    }`}
-                    ref={(el) => (carouselItemsRef.current[idx] = el)}
-                  />
-                  <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">
-                    {idx + 1}
-                  </span>
-                <Carousel.Item>
-                     <img width="100%" src={image.url} />
-                </Carousel.Item>
-              ))}
-        </Carousel> */}
-
-        {/* <Carousel.Item>
-            <img width="100%" src="https://picsum.photos/800/600?random=1" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img width="100%" src="https://picsum.photos/800/600?random=2" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img width="100%" src="https://picsum.photos/800/600?random=3" />
-          </Carousel.Item>
-          <Carousel.Item>
-          </Carousel.Item> */}
       </div>
     </div>
   );
@@ -712,23 +417,6 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
               height: Math.max(node.height() * scaleY),
             };
             onChange(_design, index);
-            // onChange({
-            //     ...data,
-            //     designs: {
-            //         ...data.designs,
-            //         [data.direction]: {
-            //             ...data.designs[data.direction],
-            //             positions: {
-            //                 ...data.designs[data.direction].positions,
-            //                 x: node.x(),
-            //                 y: node.y(),
-            //                 // set minimal value
-            //                 width: Math.max(5, node.width() * scaleX),
-            //                 height: Math.max(node.height() * scaleY),
-            //             }
-            //         }
-            //     }
-            // });
           }}
         />
       ) : (
