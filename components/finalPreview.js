@@ -79,7 +79,7 @@ const FinalPreview = (props) => {
         }).then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
-            // window.location.replace("https://navneet.geexu.org/cart");
+            window.location.replace("https://navneet.geexu.org/cart");
             // setLoading(false);
             // setIsSave(false);
           }
