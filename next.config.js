@@ -2,11 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "cls-cdn-wip.sgp1.cdn.digitaloceanspaces.com",
-      "firebasestorage.googleapis.com",
-    ],
-  },
-};
+    domains: ["cls-cdn-wip.sgp1.cdn.digitaloceanspaces.com"]
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
