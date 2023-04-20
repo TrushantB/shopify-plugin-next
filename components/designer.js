@@ -211,8 +211,92 @@ const Designer = ({
             </div>
           </div>
         </div>
+
+        {/* <div className="carousel">
+          <div className="carousel__images rounded">
+            {bookForPurchase &&
+              bookForPurchase.map((image, idx) => (
+                <div className="flex-row" key={idx}>
+                  <div
+                    onClick={() => handleSelectedImageChange(idx)}
+                    style={{ backgroundImage: `url(${image.url})` }}
+                    key={image.id}
+                    className={`carousel__image rounded ${
+                      selectedNotebook.id === image.id &&
+                      "carousel__image-selected "
+                    }`}
+                    ref={(el) => (carouselItemsRef.current[idx] = el)}
+                  />
+                  <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">
+                    {idx + 1}
+                  </span>
+                </div>
+              ))}
+          </div>
+          <button
+            className="carousel__button carousel__button-left"
+            onClick={handleLeftClick}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+              />
+            </svg>
+          </button>
+          <button
+            className="carousel__button carousel__button-right"
+            onClick={handleRightClick}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+          </button>
+        </div> */}
+        {/* <Carousel className="mt-10" cols={5} rows={1} gap={7} loop>
+          {bookForPurchase &&
+            bookForPurchase.map((image) => (
+              <Carousel.Item key={image.id}>
+                <img width="100px" height="250px" src={image.url} />
+              </Carousel.Item>
+            ))}
+        </Carousel> */}
         <div>
-          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}></Slider>
+          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}>
+            {/* {bookForPurchase &&
+              bookForPurchase.map((image, idx) => (
+                <div className="flex-row" key={idx}>
+                  <div
+                    style={{ backgroundImage: `url(${image.url})` }}
+                    key={image.id}
+                    className={`carousel__image rounded ${
+                      selectedNotebook.id === image.id &&
+                      "carousel__image-selected "
+                    }`}
+                    ref={(el) => (carouselItemsRef.current[idx] = el)}
+                  />
+                </div>
+              ))} */}
+          </Slider>
           <Slider
             asNavFor={nav1}
             ref={(slider) => (slider2 = slider)}

@@ -189,6 +189,80 @@ const FinalPreview = (props) => {
           </div>
         </div>
       </div>
+      <div className="content">
+        <div>
+          <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
+            FINAL PREVIEW
+          </h1>
+        </div>
+        <div className="main">
+          <div className="   lg:px-[70px]  text-xl font-bold">
+            <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
+          </div>
+          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-7 final sm:px-16 ">
+            {result ? (
+              result.resultNotebook.map((item) => {
+                return (
+                  <div className="flex items-center  flex-col" key={item.id}>
+                    <img src={item.url} />
+                    {item.designId === null ? (
+                      <button
+                        onClick={handleModifyDesign}
+                        className=" text-center "
+                      >
+                        <i class="fa-light fa-plus text-xl mr-3"></i>
+                        <span className="font-bold">ADD</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleModifyDesign}
+                        className="rounded-full "
+                      >
+                        <i class="fa-regular fa-pen-to-square mr-3"></i>
+                        <span className="font-bold">EDIT</span>
+                      </button>
+                    )}
+                  </div>
+                );
+              })
+            ) : (
+              <>
+                {" "}
+                <FadeLoader
+                  color="#36d7b7"
+                  height={18}
+                  loading
+                  margin={13}
+                  radius={0}
+                  width={3}
+                />
+              </>
+            )}
+          </div>
+          <div className="flex justify-center items-center mt-5 ">
+            <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-2">
+              <a
+                onClick={handleCloseButton}
+                className=" border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  w-64 text-center py-2.5"
+              >
+                CLOSE
+              </a>
+              {flag ? (
+                <a className=" border-2 font-bold bg-[#b2b2b2] text-white w-64 text-center py-2.5 rounded text-base md:text-xl pointer-events-none">
+                  <p>ADD TO CART</p>
+                </a>
+              ) : (
+                <a
+                  onClick={handleAddToCartButton}
+                  className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white w-64 text-center py-2.5 rounded text-base md:text-xl"
+                >
+                  ADD TO CART
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

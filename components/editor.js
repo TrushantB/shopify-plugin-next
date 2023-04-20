@@ -217,6 +217,19 @@ export default function Editor({
           </button>
         </div>
       </div>
+
+      <div className="bg-[#edf7fa] p-4 my-5 rounded">
+            <h3 className=" text-xl font-semibold mb-4">Quick Tips</h3>
+            <ul class="marker:text-[#0035ff] list-outside list-disc ml-6">
+              <li>Image size should not exceed 10MB & video size should not exceed 100MB</li>
+              <li> Please avoid uploading images of celebrities, sports stars, TV characters, cartoon characters or images for which you do not own the copyrights.</li>
+              <li> Please ensure to resize the images as necessary to fit the canvas. You can open the canvas & resize the image.</li>
+              <li> Please avoid placing any text too close to the border since there are slight chances that it might get cut.</li>
+              <li>
+              Please Check final preview to see if the designs are placed as you wish.
+              </li>
+            </ul>
+          </div>
     </div>
   );
 }
