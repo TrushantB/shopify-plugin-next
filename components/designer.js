@@ -100,13 +100,13 @@ const Designer = ({
   };
 
   return (
-    <div className=" bg-[#ffedc4] pb-4 py-10  min-h-screen text-center">
+    <div className=" bg-[#ffedc4] pb-4 py-10 px-2 min-h-screen text-center">
       <div className="carousel-container">
         <div className="flex justify-center items-center"></div>
 
         {/* Notebook image div */}
 
-        <div className="selected-image flex justify-center flex-col gap-10 items-center  ">
+        <div className="selected-image flex justify-center flex-col gap-10 items-center ">
           <Stage width={300} height={350}>
             {bookForPurchase.map((book) => {
               if (selectedNotebook.id === book.id) {
@@ -119,6 +119,7 @@ const Designer = ({
                         height={350}
                         x={8}
                         y={0}
+                        className="object-cover"                        
                       />
                       {book.designId == null &&
                         !book.designs.length &&
@@ -132,6 +133,7 @@ const Designer = ({
                             x={8}
                             height={350}
                             y={0}
+                            className="object-cover"  
                           />
                         )}
                       {book.designs.map((design, index) => {
@@ -214,21 +216,40 @@ const Designer = ({
         <div>
           <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}></Slider>
           <Slider
+            className="pt-14 mx-lg-5 px-lg-3 px-0 mx-0 pt-lg-2 flex justify-center items-center "
             asNavFor={nav1}
             ref={(slider) => (slider2 = slider)}
             slidesToShow={5}
-            swipeToSlide={true}
-            focusOnSelect={true}
+            // swipeToSlide={true}
+            // focusOnSelect={true}
+            responsive={[
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 4,
+                  initialSlide: 4
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3
+                }
+              }
+            ]}
           >
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
-                <Carousel.Item key={image.id}>
-                  <img
-                    onClick={() => handleSelectedImageChange(idx)}
-                    width="100px"
-                    height="250px"
-                    src={image.url}
-                  />
+                <Carousel.Item key={image.id} >
+                  <div className="relative pt-2.5 ">
+                    <img className="w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center border-dashed border-slate-300 border-2 active:border-solid active:border-blue-600 active:border-2"
+                      onClick={() => handleSelectedImageChange(idx)}
+                      src={image.url}
+                    />
+                    <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  active:bg-blue-600 rounded-sm text-white text-bold inline-block z-10 text-xs ">{idx + 1 }</span>
+                  </div>
                 </Carousel.Item>
               ))}
           </Slider>
