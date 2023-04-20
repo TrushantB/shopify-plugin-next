@@ -242,9 +242,46 @@ export default function Editor({
   return (
     <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
     <div className="px-4  lg:px-10  h-full w-10/12 mx-auto">
-      <h5 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pb-10  font-bold text-gray-800">
-        CUSTOMISE YOUR NOTEBOOK
-      </h5>
+      <div className="flex items-center justify-center pb-10 gap-x-3 ">
+        <div>
+          <h5 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl font-bold text-gray-800">
+            CUSTOMISE YOUR NOTEBOOK
+          </h5>
+        </div>
+        <div>
+        <svg className="w-8 h-8 font-normal cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+        </svg>
+        {/* <div className="p-3 bg-cyan-100 text-sm">
+              <h6 className="font-semibold ">
+                  Terms And Conditions
+              </h6>
+                <ul className="pl-4">
+                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                        Image size should not exceed 10MB & video size should not exceed 100MB
+                      </li>
+                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                        Please avoid uploading images of celebrities, sports stars, TV characters, cartoon 
+                        characters or images for which you do not own the copyrights.
+                      </li>
+                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                        Please ensure to resize the images as necessary to fit the canvas. You can open the
+                        canvas & resize the image.
+                      </li>
+                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                        Please avoid placing any text too close to the border since there are slight chances 
+                        that it might get cut.
+                      </li>
+                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                        Please Check final preview to see if the designs are placed as you wish.
+                      </li>
+                </ul>
+          </div> */}
+    
+          
+        </div>
+      </div>
+
       <div
         className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
         // onClick={handleAddImage}
@@ -283,7 +320,7 @@ export default function Editor({
                   width={100}
                   height={75}
                   
-                  className="   cursor-pointer border-solid border-2  image-grid "
+                  className=" object-center object-cover cursor-pointer border-solid border-2  image-grid "
                   alt=""
                 />
               </div>
@@ -400,7 +437,7 @@ export default function Editor({
                   <img
                     alt="img"
                     src="/images/gradent_color.webp"
-                    className="mx-2 p-2 w-24"
+                    className="mx-2 p-2 w-24 "
                   />
                 </span>
               ) : (
