@@ -52,7 +52,7 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      console.log("cartid===>", cartId);
+      console.log("cartid===>", cartId[0]);
       // console.log("cookies== geexu>", document.cookie);
 
       // setLoading(true);
