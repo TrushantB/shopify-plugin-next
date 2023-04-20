@@ -10,6 +10,7 @@
   height: 100vh;
 }
 
+
 .App {
   font-family: sans-serif;
 }
@@ -76,4 +77,25 @@ video {
   max-width: 100%;
   height: 100%;
   /* object-fit: contain; */
+}
+
+.book img{
+  object-fit: contain !important;
+}
+
+.carousel-img img{
+  height: 90px;
+}
+
+.final{
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 50vh;
+  
+}
+
+.final div{
+  width:100%;
+  margin: 20px 0;
+  
 }

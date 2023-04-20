@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 export default function Home() {
   return (
     <>
+    
       <div className="header-2 h-full">
         <Specification />
         {/* <Header isHomePage={true} /> */}

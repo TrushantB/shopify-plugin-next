@@ -127,7 +127,7 @@ const Designer = ({
     }
   };
   return (
-    <div className=" bg-[#ffedc4] pb-4 py-10  min-h-screen text-center">
+    <div  className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
       <div className="carousel-container">
         <div className="flex justify-center items-center">
           {/* apply for all */}
@@ -220,7 +220,7 @@ const Designer = ({
 
         {/* Notebook image div */}
 
-        <div className="selected-image flex justify-center flex-col gap-10 items-center  ">
+        <div className="selected-image flex justify-center flex-col gap-10 items-center   ">
           <Stage width={300} height={350}>
             {bookForPurchase.map((book) => {
               if (selectedNotebook.id === book.id) {
@@ -439,7 +439,7 @@ const Designer = ({
               </Carousel.Item>
             ))}
         </Carousel> */}
-        <div>
+        <div className=" mt-24 carousel-img">
           <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}>
             {/* {bookForPurchase &&
               bookForPurchase.map((image, idx) => (

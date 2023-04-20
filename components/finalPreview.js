@@ -82,34 +82,35 @@ const FinalPreview = (props) => {
 
   return (
     <>
-      <div>
-        <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-4xl pt-20 font-bold text-gray-800">
+    <div className="content">
+    <div>
+        <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
           FINAL PREVIEW
         </h1>
       </div>
-      <div>
-        <div>
+      <div className="main">
+        <div className="   lg:px-[70px]  text-xl font-bold">
           <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
         </div>
-        <div className="flex">
+        <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-7 final sm:px-16 ">
           {result ? (
             result.resultNotebook.map((item) => {
               return (
-                <div className="m-4" key={item.id}>
+                <div className="flex items-center  flex-col" key={item.id}>
                   <img src={item.url} />
                   {item.designId === null ? (
                     <button
                       onClick={handleModifyDesign}
-                      className="rounded-full text-center border"
+                      className=" text-center "
                     >
-                      Add
+                      <i class="fa-light fa-plus text-xl mr-3"></i><span className="font-bold">ADD</span>
                     </button>
                   ) : (
                     <button
                       onClick={handleModifyDesign}
-                      className="rounded-full text-center border"
+                      className="rounded-full "
                     >
-                      Edit
+                     <i class="fa-regular fa-pen-to-square mr-3"></i><span className="font-bold">EDIT</span> 
                     </button>
                   )}
                 </div>
@@ -129,22 +130,22 @@ const FinalPreview = (props) => {
             </>
           )}
         </div>
-        <div className="flex justify-center items-center">
-          <div className="flex justify-evenly md:justify-start col-span-3 gap-2">
+        <div className="flex justify-center items-center mt-5 ">
+          <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-2">
             <a
               onClick={handleCloseButton}
-              className="flex items-center justify-center cursor-pointer rounded-full py-2 px-4 md:px-5 text-center bg-white hover:bg-indigo-500 border font-bold text-gray-500 text-sm "
+              className=" border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  w-64 text-center py-2.5"
             >
               CLOSE
             </a>
             {flag ? (
-              <a className="flex cursor-pointer select-none rounded-full text-center bg-slate-400 py-2 px-4 md:px-5 font-bold text-white text-sm pointer-events-none">
-                ADD TO CART
+              <a className=" border-2 font-bold bg-[#b2b2b2] text-white w-64 text-center py-2.5 rounded text-base md:text-xl pointer-events-none">
+                <p>ADD TO CART</p>
               </a>
             ) : (
               <a
                 onClick={handleAddToCartButton}
-                className="flex cursor-pointer select-none rounded-full text-center bg-indigo-500 hover:bg-indigo-700 py-2 px-4 md:px-5 font-bold text-white text-sm "
+                className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white w-64 text-center py-2.5 rounded text-base md:text-xl"
               >
                 ADD TO CART
               </a>
@@ -152,6 +153,8 @@ const FinalPreview = (props) => {
           </div>
         </div>
       </div>
+    </div>
+     
     </>
   );
 };

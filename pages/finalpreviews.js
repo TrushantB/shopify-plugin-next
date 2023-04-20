@@ -5,9 +5,14 @@ const { default: Header } = require("@/components/header");
 const FinalPreviews = () => {
   return (
     <>
-      <Header />
+<div className="wrapper">
+<Header />
       <FinalPreview />
       <Footer />
+</div>
+   
+   
+      
     </>
   );
 };
