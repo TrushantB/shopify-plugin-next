@@ -57,17 +57,14 @@ const FinalPreview = (props) => {
 
       // setLoading(true);
       if (cartId.length !== 0) {
-        fetch(
-          `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify(add_to_product_data),
-          }
-        ).then((resp) => {
+        fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }).then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
             window.location.replace("https://ekartbook.myshopify.com/cart");
