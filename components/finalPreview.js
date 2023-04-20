@@ -5,12 +5,29 @@ const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState();
   let [count, setCount] = useState();
+  let [count, setCount] = useState();
   const router = useRouter();
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const dataString = decodeURIComponent(searchParams.get("data"));
     const data = deserialize(dataString);
     setResult(data);
+    setCount(data.quantity);
+    console.log(data);
+    if (data.isDesignApplyForAll) {
+      const notebook = data.resultNotebook[0];
+      let i = 1;
+      while (i < data.quantity) {
+        data.resultNotebook.push(notebook);
+        i++;
+      }
+    } else {
+      data.resultNotebook.map((item) => {
+        if (item.designId === null) {
+          setFlag(true);
+        }
+      });
+    }
     setCount(data.quantity);
     console.log(data);
     if (data.isDesignApplyForAll) {
@@ -96,9 +113,13 @@ const FinalPreview = (props) => {
     <>
       <div className="content">
         <div>
+<<<<<<< HEAD
           <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
             FINAL PREVIEW
           </h1>
+=======
+          <h3>{count} NOTEBOOK SELECTED IN PACK</h3>
+>>>>>>> 5f027f6 (debugging)
         </div>
         <div>
           <div>
