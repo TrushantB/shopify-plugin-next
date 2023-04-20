@@ -143,9 +143,10 @@ const FinalPreview = (props) => {
                 <p>ADD TO CART</p>
               </a>
             ) : (
+              // test
               <a
                 onClick={handleAddToCartButton}
-                className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white w-64 text-center py-2.5 rounded text-base md:text-xl"
+                className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white  w-64 text-center py-2.5 rounded text-base md:text-xl"
               >
                 ADD TO CART
               </a>
