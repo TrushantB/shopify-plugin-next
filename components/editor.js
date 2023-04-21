@@ -82,7 +82,7 @@ export default function Editor({
               CUSTOMISE YOUR NOTEBOOK
             </h5>
           </div>
-          <div>
+          <div className="relative">
             <svg
               className="w-6 h-6 font-normal cursor-pointer popover"
               xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ export default function Editor({
             </svg>
             {/* {isOpen ? ( */}
             <div
-              className="p-3 bg-cyan-100 text-sm popoverContainer "
+              className="p-3 bg-cyan-100 text-sm popoverContainer absolute right-0 top-8 w-[400px]"
               // style={{ display: "none" }}
               // ref={ref}
             >
@@ -177,7 +177,7 @@ export default function Editor({
                     src={design.url}
                     width={100}
                     height={75}
-                    className=" object-center object-cover cursor-pointer border-solid border-2  image-grid "
+                    className="max-w-full h-full object-center object-cover cursor-pointer border-solid border-2  image-grid "
                     alt=""
                   />
                 </div>

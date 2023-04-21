@@ -96,35 +96,35 @@ const FinalPreview = (props) => {
     <>
       <div className="content">
         <div>
-          <h1 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
+          <h1 className="flex justify-center items-center mb-4 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
             FINAL PREVIEW
           </h1>
         </div>
         <div className="main">
-          <div className="   lg:px-[70px]  text-xl font-bold">
+          <div className="px-[12px] md:px-[70px] text-xl font-semibold my-4 ">
             <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
           </div>
-          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-7 final sm:px-16 ">
+          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 ">
             {result ? (
               result.resultNotebook.map((item) => {
                 return (
-                  <div className="flex items-center  flex-col" key={item.id}>
-                    <img classname="w-24 h-28" src={item.url} />
+                  <div className="flex items-center  flex-col " key={item.id}>
+                    <img className="w-11/12 h-full mx-auto object-cover object-center" src={item.url} />
                     {item.designId === null ? (
                       <button
                         onClick={handleModifyDesign}
-                        className=" text-center "
+                        className=" text-center my-3 "
                       >
-                        <i className="fa-light fa-plus text-xl mr-3"></i>
-                        <span className="font-bold">ADD</span>
+                        <i className="fa-light fa-plus text-xl mr-1"></i>
+                        <span className="font-semibold text-sm">ADD</span>
                       </button>
                     ) : (
                       <button
                         onClick={handleModifyDesign}
-                        className="rounded-full "
+                        className="rounded-full my-3"
                       >
-                        <i className="fa-regular fa-pen-to-square mr-3"></i>
-                        <span className="font-bold">EDIT</span>
+                        <i className="fa-regular fa-pen-to-square mr-1"></i>
+                        <span className="font-semibold text-sm">EDIT</span>
                       </button>
                     )}
                   </div>
@@ -144,23 +144,23 @@ const FinalPreview = (props) => {
               </>
             )}
           </div>
-          <div className="flex justify-center items-center mt-5 ">
-            <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-2">
+          <div className="flex justify-center items-center pt-4 pb-5 ">
+            <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-6 ">
               <a
                 onClick={handleCloseButton}
-                className=" border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  w-64 text-center py-2.5"
+                className=" border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  px-24 text-center py-2.5 rounded-lg"
               >
                 CLOSE
               </a>
               {flag ? (
-                <a className=" border-2 font-bold bg-[#b2b2b2] text-white w-64 text-center py-2.5 rounded text-base md:text-xl pointer-events-none">
+                <a className=" border-2 font-bold bg-[#b2b2b2] text-white px-14 text-center py-2.5  text-base md:text-xl pointer-events-none rounded-lg">
                   <p>ADD TO CART</p>
                 </a>
               ) : (
                 // test
                 <a
                   onClick={handleAddToCartButton}
-                  className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white  w-64 text-center py-2.5 rounded text-base md:text-xl"
+                  className=" cursor-pointer select-none order-2 font-bold bg-[#0035ff] text-white  px-14 text-center py-2.5 text-base md:text-xl rounded-lg"
                 >
                   ADD TO CART
                 </a>
