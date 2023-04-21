@@ -93,14 +93,14 @@ const Designer = ({
   }, [bookForPurchase]);
 
   const handleSelectedImageChange = (newIdx) => {
+    console.log("ok");
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
       setSelectedImageIndex(newIdx);
     }
   };
-
   return (
-    <div  className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
+    <div className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
       <div className="carousel-container">
         <div className="flex justify-center items-center"></div>
 
@@ -119,7 +119,7 @@ const Designer = ({
                         height={350}
                         x={8}
                         y={0}
-                        className="object-cover"                        
+                        className="object-cover"
                       />
                       {book.designId == null &&
                         !book.designs.length &&
@@ -133,7 +133,7 @@ const Designer = ({
                             x={8}
                             height={350}
                             y={0}
-                            className="object-cover"  
+                            className="object-cover"
                           />
                         )}
                       {book.designs.map((design, index) => {
@@ -304,35 +304,38 @@ const Designer = ({
             asNavFor={nav1}
             ref={(slider) => (slider2 = slider)}
             slidesToShow={5}
-            // swipeToSlide={true}
-            // focusOnSelect={true}
+            swipeToSlide={true}
+            focusOnSelect={true}
             responsive={[
               {
                 breakpoint: 600,
                 settings: {
                   slidesToShow: 4,
                   slidesToScroll: 4,
-                  initialSlide: 4
-                }
+                  initialSlide: 4,
+                },
               },
               {
                 breakpoint: 480,
                 settings: {
                   slidesToShow: 3,
-                  slidesToScroll: 3
-                }
-              }
+                  slidesToScroll: 3,
+                },
+              },
             ]}
           >
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
-                <Carousel.Item key={image.id} >
+                <Carousel.Item key={image.id}>
                   <div className="relative pt-2.5 ">
-                    <img className="w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center border-dashed border-slate-300 border-2 active:border-solid active:border-blue-600 active:border-2"
+                    <img
+                      className="active w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center border-dashed border-slate-300 border-2 active:border-solid active:border-blue-600 active:border-2"
                       onClick={() => handleSelectedImageChange(idx)}
                       src={image.url}
                     />
-                    <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  active:bg-blue-600 rounded-sm text-white text-bold inline-block z-10 text-xs ">{idx + 1 }</span>
+                    <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  active:bg-blue-600 rounded-sm text-white text-bold inline-block z-10 text-xs ">
+                      {idx + 1}
+                    </span>
                   </div>
                 </Carousel.Item>
               ))}

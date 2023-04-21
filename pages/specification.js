@@ -138,7 +138,7 @@ const Specification = () => {
           </div>
           <div className="bg-[#edf7fa] p-4 mt-5 rounded">
             <h3 className=" text-xl font-semibold mb-4">THINGS TO KNOW</h3>
-            <ul class="marker:text-[#0035ff] list-outside list-disc ml-6">
+            <ul className="marker:text-[#0035ff] list-outside list-disc ml-6">
               <li>Minimum Pack Size is 6</li>
               <li> Shipping Charges Rs.80</li>
               <li> MRP inclusive of tax</li>

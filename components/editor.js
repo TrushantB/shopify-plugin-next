@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { ChromePicker } from "react-color";
-import { Popover, Whisper, Button } from "rsuite";
-import Link from "next/link";
 
 export default function Editor({
   designTemplates,
@@ -16,15 +14,16 @@ export default function Editor({
 }) {
   const [text, setText] = useState("");
   const router = useRouter();
-
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [color, setColor] = useState();
   const [fillColor, setFillColor] = useState(false);
   const [loading, setLoading] = useState(false);
+  const ref = useRef(null);
   const handleColorPicker = () => {
     console.log("handleColorPicker");
     setDisplayColorPicker(!displayColorPicker);
   };
+
   // handleClick = () => {
   //   this.setState({ displayColorPicker: !this.state.displayColorPicker })
   // };
@@ -50,6 +49,29 @@ export default function Editor({
     handleTextColor("", color.hex);
     setFillColor(true);
   };
+  // document.onclick = (event) => {
+  //   handlePopover(event);
+  // };
+  // const handlePopover = (event) => {
+  //   console.log("here");
+  //   const popoverContainer =
+  //     document.getElementsByClassName("popoverContainer");
+  //   const isSvg = event.target.localName;
+  //   if (isSvg === "svg") {
+  //     var targetClass = event.target.className.animVal;
+  //   } else {
+  //     var targetClass = event.target.className;
+  //   }
+  //   const classArray = targetClass.split(" ");
+  //   console.log(targetClass);
+  //   if (targetClass.includes("popover")) {
+  //     popoverContainer[0].classList.remove("hidden");
+  //     popoverContainer[0].classList.add("block");
+  //   } else {
+  //     popoverContainer[0].classList.add("hidden");
+  //     popoverContainer[0].classList.remove("block");
+  //   }
+  // };
 
   return (
     <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
@@ -62,45 +84,55 @@ export default function Editor({
           </div>
           <div>
             <svg
-              className="w-8 h-8 font-normal cursor-pointer"
+              className="w-6 h-6 font-normal cursor-pointer popover"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+
+              // ref={ref}
+              // onClick={(event) => handleInfoClick(event)}
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
               />
             </svg>
-            {/* <div className="p-3 bg-cyan-100 text-sm">
-              <h6 className="font-semibold ">
-                  Terms And Conditions
-              </h6>
-                <ul className="pl-4">
-                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                        Image size should not exceed 10MB & video size should not exceed 100MB
-                      </li>
-                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                        Please avoid uploading images of celebrities, sports stars, TV characters, cartoon 
-                        characters or images for which you do not own the copyrights.
-                      </li>
-                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                        Please ensure to resize the images as necessary to fit the canvas. You can open the
-                        canvas & resize the image.
-                      </li>
-                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                        Please avoid placing any text too close to the border since there are slight chances 
-                        that it might get cut.
-                      </li>
-                      <li className="py-2 relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                        Please Check final preview to see if the designs are placed as you wish.
-                      </li>
-                </ul>
-          </div> */}
+            {/* {isOpen ? ( */}
+            <div
+              className="p-3 bg-cyan-100 text-sm popoverContainer "
+              // style={{ display: "none" }}
+              // ref={ref}
+            >
+              <h6 className="font-semibold  ">Terms And Conditions</h6>
+              <ul className="pl-4 ">
+                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                  Image size should not exceed 10MB
+                </li>
+                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                  Please avoid uploading images of celebrities, sports stars, TV
+                  characters, cartoon characters or images for which you do not
+                  own the copyrights.
+                </li>
+                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                  Please ensure to resize the images as necessary to fit the
+                  canvas. You can open the canvas & resize the image.
+                </li>
+                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                  Please avoid placing any text too close to the border since
+                  there are slight chances that it might get cut.
+                </li>
+                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                  Please Check final preview to see if the designs are placed as
+                  you wish.
+                </li>
+              </ul>
+            </div>
+            {/* ) : (
+              <></>
+            )} */}
           </div>
         </div>
 
@@ -252,7 +284,10 @@ export default function Editor({
             </div>
 
             <div className="flex flex-col flex-md-row items-center text-center gap-5 ">
-              <button className="w-3/4 md:w-1/2 border-2 font-bold  border-[#0035ff] p-3 rounded text-base md:text-xl ">
+              <button
+                onClick={() => router.push("/specification")}
+                className="w-3/4 md:w-1/2 border-2 font-bold  border-[#0035ff] p-3 rounded text-base md:text-xl "
+              >
                 GO BACK
               </button>
               <button
