@@ -29,6 +29,7 @@
     "node-fetch": "^3.3.0",
     "nodemon": "^2.0.21",
     "react": "18.2.0",
+    "react-awesome-popover": "^6.1.1",
     "react-color": "^2.19.3",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",

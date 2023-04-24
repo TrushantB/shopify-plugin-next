@@ -5,40 +5,36 @@ import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 // import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 const Specification = () => {
   const [specifications, setSpecifications] = useState([]);
+  const [isMore, setIsMore] = useState(false);
   const [specificationValues, setSpecificationValues] = useState({});
-  // const [cookies, setCookie] = useCookies();
-  // const queryParams = new URLSearchParams(window.location.search);
-  // const term = queryParams.get("term");
-  // const location = queryParams.get("location");
-  // useEffect(() => {
-  //   const handleTabClose = (event) => {
-  //     event.preventDefault();
-
-  //     console.log("beforeunload event triggered");
-  //     const router_prompt = <Prompt message="are you want to close" />;
-  //     // window.location.replace("https://ekartbook.myshopify.com/");
-  //     return (
-  //       router_prompt, (event.returnValue = "Are you sure you want to exit?")
-  //     );
-  //   };
-
-  //   window.addEventListener("beforeunload", handleTabClose);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleTabClose);
-  //   };
-  // }, []);
   const handleChange = (event) => {
-    console.log(event.target.name, event.target.id);
-    setSpecificationValues({
-      ...specificationValues,
-      [event.target.name]: event.target.id,
-    });
+    console.log("here", event.target.id);
+    if (event.target.id === "+More") {
+      setIsMore(true);
+    } else {
+      setIsMore(false);
+    }
+    if (event.target.type === "number") {
+      setSpecificationValues({
+        ...specificationValues,
+        [event.target.name]: event.target.value,
+      });
+    } else {
+      setSpecificationValues({
+        ...specificationValues,
+        [event.target.name]: event.target.id,
+      });
+    }
+    // console.log(event.target.value);
+    // console.log("okk", event.target.name, event.target.id);
+    // setSpecificationValues({
+    //   ...specificationValues,
+    //   [event.target.name]: event.target.id,
+    // });
   };
   useEffect(() => {
     axios.get("/api/specifications").then((response) => {
@@ -93,23 +89,40 @@ const Specification = () => {
                         key={index}
                         className="flex justify-center items-center"
                       >
-                        <input
-                          type="radio"
-                          name={specification.value}
-                          id={variation.value}
-                          className="peer hidden"
-                          checked={
-                            variation.value ===
-                            specificationValues[specification.value]
-                          }
-                          onChange={(e) => handleChange(e)}
-                        />
-                        <label
-                          htmlFor={variation.value}
-                          className="block cursor-pointer select-none rounded-lg text-md  p-2.5 w-full text-center  numbers peer-checked:bg-[#fbb900]  peer-checked:text-black "
-                        >
-                          {variation.label}
-                        </label>
+                        {variation.label === "+More" && isMore ? (
+                          <>
+                            <input
+                              type="number"
+                              min="6"
+                              max="100"
+                              step="6"
+                              name={specification.value}
+                              id={variation.value}
+                              className="peer"
+                              onChange={(e) => handleChange(e)}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <input
+                              type="radio"
+                              name={specification.value}
+                              id={variation.value}
+                              className="peer hidden"
+                              checked={
+                                variation.value ===
+                                specificationValues[specification.value]
+                              }
+                              onChange={(e) => handleChange(e)}
+                            />
+                            <label
+                              htmlFor={variation.value}
+                              className="block cursor-pointer select-none rounded-lg text-md  p-2.5 w-full text-center  numbers peer-checked:bg-[#fbb900]  peer-checked:text-black "
+                            >
+                              {variation.label}
+                            </label>{" "}
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -120,13 +133,6 @@ const Specification = () => {
           <div className="">
             <div className="col-span-1"></div>
             <div className="flex justify-evenly md:justify-start  col-span-3 gap-2">
-              {/* <Link
-                onClick={submitSpecifications}
-                href={"/term-and-conditions"}
-                className="flex items-center justify-center cursor-pointer  rounded-full py-2 px-4 md:px-5   text-center bg-white hover:bg-indigo-500  border font-bold text-gray-500 text-sm "
-              >
-                Bulk Order
-              </Link> */}
               <Link
                 onClick={submitSpecifications}
                 href={"/customize"}

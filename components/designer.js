@@ -4,6 +4,7 @@ import useImage from "use-image";
 import { Html } from "react-konva-utils";
 import Carousel from "better-react-carousel";
 import Slider from "react-slick";
+import { event } from "jquery";
 
 export class URLImage extends React.Component {
   state = {
@@ -61,6 +62,7 @@ const Designer = ({
   const carouselItemsRef = useRef([]);
   const [nav1, setNav1] = React.useState(null);
   const [nav2, setNav2] = React.useState(null);
+  const [index, setIndex] = useState(0);
   let slider1 = [];
   let slider2 = [];
 
@@ -92,8 +94,7 @@ const Designer = ({
     }
   }, [bookForPurchase]);
 
-  const handleSelectedImageChange = (newIdx) => {
-    console.log("ok");
+  const handleSelectedImageChange = (event, newIdx) => {
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
       setSelectedImageIndex(newIdx);
@@ -214,91 +215,8 @@ const Designer = ({
           </div>
         </div>
 
-        {/* <div className="carousel">
-          <div className="carousel__images rounded">
-            {bookForPurchase &&
-              bookForPurchase.map((image, idx) => (
-                <div className="flex-row" key={idx}>
-                  <div
-                    onClick={() => handleSelectedImageChange(idx)}
-                    style={{ backgroundImage: `url(${image.url})` }}
-                    key={image.id}
-                    className={`carousel__image rounded ${
-                      selectedNotebook.id === image.id &&
-                      "carousel__image-selected "
-                    }`}
-                    ref={(el) => (carouselItemsRef.current[idx] = el)}
-                  />
-                  <span className="flex justify-center items-center mx-auto my-2 p-2 w-5 h-5 rounded-full text-white text-xs  bg-[#ffa700]">
-                    {idx + 1}
-                  </span>
-                </div>
-              ))}
-          </div>
-          <button
-            className="carousel__button carousel__button-left"
-            onClick={handleLeftClick}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-              />
-            </svg>
-          </button>
-          <button
-            className="carousel__button carousel__button-right"
-            onClick={handleRightClick}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-              />
-            </svg>
-          </button>
-        </div> */}
-        {/* <Carousel className="mt-10" cols={5} rows={1} gap={7} loop>
-          {bookForPurchase &&
-            bookForPurchase.map((image) => (
-              <Carousel.Item key={image.id}>
-                <img width="100px" height="250px" src={image.url} />
-              </Carousel.Item>
-            ))}
-        </Carousel> */}
         <div>
-          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}>
-            {/* {bookForPurchase &&
-              bookForPurchase.map((image, idx) => (
-                <div className="flex-row" key={idx}>
-                  <div
-                    style={{ backgroundImage: `url(${image.url})` }}
-                    key={image.id}
-                    className={`carousel__image rounded ${
-                      selectedNotebook.id === image.id &&
-                      "carousel__image-selected "
-                    }`}
-                    ref={(el) => (carouselItemsRef.current[idx] = el)}
-                  />
-                </div>
-              ))} */}
-          </Slider>
+          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}></Slider>
           <Slider
             className="pt-14 mx-lg-5 px-lg-3 px-0 mx-0 pt-lg-2 flex justify-center items-center "
             asNavFor={nav1}
@@ -306,6 +224,9 @@ const Designer = ({
             slidesToShow={5}
             swipeToSlide={true}
             focusOnSelect={true}
+            beforeChange={(prev, next) => {
+              setIndex(next);
+            }}
             responsive={[
               {
                 breakpoint: 600,
@@ -328,14 +249,30 @@ const Designer = ({
               bookForPurchase.map((image, idx) => (
                 <Carousel.Item key={image.id}>
                   <div className="relative pt-2.5 ">
-                    <img
-                      className="active w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center border-dashed border-slate-300 border-2 active:border-solid active:border-blue-600 active:border-2"
-                      onClick={() => handleSelectedImageChange(idx)}
-                      src={image.url}
-                    />
-                    <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  active:bg-blue-600 rounded-sm text-white text-bold inline-block z-10 text-xs ">
-                      {idx + 1}
-                    </span>
+                    {index === idx ? (
+                      <>
+                        {" "}
+                        <img
+                          className="active carouselImage w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
+                          onClick={() => handleSelectedImageChange(event, idx)}
+                          src={image.url}
+                        />
+                        <span className=" bg-blue-600 absolute left-1 top-1 py-0.5 px-1.5 ml-1    rounded-sm text-white text-bold inline-block z-10 text-xs ">
+                          {idx + 1}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          className="carouselImage w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
+                          onClick={() => handleSelectedImageChange(event, idx)}
+                          src={image.url}
+                        />
+                        <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  rounded-sm text-white text-bold inline-block z-10 text-xs ">
+                          {idx + 1}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </Carousel.Item>
               ))}
@@ -402,23 +339,6 @@ const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
             height: Math.max(node.height() * scaleY),
           };
           onChange(_design, index);
-          // onChange({
-          //     ...data,
-          //     designs: {
-          //         ...data.designs,
-          //         [data.direction]: {
-          //             ...data.designs[data.direction],
-          //             positions: {
-          //                 ...data.designs[data.direction].positions,
-          //                 x: node.x(),
-          //                 y: node.y(),
-          //                 // set minimal value
-          //                 width: Math.max(5, node.width() * scaleX),
-          //                 height: Math.max(node.height() * scaleY),
-          //             }
-          //         }
-          //     }
-          // });
         }}
       />
       {isSelected && (
@@ -448,11 +368,7 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
-  // const handleKeyUp = (e) => {
-  //   if (e.keyCode === 13) {
-  //     handleBlur();
-  //   }
-  // };
+
   const handleBlur = () => {
     setEditableText(true);
     const _design = {

@@ -5,6 +5,7 @@ const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState();
   let [count, setCount] = useState();
+  let [selected, setSelected] = useState(0);
   const router = useRouter();
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -18,12 +19,18 @@ const FinalPreview = (props) => {
       let i = 1;
       while (i < data.quantity) {
         data.resultNotebook.push(notebook);
+        if (data.designId !== null) {
+          setSelected(++i);
+        }
         i++;
       }
     } else {
+      let count = 0;
       data.resultNotebook.map((item) => {
         if (item.designId === null) {
           setFlag(true);
+        } else {
+          setSelected(++count);
         }
       });
     }
@@ -102,14 +109,20 @@ const FinalPreview = (props) => {
         </div>
         <div className="main">
           <div className="px-[12px] md:px-[70px] text-xl font-semibold my-4 ">
-            <h3>6/6 NOTEBOOK SELECTED IN PACK</h3>
+            <h3>
+              {selected}/{count} NOTEBOOK SELECTED IN PACK
+            </h3>
           </div>
           <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 ">
             {result ? (
-              result.resultNotebook.map((item) => {
+              result.resultNotebook.map((item, index) => {
                 return (
-                  <div className="flex items-center  flex-col " key={item.id}>
-                    <img className="w-11/12 h-full mx-auto object-cover object-center" src={item.url} />
+                  <div className="flex items-center  flex-col " key={index}>
+                    <img
+                      className="w-11/12 h-full mx-auto object-cover object-center"
+                      src={item.url}
+                      alt="image"
+                    />
                     {item.designId === null ? (
                       <button
                         onClick={handleModifyDesign}

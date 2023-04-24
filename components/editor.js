@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { ChromePicker } from "react-color";
@@ -17,7 +17,8 @@ export default function Editor({
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [color, setColor] = useState();
   const [fillColor, setFillColor] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const ref = useRef(null);
   const handleColorPicker = () => {
     console.log("handleColorPicker");
@@ -49,29 +50,33 @@ export default function Editor({
     handleTextColor("", color.hex);
     setFillColor(true);
   };
-  // document.onclick = (event) => {
-  //   handlePopover(event);
-  // };
-  // const handlePopover = (event) => {
-  //   console.log("here");
-  //   const popoverContainer =
-  //     document.getElementsByClassName("popoverContainer");
-  //   const isSvg = event.target.localName;
-  //   if (isSvg === "svg") {
-  //     var targetClass = event.target.className.animVal;
-  //   } else {
-  //     var targetClass = event.target.className;
-  //   }
-  //   const classArray = targetClass.split(" ");
-  //   console.log(targetClass);
-  //   if (targetClass.includes("popover")) {
-  //     popoverContainer[0].classList.remove("hidden");
-  //     popoverContainer[0].classList.add("block");
-  //   } else {
-  //     popoverContainer[0].classList.add("hidden");
-  //     popoverContainer[0].classList.remove("block");
-  //   }
-  // };
+  // useEffect(() => {
+  //   document.onclick = (event) => {
+  //     handlePopover(event);
+  //   };
+  // }, []);
+
+  const handlePopover = (event) => {
+    console.log("here");
+    setIsOpen(!isOpen);
+    // const popoverContainer =
+    //   document.getElementsByClassName("popoverContainer");
+    // const isSvg = event.target.localName;
+    // if (isSvg === "svg") {
+    //   var targetClass = event.target.className.animVal;
+    // } else {
+    //   var targetClass = event.target.className;
+    // }
+    // // const classArray = targetClass.split(" ");
+    // console.log(popoverContainer[0]);
+    // if (targetClass.includes("ispopover")) {
+    //   popoverContainer[0].classList.remove("hidden");
+    //   popoverContainer[0].classList.add("block");
+    // } else {
+    //   popoverContainer[0].classList.add("hidden");
+    //   popoverContainer[0].classList.remove("block");
+    // }
+  };
 
   return (
     <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
@@ -82,14 +87,17 @@ export default function Editor({
               CUSTOMISE YOUR NOTEBOOK
             </h5>
           </div>
+
           <div className="relative">
             <svg
-              className="w-6 h-6 font-normal cursor-pointer popover"
+              className="w-6 h-6 font-normal cursor-pointer ispopover"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
+              onMouseEnter={handlePopover}
+              onMouseLeave={handlePopover}
 
               // ref={ref}
               // onClick={(event) => handleInfoClick(event)}
@@ -100,39 +108,41 @@ export default function Editor({
                 d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
               />
             </svg>
-            {/* {isOpen ? ( */}
-            <div
-              className="p-3 bg-cyan-100 text-sm popoverContainer absolute right-0 top-8 w-[400px]"
-              // style={{ display: "none" }}
-              // ref={ref}
-            >
-              <h6 className="font-semibold  ">Terms And Conditions</h6>
-              <ul className="pl-4 ">
-                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                  Image size should not exceed 10MB
-                </li>
-                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                  Please avoid uploading images of celebrities, sports stars, TV
-                  characters, cartoon characters or images for which you do not
-                  own the copyrights.
-                </li>
-                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                  Please ensure to resize the images as necessary to fit the
-                  canvas. You can open the canvas & resize the image.
-                </li>
-                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                  Please avoid placing any text too close to the border since
-                  there are slight chances that it might get cut.
-                </li>
-                <li className="py-2  relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
-                  Please Check final preview to see if the designs are placed as
-                  you wish.
-                </li>
-              </ul>
-            </div>
-            {/* ) : (
+            {isOpen ? (
+              <div
+                className="p-3 bg-cyan-100 text-sm popoverContainer absolute right-0 top-8 w-[400px]  ispopover"
+                // style={{ display: "none" }}
+                // ref={ref}
+              >
+                <h6 className="font-semibold  ispopover">
+                  Terms And Conditions
+                </h6>
+                <ul className="pl-4 ispopover">
+                  <li className="py-2 ispopover relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                    Image size should not exceed 10MB
+                  </li>
+                  <li className="py-2 ispopover relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                    Please avoid uploading images of celebrities, sports stars,
+                    TV characters, cartoon characters or images for which you do
+                    not own the copyrights.
+                  </li>
+                  <li className="py-2 ispopover relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                    Please ensure to resize the images as necessary to fit the
+                    canvas. You can open the canvas & resize the image.
+                  </li>
+                  <li className="py-2 ispopover relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                    Please avoid placing any text too close to the border since
+                    there are slight chances that it might get cut.
+                  </li>
+                  <li className="py-2 ispopover relative before:content-[''] before:block before:h-1.5 before:w-1.5 before:-left-4 before:top-4 before:rounded-full before:absolute before:bg-blue-500">
+                    Please Check final preview to see if the designs are placed
+                    as you wish.
+                  </li>
+                </ul>
+              </div>
+            ) : (
               <></>
-            )} */}
+            )}
           </div>
         </div>
 
@@ -140,14 +150,6 @@ export default function Editor({
           className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
           // onClick={handleAddImage}
         >
-          {/* <svg
-          className="w-8 h-8"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-        </svg> */}
           <input
             className="text-black p-2 "
             type="file"
@@ -300,19 +302,6 @@ export default function Editor({
           </div>
         </div>
       </div>
-
-      {/* <div className="bg-[#edf7fa] p-4 my-5 rounded">
-            <h3 className=" text-xl font-semibold mb-4">Quick Tips</h3>
-            <ul class="marker:text-[#0035ff] list-outside list-disc ml-6">
-              <li>Image size should not exceed 10MB & video size should not exceed 100MB</li>
-              <li> Please avoid uploading images of celebrities, sports stars, TV characters, cartoon characters or images for which you do not own the copyrights.</li>
-              <li> Please ensure to resize the images as necessary to fit the canvas. You can open the canvas & resize the image.</li>
-              <li> Please avoid placing any text too close to the border since there are slight chances that it might get cut.</li>
-              <li>
-              Please Check final preview to see if the designs are placed as you wish.
-              </li>
-            </ul>
-          </div> */}
     </div>
   );
 }

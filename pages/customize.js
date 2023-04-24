@@ -26,48 +26,6 @@ function Customize() {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  // useEffect(() => {
-  //   if (isSave) {
-  //     window.addEventListener("beforeunload", (ev) => {
-  //       ev.preventDefault();
-  //       ev.returnValue = "Are you sure you want to close?";
-  //     });
-  //   }
-  //   // return () => {
-  //   window.removeEventListener("beforeunload", () => {
-  //     console.log("called 2");
-  //   });
-  //   // };
-  // }, [isSave]);
-  // useEffect(() => {
-  //   if (!isSave) {
-  //     window.removeEventListener("beforeunload", () => {
-  //       console.log("called 2");
-  //     });
-  //   }
-  // return () => {
-  //   second
-  // }
-  // }, [isSave]);
-
-  // const beforeUnloadListener = (event) => {
-  //   event.preventDefault();
-  //   event.returnValue = "";
-  // };
-
-  // // A function that invokes a callback when the page has unsaved changes.
-  //   window.addEventListener("beforeunload", beforeUnloadListener);
-  // };
-
-  // // A function that invokes a callback when the page's unsaved changes are resolved.
-  //   alert("saved");
-  //   window.removeEventListener("beforeunload", beforeUnloadListener);
-  // };
-
-  // const [modal, setModal] = React.useState({
-  //     isOpen: false,
-  //     message: 'anjay'
-  // })
   const [bookForPurchase, setBookForPurchase] = useState([]);
   const handleAddtext = (text) => {
     bookForPurchase.map((book) => {
@@ -92,28 +50,6 @@ function Customize() {
     setIsSave(true);
   };
   const handleTextColor = (event, param) => {
-    // if (event.target.classList.contains("bg-blue-900")) {
-    //   console.log("blue");
-    //   console.log(param);
-    //   setColor("blue");
-    // }
-    // if (event.target.classList.contains("bg-purple-900")) {
-    //   console.log("black");
-    //   setColor("purple");
-    // }
-    // if (event.target.classList.contains("bg-red-900")) {
-    //   console.log("red");
-    //   setColor("red");
-    // }
-    // if (event.target.classList.contains("bg-green-900")) {
-    //   setColor("green");
-    //   console.log("green");
-    // }
-    // if (event.target.classList.contains("bg-yellow-300")) {
-    //   setColor("yellow");
-    //   console.log("yellow");
-    // }
-    // console.log("here", param);
     setColor(param);
   };
   const handleAddImage = async (event) => {
@@ -160,47 +96,6 @@ function Customize() {
     }
   }, []);
 
-  // React.useEffect(() => {
-  //   // console.log(tshirt)
-  // }, [])
-
-  // const checkDeselect = e => {
-  //     // deselect when clicked on empty area
-  //     const clickedOnEmpty = e.target === e.target.getStage();
-  //     if (clickedOnEmpty) {
-  //         setSelected(false);
-  //     }
-  // };
-
-  // function closeModal() {
-  //     setModal({
-  //         isOpen: false,
-  //         message: null
-  //     })
-  // }
-
-  // React.useEffect(() => {
-  //     if (!appLoaded) {
-  //         // preload images
-  //         for (let i = 0; i < tshirts.length; i++) {
-  //             const pic = tshirts[i];
-  //             const image = new Image()
-  //             image.src = pic
-  //             image.onload = () => {
-  //                 // hide loading when the last image has been loaded
-  //                 if (i === (tshirts.length - 1)) {
-  //                     setAppLoaded(true)
-  //                     let fisrtLoad = document.getElementById("fisrtLoad")
-  //                     fisrtLoad.classList.add("fade-out")
-  //                     setTimeout(() => {
-  //                         fisrtLoad.style.display = "none"
-  //                     }, 500)
-  //                 }
-  //             }
-
-  //         }
-  //     }
-  // }, [appLoaded, setAppLoaded])
   const applyDesign = (bookDesign) => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
     bookForPurchase.map((book) => {
@@ -310,53 +205,7 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    // const add_to_product_data = {
-    //   product: {
-    //     title: "Custom Book",
-    //     properties: resultNotebook,
-    //     quantity: result.quantity,
-    //     status: "active",
-    //     vendor: "navneet",
-    //     product_type: "customised",
-    //     product_type: "Snowboard",
-    //   },
-    // };
-
     console.log("your result is here---===>", result);
-    // try {
-    //   const cookies = document.cookie.split("; ");
-    //   const cartId = cookies.filter(
-    //     (element) => element.substring(0, 4) === "cart"
-    //   );
-    //   // console.log("cart===>", cartId);
-    //   // console.log("cookies== geexu>", document.cookie);
-
-    //   setLoading(true);
-    //   if (cartId.length !== 0) {
-    //     fetch(
-    //       `https://shopify-backend-x0gg.onrender.com/cart?cart=${cartId[0]}`,
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           "Access-Control-Allow-Origin": "*",
-    //         },
-    //         body: JSON.stringify(add_to_product_data),
-    //       }
-    //     ).then((resp) => {
-    //       console.log("response", resp);
-    //       if (resp.status === 200) {
-    //         window.location.replace("https://ekartbook.myshopify.com/cart");
-    //         setLoading(false);
-    //         setIsSave(false);
-    //       }
-    //     });
-    //   } else {
-    //     alert("invalid Cart ID");
-    //   }
-    // } catch (err) {
-    //   console.log("Error is here", err);
-    // }
     const serializedData = serialize(result);
     router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
   };
