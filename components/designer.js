@@ -248,12 +248,12 @@ const Designer = ({
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
                 <Carousel.Item key={image.id}>
-                  <div className="relative pt-2.5 ">
+                  <div className="relative pt-2.5  ">
                     {index === idx ? (
                       <>
                         {" "}
                         <img
-                          className="active carouselImage w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
+                          className="active  w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
                           onClick={() => handleSelectedImageChange(event, idx)}
                           src={image.url}
                         />
@@ -264,7 +264,7 @@ const Designer = ({
                     ) : (
                       <>
                         <img
-                          className="carouselImage w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
+                          className=" w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
                           onClick={() => handleSelectedImageChange(event, idx)}
                           src={image.url}
                         />

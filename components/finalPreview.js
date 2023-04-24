@@ -19,8 +19,9 @@ const FinalPreview = (props) => {
       let i = 1;
       while (i < data.quantity) {
         data.resultNotebook.push(notebook);
+        let j = i;
         if (data.designId !== null) {
-          setSelected(++i);
+          setSelected(++j);
         }
         i++;
       }
@@ -72,9 +73,6 @@ const FinalPreview = (props) => {
         (element) => element.substring(0, 4) === "cart"
       );
       console.log("cartid===>", cartId[0]);
-      // console.log("cookies== geexu>", document.cookie);
-
-      // setLoading(true);
       if (cartId.length !== 0) {
         fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
           method: "POST",
@@ -161,7 +159,7 @@ const FinalPreview = (props) => {
             <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-6 ">
               <a
                 onClick={handleCloseButton}
-                className=" border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  px-24 text-center py-2.5 rounded-lg"
+                className="cursor-pointer border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  px-24 text-center py-2.5 rounded-lg"
               >
                 CLOSE
               </a>
