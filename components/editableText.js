@@ -1,5 +1,4 @@
 import React from "react";
-import { EditableTextInput } from "./EditableTextInput";
 import { Html } from "react-konva-utils";
 
 const RETURN_KEY = 13;
