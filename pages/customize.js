@@ -23,10 +23,19 @@ function Customize() {
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [isSave, setIsSave] = useState(false);
+  const [isSaveData, setIsSaveData] = useState(true);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   const [bookForPurchase, setBookForPurchase] = useState([]);
+  // useEffect(() => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   const dataString = decodeURIComponent(searchParams.get("data"));
+  //   const data = deserialize(dataString);
+  //   console.log("===>>>", data.resultNotebook);
+  //   setBookForPurchase(data.resultNotebook);
+  //   setSaveData(data);
+  // }, []);
   const handleAddtext = (text) => {
     bookForPurchase.map((book) => {
       if (book.id === selectedNotebook.id) {
@@ -88,11 +97,22 @@ function Customize() {
         designId: null,
         designs: [],
       }));
+      const searchParams = new URLSearchParams(location.search);
+      const dataString = decodeURIComponent(searchParams.get("data"));
+      const data = deserialize(dataString);
+      console.log("okokok", bookSet);
 
-      setBookForPurchase(bookSet);
-      setSelectedNotebook(bookSet[0]);
-    } else {
-      router.push("/specification");
+      if (data) {
+        console.log("here is you", data);
+        setBookForPurchase(data.resultNotebook);
+        setSelectedNotebook(data.resultNotebook[data.target]);
+        console.log({ bookForPurchase });
+        setIsSaveData(false);
+      } else {
+        setBookForPurchase(bookSet);
+        setSelectedNotebook(bookSet[0]);
+        console.log(bookSet[0]);
+      }
     }
   }, []);
 
@@ -177,6 +197,27 @@ function Customize() {
 
     return result;
   }
+  // useEffect(() => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   const dataString = decodeURIComponent(searchParams.get("data"));
+  //   const data = deserialize(dataString);
+  //   console.log("===>>>", data.resultNotebook);
+  //   data.resultNotebook.map((item) => setBookForPurchase(item));
+  //   // setBookForPurchase(data.resultNotebook);
+  //   setSaveData(data);
+  // }, []);
+  const deserialize = (str) => {
+    const revive = (key, value) => {
+      if (typeof value === "string" && /^function\s*\(/.test(value)) {
+        return eval(`(${value})`);
+      } else if (value === "[Circular]") {
+        return { __circular__: true };
+      } else {
+        return value;
+      }
+    };
+    return JSON.parse(str, revive);
+  };
   const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
@@ -200,11 +241,13 @@ function Customize() {
           id: book.id,
           designId: book.designId,
           url: book.url,
+          designs: book.designs,
           ...rest,
         });
       });
       result.resultNotebook = resultNotebook;
     }
+    result.isSave = true;
     console.log("your result is here---===>", result);
     const serializedData = serialize(result);
     router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);

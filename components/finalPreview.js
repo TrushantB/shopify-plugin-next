@@ -6,6 +6,8 @@ const FinalPreview = (props) => {
   let [result, setResult] = useState();
   let [count, setCount] = useState();
   let [selected, setSelected] = useState(0);
+  const [target, setTarget] = useState(0);
+
   const router = useRouter();
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -25,6 +27,8 @@ const FinalPreview = (props) => {
         }
         i++;
       }
+      console.log("spmething missing1", data);
+      setResult(data);
     } else {
       let count = 0;
       data.resultNotebook.map((item) => {
@@ -48,11 +52,33 @@ const FinalPreview = (props) => {
     };
     return JSON.parse(str, revive);
   };
-  const handleModifyDesign = () => {
-    router.push("/customize");
+  const handleModifyDesign = (event, index) => {
+    console.log(event.target, index);
+    setTarget(index);
+    console.log("okkkkkkkk", target);
+    result.target = target;
+    const serializedData = serialize(result);
+    router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
   };
   const handleCloseButton = () => {
-    router.push("/customize");
+    console.log("spmething missing1", result);
+    result.target = target;
+    const serializedData = serialize(result);
+    router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
+  };
+  const serialize = (obj) => {
+    const cache = new WeakSet();
+    return JSON.stringify(obj, (key, value) => {
+      if (typeof value === "function") {
+        return value.toString();
+      } else if (typeof value === "object" && value !== null) {
+        if (cache.has(value)) {
+          return "[Circular]";
+        }
+        cache.add(value);
+      }
+      return value;
+    });
   };
   const handleAddToCartButton = () => {
     const add_to_product_data = {
@@ -123,7 +149,7 @@ const FinalPreview = (props) => {
                     />
                     {item.designId === null ? (
                       <button
-                        onClick={handleModifyDesign}
+                        onClick={(event) => handleModifyDesign(event, index)}
                         className=" text-center my-3 "
                       >
                         <i className="fa-light fa-plus text-xl mr-1"></i>
@@ -131,7 +157,7 @@ const FinalPreview = (props) => {
                       </button>
                     ) : (
                       <button
-                        onClick={handleModifyDesign}
+                        onClick={(event) => handleModifyDesign(event, index)}
                         className="rounded-full my-3"
                       >
                         <i className="fa-regular fa-pen-to-square mr-1"></i>

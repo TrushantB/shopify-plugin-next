@@ -60,16 +60,16 @@ const Designer = ({
   const [isSelected, setIsSelected] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const carouselItemsRef = useRef([]);
-  const [nav1, setNav1] = React.useState(null);
-  const [nav2, setNav2] = React.useState(null);
+  // const [nav1, setNav1] = React.useState(null);
+  // const [nav2, setNav2] = React.useState(null);
   const [index, setIndex] = useState(0);
-  let slider1 = [];
-  let slider2 = [];
+  // let slider1 = [];
+  // let slider2 = [];
 
-  useEffect(() => {
-    setNav1(slider1);
-    setNav2(slider2);
-  }, [slider1, slider2]);
+  // useEffect(() => {
+  //   setNav1(slider1);
+  //   setNav2(slider2);
+  // }, [slider1, slider2]);
   const onSelect = (event) => {
     console.log("yes here is me", event.target._id, bookForPurchase);
     setIsSelected(!isSelected);
@@ -82,19 +82,22 @@ const Designer = ({
     });
     setBookForPurchase([...bookForPurchase]);
   };
+  // useEffect(() => {
+  //   const caroselSlick = document.getElementsByClassName("carousel");
+  //   caroselSlick.slick("refresh");
+  // }, []);
+  // useEffect(() => {
+  //   if (bookForPurchase && bookForPurchase[0]) {
+  //     carouselItemsRef.current = carouselItemsRef.current.slice(
+  //       0,
+  //       bookForPurchase.length
+  //     );
 
-  useEffect(() => {
-    if (bookForPurchase && bookForPurchase[0]) {
-      carouselItemsRef.current = carouselItemsRef.current.slice(
-        0,
-        bookForPurchase.length
-      );
+  //     setSelectedImageIndex(0);
+  //   }
+  // }, [bookForPurchase]);
 
-      setSelectedImageIndex(0);
-    }
-  }, [bookForPurchase]);
-
-  const handleSelectedImageChange = (event, newIdx) => {
+  const handleSelectedImageChange = (newIdx) => {
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
       setSelectedImageIndex(newIdx);
@@ -216,16 +219,16 @@ const Designer = ({
         </div>
 
         <div>
-          <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)}></Slider>
           <Slider
-            className="pt-14 mx-lg-5 px-lg-3 px-0 mx-0 pt-lg-2 flex justify-center items-center "
-            asNavFor={nav1}
-            ref={(slider) => (slider2 = slider)}
+            className="pt-14 mx-lg-5 px-lg-4 px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
+            focusOnSelect={true}
+            // centerMode={true}
+            variableWidth={true}
             slidesToShow={5}
             swipeToSlide={true}
-            focusOnSelect={true}
             beforeChange={(prev, next) => {
               setIndex(next);
+              handleSelectedImageChange(next);
             }}
             responsive={[
               {
@@ -247,34 +250,31 @@ const Designer = ({
           >
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
-                <Carousel.Item key={image.id}>
-                  <div className="relative pt-2.5  ">
-                    {index === idx ? (
-                      <>
-                        {" "}
-                        <img
-                          className="active  w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
-                          onClick={() => handleSelectedImageChange(event, idx)}
-                          src={image.url}
-                        />
-                        <span className=" bg-blue-600 absolute left-1 top-1 py-0.5 px-1.5 ml-1    rounded-sm text-white text-bold inline-block z-10 text-xs ">
-                          {idx + 1}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          className=" w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
-                          onClick={() => handleSelectedImageChange(event, idx)}
-                          src={image.url}
-                        />
-                        <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  rounded-sm text-white text-bold inline-block z-10 text-xs ">
-                          {idx + 1}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </Carousel.Item>
+                <div className="relative  p-3.5" key={idx}>
+                  {index === idx ? (
+                    <>
+                      <img
+                        className="active  w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
+                        onClick={() => handleSelectedImageChange(idx)}
+                        src={image.url}
+                      />
+                      <span className=" bg-blue-600 absolute left-0.5 top-1 py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs ">
+                        {idx + 1}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        className=" w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover  flex justify-center border-slate-400 items-center border-dashed border-2"
+                        onClick={() => handleSelectedImageChange(idx)}
+                        src={image.url}
+                      />
+                      <span className="absolute left-1 top-1 py-0.5 px-1.5 ml-1 bg-zinc-400  rounded-sm text-white text-bold inline-block z-10 text-xs ">
+                        {idx + 1}
+                      </span>
+                    </>
+                  )}
+                </div>
               ))}
           </Slider>
         </div>
