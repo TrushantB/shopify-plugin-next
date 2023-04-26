@@ -12,7 +12,6 @@ const Specification = () => {
   const [isMore, setIsMore] = useState(false);
   const [specificationValues, setSpecificationValues] = useState({});
   const handleChange = (event) => {
-    console.log("here", event.target.id);
     if (event.target.id === "+More") {
       setIsMore(true);
     } else {
@@ -29,12 +28,6 @@ const Specification = () => {
         [event.target.name]: event.target.id,
       });
     }
-    // console.log(event.target.value);
-    // console.log("okk", event.target.name, event.target.id);
-    // setSpecificationValues({
-    //   ...specificationValues,
-    //   [event.target.name]: event.target.id,
-    // });
   };
   useEffect(() => {
     axios.get("/api/specifications").then((response) => {
@@ -93,7 +86,7 @@ const Specification = () => {
                           <>
                             <input
                               type="number"
-                              min="6"
+                              min="25 "
                               max="100"
                               step="6"
                               name={specification.value}

@@ -60,21 +60,10 @@ const Designer = ({
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const carouselItemsRef = useRef([]);
-  // const [nav1, setNav1] = React.useState(null);
-  // const [nav2, setNav2] = React.useState(null);
-  let [index, setIndex] = useState(target);
-  console.log("here is selected", index);
-  // index = target;
-  // let slider1 = [];
-  // let slider2 = [];
 
-  // useEffect(() => {
-  //   setNav1(slider1);
-  //   setNav2(slider2);
-  // }, [slider1, slider2]);
+  let [index, setIndex] = useState(target);
+
   const onSelect = (event) => {
-    console.log("yes here is me", event.target._id, bookForPurchase);
     setIsSelected(!isSelected);
   };
   const onChange = (data, index) => {
@@ -85,20 +74,6 @@ const Designer = ({
     });
     setBookForPurchase([...bookForPurchase]);
   };
-  // useEffect(() => {
-  //   const caroselSlick = document.getElementsByClassName("carousel");
-  //   caroselSlick.slick("refresh");
-  // }, []);
-  // useEffect(() => {
-  //   if (bookForPurchase && bookForPurchase[0]) {
-  //     carouselItemsRef.current = carouselItemsRef.current.slice(
-  //       0,
-  //       bookForPurchase.length
-  //     );
-
-  //     setSelectedImageIndex(0);
-  //   }
-  // }, [bookForPurchase]);
 
   const handleSelectedImageChange = (newIdx) => {
     if (bookForPurchase && bookForPurchase.length > 0) {
@@ -365,9 +340,6 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
   const trRef = React.useRef();
   const [editableText, setEditableText] = useState(true);
   const [inputValue, setInputValue] = useState(design.text);
-  // const textFields = [];
-  // textFields.push(design);
-  console.log("designnnn", isSelected);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -385,13 +357,11 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
     event.target.setSelectionRange(inputValue.length, inputValue.length);
   };
   const handleClick = () => {
-    console.log("handle click");
     setIsSelected(!isSelected);
   };
 
   React.useEffect(() => {
     if (isSelected) {
-      console.log(shapeRef.current._id);
       trRef?.current?.setNode(shapeRef.current);
       trRef?.current?.getLayer().batchDraw();
     }
@@ -421,7 +391,6 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
               x: e.target.x(),
               y: e.target.y(),
             };
-            console.log("X", _design, index);
             onChange(_design, index);
           }}
           onTransformEnd={(e) => {

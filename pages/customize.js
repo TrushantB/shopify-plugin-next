@@ -28,14 +28,7 @@ function Customize() {
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   const [bookForPurchase, setBookForPurchase] = useState([]);
-  // useEffect(() => {
-  //   const searchParams = new URLSearchParams(location.search);
-  //   const dataString = decodeURIComponent(searchParams.get("data"));
-  //   const data = deserialize(dataString);
-  //   console.log("===>>>", data.resultNotebook);
-  //   setBookForPurchase(data.resultNotebook);
-  //   setSaveData(data);
-  // }, []);
+
   const handleAddtext = (text) => {
     bookForPurchase.map((book) => {
       if (book.id === selectedNotebook.id) {
@@ -52,7 +45,6 @@ function Customize() {
           isSelected: false,
         };
         book.designs.push(design);
-        // console.log("===>", design);
         setSelectedNotebook({ ...selectedNotebook });
       }
     });
@@ -102,14 +94,11 @@ function Customize() {
       const data = deserialize(dataString);
       if (data) {
         setTarget(data.target);
-        console.log("here is you", data);
         setBookForPurchase(data.resultNotebook);
         setSelectedNotebook(data.resultNotebook[data.target]);
-        console.log({ bookForPurchase });
       } else {
         setBookForPurchase(bookSet);
         setSelectedNotebook(bookSet[0]);
-        console.log(bookSet[0]);
       }
     }
   }, []);
@@ -179,13 +168,6 @@ function Customize() {
       });
     });
     setIsSave(false);
-    // window.removeEventListener(
-    //   "beforeunload",
-    //   () => {
-    //     alert("called 2");
-    //   },
-    //   false
-    // );
   };
 
   function generateString(length) {
@@ -197,15 +179,7 @@ function Customize() {
 
     return result;
   }
-  // useEffect(() => {
-  //   const searchParams = new URLSearchParams(location.search);
-  //   const dataString = decodeURIComponent(searchParams.get("data"));
-  //   const data = deserialize(dataString);
-  //   console.log("===>>>", data.resultNotebook);
-  //   data.resultNotebook.map((item) => setBookForPurchase(item));
-  //   // setBookForPurchase(data.resultNotebook);
-  //   setSaveData(data);
-  // }, []);
+
   const deserialize = (str) => {
     const revive = (key, value) => {
       if (typeof value === "string" && /^function\s*\(/.test(value)) {

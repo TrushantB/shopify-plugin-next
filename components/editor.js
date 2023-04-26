@@ -21,13 +21,8 @@ export default function Editor({
 
   const ref = useRef(null);
   const handleColorPicker = () => {
-    console.log("handleColorPicker");
     setDisplayColorPicker(!displayColorPicker);
   };
-
-  // handleClick = () => {
-  //   this.setState({ displayColorPicker: !this.state.displayColorPicker })
-  // };
 
   const handleClose = () => {
     setDisplayColorPicker(!displayColorPicker);
@@ -44,38 +39,13 @@ export default function Editor({
     left: "0px",
   };
   const handleChange = (color) => {
-    // this.setState({ color: color.rgb })
     setColor(color.hex);
-    console.log(color.hex);
     handleTextColor("", color.hex);
     setFillColor(true);
   };
-  // useEffect(() => {
-  //   document.onclick = (event) => {
-  //     handlePopover(event);
-  //   };
-  // }, []);
 
-  const handlePopover = (event) => {
-    console.log("here");
+  const handlePopover = () => {
     setIsOpen(!isOpen);
-    // const popoverContainer =
-    //   document.getElementsByClassName("popoverContainer");
-    // const isSvg = event.target.localName;
-    // if (isSvg === "svg") {
-    //   var targetClass = event.target.className.animVal;
-    // } else {
-    //   var targetClass = event.target.className;
-    // }
-    // // const classArray = targetClass.split(" ");
-    // console.log(popoverContainer[0]);
-    // if (targetClass.includes("ispopover")) {
-    //   popoverContainer[0].classList.remove("hidden");
-    //   popoverContainer[0].classList.add("block");
-    // } else {
-    //   popoverContainer[0].classList.add("hidden");
-    //   popoverContainer[0].classList.remove("block");
-    // }
   };
 
   return (
@@ -201,7 +171,6 @@ export default function Editor({
                     onChange={(e) => setText(e.target.value)}
                     onKeyUp={(e) => {
                       if (e.key == "Enter") {
-                        console.log(e.key);
                         handleAddtext(text);
                         setText("");
                       }

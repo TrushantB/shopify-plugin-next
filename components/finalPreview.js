@@ -15,7 +15,6 @@ const FinalPreview = (props) => {
     const data = deserialize(dataString);
     setResult(data);
     setCount(data.quantity);
-    console.log(data);
     if (data.isDesignApplyForAll) {
       const notebook = data.resultNotebook[0];
       let i = 1;
@@ -52,17 +51,13 @@ const FinalPreview = (props) => {
     return JSON.parse(str, revive);
   };
   const handleModifyDesign = (event, index) => {
-    console.log(event.target, index);
     setTarget(index);
-    console.log("okkkkkkkk", target);
     result.target = index;
     // setResult({ ...result, target });
     const serializedData = serialize(result);
     router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
   };
-  console.log({ result });
   const handleCloseButton = () => {
-    console.log("spmething missing1", result);
     result.target = target;
     const serializedData = serialize(result);
     router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
@@ -95,11 +90,9 @@ const FinalPreview = (props) => {
     };
     try {
       const cookies = document.cookie.split("; ");
-      console.log("all cookies", cookies);
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      console.log("cartid===>", cartId[0]);
       if (cartId.length !== 0) {
         // fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
         //   method: "POST",

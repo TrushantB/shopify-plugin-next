@@ -281,9 +281,7 @@ export default function Customize() {
     const instance = new AsukaDesigner("#myId", options); // Create an instance of the main plugin class
 
     instance.designer.addView("myView", /* height */ 150, /* width */ 150); // Access the subclasses from the main class
-    instance.on("ready", function () {
-      console.log("The plugin is ready");
-    });
+    instance.on("ready", function () {});
   }, []);
   return (
     <>

@@ -3,9 +3,7 @@ import { Html } from "react-konva-utils";
 
 const RETURN_KEY = 13;
 const ESCAPE_KEY = 27;
-function handleTextChange(e) {
-  console.log("yess", e.target.value);
-}
+
 export function EditableText({
   x,
   y,
