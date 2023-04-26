@@ -56,13 +56,16 @@ const Designer = ({
   handleClearDesign,
   notebookDetails,
   setBookForPurchase,
+  target,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const carouselItemsRef = useRef([]);
   // const [nav1, setNav1] = React.useState(null);
   // const [nav2, setNav2] = React.useState(null);
-  const [index, setIndex] = useState(0);
+  let [index, setIndex] = useState(target);
+  console.log("here is selected", index);
+  // index = target;
   // let slider1 = [];
   // let slider2 = [];
 
@@ -222,6 +225,7 @@ const Designer = ({
           <Slider
             className="pt-14 mx-lg-5 px-lg-4 px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
             focusOnSelect={true}
+            initialSlide={target}
             // centerMode={true}
             variableWidth={true}
             slidesToShow={5}
@@ -251,7 +255,7 @@ const Designer = ({
             {bookForPurchase &&
               bookForPurchase.map((image, idx) => (
                 <div className="relative  p-3.5" key={idx}>
-                  {index === idx ? (
+                  {idx === index ? (
                     <>
                       <img
                         className="active  w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center"
@@ -384,6 +388,7 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
     console.log("handle click");
     setIsSelected(!isSelected);
   };
+
   React.useEffect(() => {
     if (isSelected) {
       console.log(shapeRef.current._id);

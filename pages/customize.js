@@ -23,7 +23,7 @@ function Customize() {
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [isSave, setIsSave] = useState(false);
-  const [isSaveData, setIsSaveData] = useState(true);
+  const [target, setTarget] = useState(0);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -100,14 +100,12 @@ function Customize() {
       const searchParams = new URLSearchParams(location.search);
       const dataString = decodeURIComponent(searchParams.get("data"));
       const data = deserialize(dataString);
-      console.log("okokok", bookSet);
-
       if (data) {
+        setTarget(data.target);
         console.log("here is you", data);
         setBookForPurchase(data.resultNotebook);
         setSelectedNotebook(data.resultNotebook[data.target]);
         console.log({ bookForPurchase });
-        setIsSaveData(false);
       } else {
         setBookForPurchase(bookSet);
         setSelectedNotebook(bookSet[0]);
@@ -143,6 +141,8 @@ function Customize() {
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
     });
+    // const serializedData = serialize(bookForPurchase);
+    // router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
     setIsSave(true);
   };
   const handleClearDesign = () => {
@@ -280,6 +280,7 @@ function Customize() {
             handleAllClearDesign={handleAllClearDesign}
             notebookDetails={notebookDetails}
             setBookForPurchase={setBookForPurchase}
+            target={target}
           />
           <Editor
             designTemplates={designTemplates}

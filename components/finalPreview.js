@@ -27,7 +27,6 @@ const FinalPreview = (props) => {
         }
         i++;
       }
-      console.log("spmething missing1", data);
       setResult(data);
     } else {
       let count = 0;
@@ -56,10 +55,12 @@ const FinalPreview = (props) => {
     console.log(event.target, index);
     setTarget(index);
     console.log("okkkkkkkk", target);
-    result.target = target;
+    result.target = index;
+    // setResult({ ...result, target });
     const serializedData = serialize(result);
     router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
   };
+  console.log({ result });
   const handleCloseButton = () => {
     console.log("spmething missing1", result);
     result.target = target;
@@ -100,21 +101,21 @@ const FinalPreview = (props) => {
       );
       console.log("cartid===>", cartId[0]);
       if (cartId.length !== 0) {
-        fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify(add_to_product_data),
-        }).then((resp) => {
-          console.log("response", resp);
-          if (resp.status === 200) {
-            window.location.replace("https://navneet.geexu.org/cart");
-            // setLoading(false);
-            // setIsSave(false);
-          }
-        });
+        // fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        //   body: JSON.stringify(add_to_product_data),
+        // }).then((resp) => {
+        //   console.log("response", resp);
+        //   if (resp.status === 200) {
+        //     window.location.replace("https://navneet.geexu.org/cart");
+        //     // setLoading(false);
+        //     // setIsSave(false);
+        //   }
+        // });
       } else {
         alert("invalid Cart ID");
       }
