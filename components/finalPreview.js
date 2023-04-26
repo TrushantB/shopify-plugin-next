@@ -14,6 +14,7 @@ const FinalPreview = (props) => {
     const dataString = decodeURIComponent(searchParams.get("data"));
     const data = deserialize(dataString);
     setResult(data);
+    console.log("data ==>", data);
     setCount(data.quantity);
     if (data.isDesignApplyForAll) {
       const notebook = data.resultNotebook[0];
@@ -93,22 +94,23 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
+      console.log("here is you", cartId);
       if (cartId.length !== 0) {
-        // fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     "Access-Control-Allow-Origin": "*",
-        //   },
-        //   body: JSON.stringify(add_to_product_data),
-        // }).then((resp) => {
-        //   console.log("response", resp);
-        //   if (resp.status === 200) {
-        //     window.location.replace("https://navneet.geexu.org/cart");
-        //     // setLoading(false);
-        //     // setIsSave(false);
-        //   }
-        // });
+        fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }).then((resp) => {
+          console.log("response", resp);
+          if (resp.status === 200) {
+            window.location.replace("https://navneet.geexu.org/cart");
+            // setLoading(false);
+            // setIsSave(false);
+          }
+        });
       } else {
         alert("invalid Cart ID");
       }
