@@ -96,7 +96,7 @@ const FinalPreview = (props) => {
       );
       console.log("here is you", cartId);
       // if (cartId.length !== 0) {
-      fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+      fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
