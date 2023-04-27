@@ -80,7 +80,7 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = () => {
     const add_to_product_data = {
       product: {
-        title: "Customm Book",
+        title: "Navneet Custom Book",
         properties: result.resultNotebook,
         quantity: result.quantity,
         status: "active",
@@ -96,7 +96,7 @@ const FinalPreview = (props) => {
       );
       console.log("here is you", cartId);
       if (cartId.length !== 0) {
-        fetch(`https://shopify-backend-x0gg.onrender.com/cart?${cartId[0]}`, {
+        fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const FinalPreview = (props) => {
         }).then((resp) => {
           console.log("response", resp);
           if (resp.status === 200) {
-            window.location.replace("https://navneet.geexu.org/cart");
+            window.location.replace("https://navneetdemo.geexu.org/cart");
             // setLoading(false);
             // setIsSave(false);
           }
