@@ -80,7 +80,7 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = () => {
     const add_to_product_data = {
       product: {
-        title: "Customm Book",
+        title: "Navneet Custom Book",
         properties: result.resultNotebook,
         quantity: result.quantity,
         status: "active",
