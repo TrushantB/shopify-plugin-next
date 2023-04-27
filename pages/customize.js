@@ -23,7 +23,6 @@ function Customize() {
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
   const [isSave, setIsSave] = useState(false);
-  const [target, setTarget] = useState(0);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -93,7 +92,6 @@ function Customize() {
       const dataString = decodeURIComponent(searchParams.get("data"));
       const data = deserialize(dataString);
       if (data) {
-        setTarget(data.target);
         setBookForPurchase(data.resultNotebook);
         setSelectedNotebook(data.resultNotebook[data.target]);
       } else {
@@ -258,7 +256,6 @@ function Customize() {
             handleAllClearDesign={handleAllClearDesign}
             notebookDetails={notebookDetails}
             setBookForPurchase={setBookForPurchase}
-            target={target}
           />
           <Editor
             designTemplates={designTemplates}
