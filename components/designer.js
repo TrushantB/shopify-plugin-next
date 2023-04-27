@@ -58,13 +58,12 @@ const Designer = ({
   setBookForPurchase,
   target,
 }) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedTransform, setSelectedTransform] = useState(null);
 
   let [index, setIndex] = useState(target);
 
-  const onSelect = (event) => {
-    setIsSelected(!isSelected);
+  const onSelect = (event, index) => {
+    setSelectedTransform(index === selectedTransform ? null : index);
   };
   const onChange = (data, index) => {
     bookForPurchase.map((book) => {
@@ -78,7 +77,6 @@ const Designer = ({
   const handleSelectedImageChange = (newIdx) => {
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
-      setSelectedImageIndex(newIdx);
     }
   };
   return (
@@ -126,7 +124,6 @@ const Designer = ({
                               design={design}
                               onChange={onChange}
                               onSelect={onSelect}
-                              isSelected={isSelected}
                               index={index}
                             />
                           );
@@ -137,8 +134,8 @@ const Designer = ({
                               design={design}
                               onChange={onChange}
                               onSelect={onSelect}
-                              isSelected={isSelected}
                               index={index}
+                              selectedTransform={selectedTransform}
                             />
                           );
                         }
@@ -262,23 +259,22 @@ const Designer = ({
   );
 };
 
-const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
+const DesignImageView = ({ onSelect, onChange, design, index, selectedTransform }) => {
   const [image] = useImage(design.url, "Anonymous");
   const shapeRef = React.useRef();
   const trRef = React.useRef();
 
   React.useEffect(() => {
-    if (isSelected) {
+    if (selectedTransform !== null) {
       trRef?.current?.setNode(shapeRef.current);
       trRef?.current?.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  }, [selectedTransform]);
 
   return (
     <React.Fragment>
       <Image
         ref={shapeRef}
-        isSelected={isSelected}
         image={image}
         draggable
         width={design.width}
@@ -320,7 +316,7 @@ const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
           onChange(_design, index);
         }}
       />
-      {isSelected && (
+      {selectedTransform === indexlected && (
         <Transformer
           ref={trRef}
           boundBoxFunc={(oldBox, newBox) => {
@@ -335,18 +331,18 @@ const DesignImageView = ({ isSelected, onSelect, onChange, design, index }) => {
     </React.Fragment>
   );
 };
-const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
+const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
-  const [editableText, setEditableText] = useState(true);
+  const [editableText, setEditableText] = useState(false);
   const [inputValue, setInputValue] = useState(design.text);
-
+  let textLines = (inputValue?.match(/\n/g) || []).length + 1;
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleBlur = () => {
-    setEditableText(true);
+    setEditableText(false);
     const _design = {
       ...design,
       text: inputValue,
@@ -356,35 +352,31 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
   const handleFocus = (event) => {
     event.target.setSelectionRange(inputValue.length, inputValue.length);
   };
-  const handleClick = () => {
-    setIsSelected(!isSelected);
-  };
 
   React.useEffect(() => {
-    if (isSelected) {
+    if (selectedTransform !== null) {
       trRef?.current?.setNode(shapeRef.current);
       trRef?.current?.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  }, [selectedTransform]);
   return (
     <React.Fragment>
-      {editableText ? (
+      {!editableText ? (
         <Text
           ref={shapeRef}
-          // isSelected={isSelected}
           text={design.text}
-          // text="123123123"
           draggable
-          width={design.width}
-          // fontSize={5}
           fontSize={design.height}
-          height={design.height}
           x={design.x}
           y={design.y}
           fill={design.color}
-          onClick={onSelect}
-          onTap={handleClick}
-          onDblClick={() => setEditableText(false)}
+          onClick={(e) => {
+            onSelect(e, index)
+          }}
+          onDblClick={async (e) => {
+            await onSelect(e, null)
+            setEditableText(true)
+          }}
           onDragEnd={(e) => {
             const _design = {
               ...design,
@@ -412,7 +404,7 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
               y: node.y(),
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
-              height: Math.max(node.height() * scaleY),
+              height: Math.max(node.height() / textLines * scaleY),
             };
             onChange(_design, index);
           }}
@@ -423,18 +415,22 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
             style: {
               opacity: 1,
               position: "absolute",
-              left: `${design.x}px`,
-              top: `${design.y - 10}px`,
+              left: `${design.x - design.x / design.width}px`,
+              top: `${design.y - design.y / design.height}px`,
               border: 0,
               padding: 0,
               margin: 0,
               color: `${design.color}`,
+
             },
           }}
         >
+          {
+            console.log(design)
+          }
           <textarea
             value={inputValue}
-            className="bg-transparent border-transparent outline-none cursor-text"
+            className="bg-transparent"
             onChange={handleChange}
             // onKeyUp={handleKeyUp}
             autoFocus
@@ -442,14 +438,14 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
             onBlur={handleBlur}
             style={{
               fontSize: `${design.height}px`,
-              // height: `${design.height}px`,
+              height: `${design.height * textLines}px`,
               width: "100%",
               resize: "none",
             }}
           />
         </Html>
       )}
-      {isSelected && (
+      {selectedTransform === index && (
         <Transformer
           ref={trRef}
           enabledAnchors={[
@@ -457,7 +453,11 @@ const DesignTextView = ({ isSelected, onSelect, onChange, design, index }) => {
             "top-right",
             "bottom-left",
             "bottom-right",
+
           ]}
+          onTransform={(e) => {
+            console.log(e);
+          }}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 5 || newBox.height < 5) {
