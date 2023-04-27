@@ -95,25 +95,25 @@ const FinalPreview = (props) => {
         (element) => element.substring(0, 4) === "cart"
       );
       console.log("here is you", cartId);
-      // if (cartId.length !== 0) {
-      fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(add_to_product_data),
-      }).then((resp) => {
-        console.log("response", resp);
-        if (resp.status === 200) {
-          window.location.replace("https://navneetdemo.geexu.org/cart");
-          // setLoading(false);
-          // setIsSave(false);
-        }
-      });
-      // } else {
-      //   alert("invalid Cart ID j");
-      // }
+      if (cartId.length !== 0) {
+        fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(add_to_product_data),
+        }).then((resp) => {
+          console.log("response", resp);
+          if (resp.status === 200) {
+            window.location.replace("https://navneetdemo.geexu.org/cart");
+            // setLoading(false);
+            // setIsSave(false);
+          }
+        });
+      } else {
+        alert("invalid Cart ID j");
+      }
     } catch (err) {
       console.log("Error is here", err);
     }
