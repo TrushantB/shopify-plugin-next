@@ -107,7 +107,7 @@ video {
   background-repeat: no-repeat;
 }
 .slick-next {
-  right: -12px;
+  right: -22px;
 }
 .slick-prev:before {
   content: "";
