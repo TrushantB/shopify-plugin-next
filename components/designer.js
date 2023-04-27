@@ -195,7 +195,7 @@ const Designer = ({
 
         <div>
           <Slider
-            className="pt-14 mx-lg-5 px-lg-4 px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
+            className="pt-14 mx-lg-5  px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
             focusOnSelect={true}
             initialSlide={target}
             // centerMode={true}
@@ -259,7 +259,13 @@ const Designer = ({
   );
 };
 
-const DesignImageView = ({ onSelect, onChange, design, index, selectedTransform }) => {
+const DesignImageView = ({
+  onSelect,
+  onChange,
+  design,
+  index,
+  selectedTransform,
+}) => {
   const [image] = useImage(design.url, "Anonymous");
   const shapeRef = React.useRef();
   const trRef = React.useRef();
@@ -331,7 +337,13 @@ const DesignImageView = ({ onSelect, onChange, design, index, selectedTransform 
     </React.Fragment>
   );
 };
-const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }) => {
+const DesignTextView = ({
+  onSelect,
+  onChange,
+  design,
+  index,
+  selectedTransform,
+}) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
   const [editableText, setEditableText] = useState(false);
@@ -371,11 +383,11 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
           y={design.y}
           fill={design.color}
           onClick={(e) => {
-            onSelect(e, index)
+            onSelect(e, index);
           }}
           onDblClick={async (e) => {
-            await onSelect(e, null)
-            setEditableText(true)
+            await onSelect(e, null);
+            setEditableText(true);
           }}
           onDragEnd={(e) => {
             const _design = {
@@ -404,7 +416,7 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
               y: node.y(),
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
-              height: Math.max(node.height() / textLines * scaleY),
+              height: Math.max((node.height() / textLines) * scaleY),
             };
             onChange(_design, index);
           }}
@@ -421,13 +433,10 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
               padding: 0,
               margin: 0,
               color: `${design.color}`,
-
             },
           }}
         >
-          {
-            console.log(design)
-          }
+          {console.log(design)}
           <textarea
             value={inputValue}
             className="bg-transparent"
@@ -453,7 +462,6 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
             "top-right",
             "bottom-left",
             "bottom-right",
-
           ]}
           onTransform={(e) => {
             console.log(e);

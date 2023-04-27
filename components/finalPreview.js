@@ -112,7 +112,7 @@ const FinalPreview = (props) => {
           }
         });
       } else {
-        alert("invalid Cart ID j");
+        alert("invalid Cart ID ");
       }
     } catch (err) {
       console.log("Error is here", err);
