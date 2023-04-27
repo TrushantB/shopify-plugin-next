@@ -336,7 +336,7 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
   const trRef = React.useRef();
   const [editableText, setEditableText] = useState(false);
   const [inputValue, setInputValue] = useState(design.text);
-
+  let textLines = (inputValue?.match(/\n/g) || []).length + 1;
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -404,7 +404,7 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
               y: node.y(),
               // set minimal value
               width: Math.max(5, node.width() * scaleX),
-              height: Math.max(node.height() * scaleY),
+              height: Math.max(node.height() / textLines * scaleY),
             };
             onChange(_design, index);
           }}
@@ -415,18 +415,22 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
             style: {
               opacity: 1,
               position: "absolute",
-              left: `${design.x}px`,
-              top: `${design.y - 10}px`,
+              left: `${design.x - design.x / design.width}px`,
+              top: `${design.y - design.y / design.height}px`,
               border: 0,
               padding: 0,
               margin: 0,
               color: `${design.color}`,
+
             },
           }}
         >
+          {
+            console.log(design)
+          }
           <textarea
             value={inputValue}
-            className="bg-transparent border-transparent outline-none cursor-text"
+            className="bg-transparent"
             onChange={handleChange}
             // onKeyUp={handleKeyUp}
             autoFocus
@@ -434,7 +438,7 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
             onBlur={handleBlur}
             style={{
               fontSize: `${design.height}px`,
-              // height: `${design.height}px`,
+              height: `${design.height * textLines}px`,
               width: "100%",
               resize: "none",
             }}
@@ -449,7 +453,11 @@ const DesignTextView = ({ onSelect, onChange, design, index, selectedTransform }
             "top-right",
             "bottom-left",
             "bottom-right",
+
           ]}
+          onTransform={(e) => {
+            console.log(e);
+          }}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 5 || newBox.height < 5) {
