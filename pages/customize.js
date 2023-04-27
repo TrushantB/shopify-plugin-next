@@ -123,7 +123,11 @@ function Customize() {
   };
 
   const handleApplyForAll = () => {
-    setNotebookDetails({ ...notebookDetails, isApplyForAll: true });
+    console.log("handle Apply all");
+    setNotebookDetails({
+      ...notebookDetails,
+      isApplyForAll: true,
+    });
     bookForPurchase.map((book) => {
       book.url = selectedNotebook.url;
       book.designId = selectedNotebook.designId;
