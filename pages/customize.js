@@ -132,6 +132,7 @@ function Customize() {
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
     });
+    console.log("-=->", bookForPurchase);
     // const serializedData = serialize(bookForPurchase);
     // router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
     setIsSave(true);
@@ -223,7 +224,6 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    result.isSave = true;
     console.log("your result is here---===>", result);
     const serializedData = serialize(result);
     router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
@@ -244,7 +244,7 @@ function Customize() {
   };
   return (
     <React.Fragment>
-      <Header />
+      {/* <Header /> */}
       {!loading ? (
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <Designer
@@ -280,7 +280,7 @@ function Customize() {
           <h3>Adding product to cart</h3>
         </div>
       )}
-      <Footer />
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }

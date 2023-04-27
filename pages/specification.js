@@ -45,7 +45,7 @@ const Specification = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <div className=" items-center h-full  grid  grid-cols-1 lg:grid-cols-2">
         <div className=" bg-[#ffedc4] book  p-8  h-full flex items-center justify-center ">
@@ -151,7 +151,7 @@ const Specification = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
