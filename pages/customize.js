@@ -11,8 +11,6 @@ const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
 });
 import { designTemplates } from "@/lib/constants";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import { useRouter } from "next/router";
 
 function Customize() {
