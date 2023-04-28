@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
 
 const DesignImageView = ({ onSelect, onChange, design, index, selectedTransform }) => {
