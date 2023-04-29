@@ -1,9 +1,7 @@
 import Image from "next/image";
 import cover from "@/public/cover.svg";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 // import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
@@ -11,29 +9,30 @@ const Specification = () => {
   const [specifications, setSpecifications] = useState([]);
   const [isMore, setIsMore] = useState(false);
   const [specificationValues, setSpecificationValues] = useState({});
+  const router = useRouter();
   const handleChange = (event) => {
-    if (event.target.id === "+More") {
+    if (event.target.id >= 25) {
       setIsMore(true);
     } else {
       setIsMore(false);
     }
-    if (event.target.type === "number") {
-      setSpecificationValues({
-        ...specificationValues,
-        [event.target.name]: event.target.value,
-      });
-    } else {
-      setSpecificationValues({
-        ...specificationValues,
-        [event.target.name]: event.target.id,
-      });
-    }
+    setSpecificationValues({
+      ...specificationValues,
+      [event.target.name]: event.target.id,
+    });
+  };
+  const handleInputChange = (event) => {
+    setSpecificationValues({
+      ...specificationValues,
+      [event.target.name]: event.target.value,
+    });
   };
   useEffect(() => {
     axios.get("/api/specifications").then((response) => {
       setSpecifications(response.data.data);
       setSpecificationValues(response.data.defaultValues);
     });
+    sessionStorage.clear("result");
   }, []);
 
   const submitSpecifications = () => {
@@ -41,6 +40,14 @@ const Specification = () => {
       "notebookDetails",
       JSON.stringify({ specifications: specificationValues })
     );
+    if (
+      specificationValues.quantity % 6 !== 0 ||
+      specificationValues.quantity == 0
+    ) {
+      console.log("Input value should be multiple of 6");
+    } else {
+      router.push("/customize");
+    }
   };
 
   return (
@@ -86,13 +93,15 @@ const Specification = () => {
                           <>
                             <input
                               type="number"
-                              min="25 "
-                              max="100"
-                              step="6"
+                              min={6}
+                              max={100}
+                              step={6}
+                              // value={6}
+                              defaultValue={30}
                               name={specification.value}
-                              id={variation.value}
+                              id={variation.label}
                               className="peer"
-                              onChange={(e) => handleChange(e)}
+                              onChange={(e) => handleInputChange(e)}
                             />
                           </>
                         ) : (
@@ -126,13 +135,13 @@ const Specification = () => {
           <div className="">
             <div className="col-span-1"></div>
             <div className="flex justify-evenly md:justify-start  col-span-3 gap-2">
-              <Link
+              <button
                 onClick={submitSpecifications}
-                href={"/customize"}
+                // href={"/customize"}
                 className=" cursor-pointer select-none w-full flex justify-center text-center bg-[#0035ff] rounded p-3  px-4 md:px-5 font-bold text-white text-xl "
               >
                 CONTINUE
-              </Link>
+              </button>
             </div>
           </div>
           <div className="bg-[#edf7fa] p-4 mt-5 rounded">

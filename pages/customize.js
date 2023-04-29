@@ -12,6 +12,7 @@ const Editor = dynamic(() => import("@/components/editor"), {
 });
 import { designTemplates } from "@/lib/constants";
 import { useRouter } from "next/router";
+import { json } from "body-parser";
 
 function Customize() {
   const router = useRouter();
@@ -73,6 +74,7 @@ function Customize() {
     const notebookDetails = JSON.parse(
       sessionStorage.getItem("notebookDetails")
     );
+    const data = JSON.parse(sessionStorage.getItem("result"));
     setNotebookDetails(notebookDetails);
     if (Number(notebookDetails?.specifications?.quantity)) {
       const bookSet = Array.from(
@@ -86,12 +88,13 @@ function Customize() {
         designId: null,
         designs: [],
       }));
-      const searchParams = new URLSearchParams(location.search);
-      const dataString = decodeURIComponent(searchParams.get("data"));
-      const data = deserialize(dataString);
-      if (data) {
-        setBookForPurchase(data.resultNotebook);
-        setSelectedNotebook(data.resultNotebook[data.target]);
+
+      if (data?.result) {
+        setBookForPurchase(data.result.resultNotebook);
+        setSelectedNotebook(data.result.resultNotebook[2]);
+        data.result.resultNotebook.map((book) => {
+          book.designs = []; // while deserialization, adding default in designs
+        });
       } else {
         setBookForPurchase(bookSet);
         setSelectedNotebook(bookSet[0]);
@@ -119,21 +122,26 @@ function Customize() {
   };
 
   const handleApplyForAll = () => {
-    console.log("handle Apply all");
     setNotebookDetails({
       ...notebookDetails,
       isApplyForAll: true,
     });
-    bookForPurchase.map((book) => {
+    bookForPurchase.map((book, index) => {
       book.url = selectedNotebook.url;
       book.designId = selectedNotebook.designId;
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
+      book.id = generateString(14);
     });
-    console.log("-=->", bookForPurchase);
-    // const serializedData = serialize(bookForPurchase);
-    // router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
-    setIsSave(true);
+    let result = {
+      product_id: generateString(14),
+      isAgreeTermsAndConditions: notebookDetails.isAgreeTermsAndConditions,
+      isDesignApplyForAll: notebookDetails.isApplyForAll,
+      resultNotebook: bookForPurchase,
+      quantity: Number(bookForPurchase.length),
+    };
+    sessionStorage.setItem("result", JSON.stringify({ result: result }));
+    router.push(`/finalpreviews`);
   };
   const handleClearDesign = () => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
@@ -181,18 +189,6 @@ function Customize() {
     return result;
   }
 
-  const deserialize = (str) => {
-    const revive = (key, value) => {
-      if (typeof value === "string" && /^function\s*\(/.test(value)) {
-        return eval(`(${value})`);
-      } else if (value === "[Circular]") {
-        return { __circular__: true };
-      } else {
-        return value;
-      }
-    };
-    return JSON.parse(str, revive);
-  };
   const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
@@ -208,6 +204,7 @@ function Customize() {
       result.resultNotebook.push({
         designId: selectedNotebook.designId,
         url: selectedNotebook.url,
+        id: 0,
         ...rest,
       });
     } else {
@@ -222,24 +219,11 @@ function Customize() {
       });
       result.resultNotebook = resultNotebook;
     }
-    console.log("your result is here---===>", result);
-    const serializedData = serialize(result);
-    router.push(`/finalpreviews?data=${encodeURIComponent(serializedData)}`);
+
+    sessionStorage.setItem("result", JSON.stringify({ result: result }));
+    router.push(`/finalpreviews`);
   };
-  const serialize = (obj) => {
-    const cache = new WeakSet();
-    return JSON.stringify(obj, (key, value) => {
-      if (typeof value === "function") {
-        return value.toString();
-      } else if (typeof value === "object" && value !== null) {
-        if (cache.has(value)) {
-          return "[Circular]";
-        }
-        cache.add(value);
-      }
-      return value;
-    });
-  };
+
   return (
     <React.Fragment>
       {/* <Header /> */}

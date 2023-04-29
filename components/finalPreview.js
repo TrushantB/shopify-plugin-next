@@ -10,73 +10,31 @@ const FinalPreview = (props) => {
 
   const router = useRouter();
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const dataString = decodeURIComponent(searchParams.get("data"));
-    const data = deserialize(dataString);
-    setResult(data);
-    console.log("data ==>", data);
-    setCount(data.quantity);
-    if (data.isDesignApplyForAll) {
-      const notebook = data.resultNotebook[0];
-      let i = 1;
-      while (i < data.quantity) {
-        data.resultNotebook.push(notebook);
-        let j = i;
-        if (data.designId !== null) {
-          setSelected(++j);
-        }
-        i++;
-      }
-      setResult(data);
-    } else {
-      let count = 0;
-      data.resultNotebook.map((item) => {
-        if (item.designId === null) {
-          setFlag(true);
-        } else {
-          setSelected(++count);
-        }
-      });
-    }
-  }, []);
-  const deserialize = (str) => {
-    const revive = (key, value) => {
-      if (typeof value === "string" && /^function\s*\(/.test(value)) {
-        return eval(`(${value})`);
-      } else if (value === "[Circular]") {
-        return { __circular__: true };
+    const data = JSON.parse(sessionStorage.getItem("result"));
+    setResult(data.result);
+    setCount(data.result.quantity);
+
+    let count = 0;
+    data.result.resultNotebook.map((item) => {
+      if (item.designId === null) {
+        setFlag(true);
       } else {
-        return value;
+        setSelected(++count);
       }
-    };
-    return JSON.parse(str, revive);
-  };
+    });
+  }, []);
+
   const handleModifyDesign = (event, index) => {
     setTarget(index);
     result.target = index;
-    // setResult({ ...result, target });
-    const serializedData = serialize(result);
-    router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
+    setResult({ ...result, target: index });
+    router.push(`/customize`);
   };
   const handleCloseButton = () => {
     result.target = target;
-    const serializedData = serialize(result);
-    router.push(`/customize?data=${encodeURIComponent(serializedData)}`);
+    router.push(`/customize`);
   };
-  const serialize = (obj) => {
-    const cache = new WeakSet();
-    return JSON.stringify(obj, (key, value) => {
-      if (typeof value === "function") {
-        return value.toString();
-      } else if (typeof value === "object" && value !== null) {
-        if (cache.has(value)) {
-          return "[Circular]";
-        }
-        cache.add(value);
-      }
-      return value;
-    });
-  };
+
   const handleAddToCartButton = () => {
     const add_to_product_data = {
       product: {
@@ -94,7 +52,6 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      console.log("here is you", cartId);
       if (cartId.length !== 0) {
         fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
           method: "POST",
