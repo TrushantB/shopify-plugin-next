@@ -58,7 +58,7 @@ const Specification = () => {
         <div className=" bg-[#ffedc4] book  p-8  h-full flex items-center justify-center ">
           <Image src={cover} height={450} width={350} />
         </div>
-        <div className=" py-16 px-4 md:px-5  w-10/12 mx-auto">
+        <div className="py-16 px-14 h-screen mx-auto overflow-scroll">
           <div className="text-center mb-10 py-3  leading-10">
             <h4 className="font-bold text-2xl  lg:text-3xl text-gray-900">
               CHOOSE YOUR NOTEBOOK TYPE
@@ -78,11 +78,10 @@ const Specification = () => {
                 </label>
                 <div className="  items-center justify-center w-full col-span-3 mb-2">
                   <div
-                    className={`grid w-full ${
-                      specification.variations.length < 4
-                        ? "grid-cols-2"
-                        : "grid-cols-5 bg-white "
-                    }   rounded-lg bg-[#f4f5fa] p-2`}
+                    className={`grid w-full ${specification.variations.length < 4
+                      ? "grid-cols-2"
+                      : "grid-cols-5 bg-white "
+                      }   rounded-lg bg-[#f4f5fa] p-2`}
                   >
                     {specification.variations.map((variation, index) => (
                       <div

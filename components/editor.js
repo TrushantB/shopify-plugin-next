@@ -49,7 +49,7 @@ export default function Editor({
   };
 
   return (
-    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center ">
+    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center h-screen overflow-scroll">
       <div className="px-4  lg:px-10  h-full w-10/12 mx-auto">
         <div className="flex items-center justify-center pb-10 gap-x-3 ">
           <div>
@@ -69,8 +69,8 @@ export default function Editor({
               onMouseEnter={handlePopover}
               onMouseLeave={handlePopover}
 
-              // ref={ref}
-              // onClick={(event) => handleInfoClick(event)}
+            // ref={ref}
+            // onClick={(event) => handleInfoClick(event)}
             >
               <path
                 strokeLinecap="round"
@@ -81,8 +81,8 @@ export default function Editor({
             {isOpen ? (
               <div
                 className="p-3 bg-cyan-100 text-sm popoverContainer absolute right-0 top-8 w-[400px]  ispopover"
-                // style={{ display: "none" }}
-                // ref={ref}
+              // style={{ display: "none" }}
+              // ref={ref}
               >
                 <h6 className="font-semibold  ispopover">
                   Terms And Conditions
@@ -118,7 +118,7 @@ export default function Editor({
 
         <div
           className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
-          // onClick={handleAddImage}
+        // onClick={handleAddImage}
         >
           <input
             className="text-black p-2 "
