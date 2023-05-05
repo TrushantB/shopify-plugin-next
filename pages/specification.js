@@ -3,6 +3,7 @@ import cover from "@/public/cover.svg";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Toaster, toast } from "react-hot-toast";
 
 // import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 const Specification = () => {
@@ -44,7 +45,7 @@ const Specification = () => {
       specificationValues.quantity % 6 !== 0 ||
       specificationValues.quantity == 0
     ) {
-      // add alert message
+      toast.error("Book quantity should be multiple of 6");
     } else {
       router.push("/customize");
     }
@@ -102,6 +103,7 @@ const Specification = () => {
                               className="peer"
                               onChange={(e) => handleInputChange(e)}
                             />
+                            <Toaster/>
                           </>
                         ) : (
                           <>

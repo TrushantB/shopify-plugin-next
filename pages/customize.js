@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { FadeLoader } from "react-spinners";
+import toast, { Toaster } from 'react-hot-toast';
 const sampleImage =
   "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
 
@@ -124,7 +125,7 @@ function Customize() {
       }
     });
   }else{
-    alert('image size should be greater then 1 MB')
+    toast.error("Image size should be greater than 1 MB")
   }
   };
 
@@ -277,6 +278,7 @@ function Customize() {
             handleAddImage={handleAddImage}
             handleTextColor={handleTextColor}
           />
+          <Toaster />
         </div>
       ) : (
         <div className="w-auto h-auto flex items-center justify-center">
