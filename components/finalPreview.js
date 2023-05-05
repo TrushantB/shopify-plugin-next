@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FadeLoader } from "react-spinners";
+import { json } from "body-parser";
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState({});
@@ -64,6 +65,7 @@ const FinalPreview = (props) => {
             "Access-Control-Allow-Origin": "*",
           },
         }).then((resp) => {
+          localStorage.setItem('cart',json.stringify(resp));
         console.log(resp);
         });
 
