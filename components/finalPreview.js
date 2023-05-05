@@ -65,7 +65,7 @@ const FinalPreview = (props) => {
             "Access-Control-Allow-Origin": "*",
           },
         }).then((resp) => {
-          const myJSON = JSON.stringify(myObj);
+          const myJSON = JSON.stringify(resp);
           localStorage.setItem('cart',myJSON);
         console.log(resp);
         });
