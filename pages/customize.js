@@ -12,7 +12,6 @@ const Editor = dynamic(() => import("@/components/editor"), {
 });
 import { designTemplates } from "@/lib/constants";
 import { useRouter } from "next/router";
-import { json } from "body-parser";
 
 function Customize() {
   const router = useRouter();
@@ -21,14 +20,66 @@ function Customize() {
   const [color, setColor] = useState();
   const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
-  const [isSave, setIsSave] = useState(false);
+  const [changes, setChanges] = useState(false);
+  const [imageSize, setImageSize] = useState(false);
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   const [bookForPurchase, setBookForPurchase] = useState([]);
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [changes]);
+
+  useEffect(() => {
+    const notebookDetails = JSON.parse(
+      sessionStorage.getItem("notebookDetails")
+    );
+    const data = JSON.parse(sessionStorage.getItem("result"));
+
+    setNotebookDetails(notebookDetails);
+    if (Number(notebookDetails?.specifications?.quantity)) {
+      const bookSet = Array.from(
+        Array(Number(notebookDetails.specifications.quantity)).keys(
+          Number(notebookDetails.specifications.quantity)
+        )
+      ).map((id) => ({
+        id,
+        url: sampleImage,
+        isCustomizedDesign: true,
+        designId: null,
+        designs: [],
+      }));
+
+      if (data?.result) {
+        const selectedNotebook = JSON.parse(
+          sessionStorage.getItem("selectedId")
+        );
+        const selectedBook = data.result.resultNotebook.filter(
+          (item) => item.id === selectedNotebook.selectedNotebook
+        );
+        setSelectedNotebook(selectedBook[0]);
+        setBookForPurchase(data.result.resultNotebook);
+      } else {
+        setBookForPurchase(bookSet);
+        setSelectedNotebook(bookSet[0]);
+      }
+    }
+  }, []);
+
+  function handleBeforeUnload(event) {
+    if (changes) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  }
+
   const handleAddtext = (text) => {
     bookForPurchase.map((book) => {
+
       if (book.id === selectedNotebook.id) {
         const design = {
           type: "text",
@@ -46,14 +97,17 @@ function Customize() {
         setSelectedNotebook({ ...selectedNotebook });
       }
     });
-    setIsSave(true);
+    setChanges(true);
   };
   const handleTextColor = (event, param) => {
     setColor(param);
   };
   const handleAddImage = async (event) => {
     await setImage(URL.createObjectURL(event.target.files[0]));
-    bookForPurchase.map((book) => {
+    let imageSize = event.target.files[0].size;
+    imageSize = imageSize / 1024;
+    if(imageSize > 1024){
+     bookForPurchase.map((book) => {
       if (book.id === selectedNotebook.id) {
         const design = {
           type: "image",
@@ -66,41 +120,13 @@ function Customize() {
         };
         book.designs.push(design);
         setSelectedNotebook({ ...selectedNotebook });
-        setIsSave(true);
+        setChanges(true);
       }
     });
+  }else{
+    alert('image size should be greater then 1 MB')
+  }
   };
-  useEffect(() => {
-    const notebookDetails = JSON.parse(
-      sessionStorage.getItem("notebookDetails")
-    );
-    const data = JSON.parse(sessionStorage.getItem("result"));
-    setNotebookDetails(notebookDetails);
-    if (Number(notebookDetails?.specifications?.quantity)) {
-      const bookSet = Array.from(
-        Array(Number(notebookDetails.specifications.quantity)).keys(
-          Number(notebookDetails.specifications.quantity)
-        )
-      ).map((id) => ({
-        id,
-        url: sampleImage,
-        isCustomizedDesign: true,
-        designId: null,
-        designs: [],
-      }));
-
-      if (data?.result) {
-        setBookForPurchase(data.result.resultNotebook);
-        setSelectedNotebook(data.result.resultNotebook[2]);
-        data.result.resultNotebook.map((book) => {
-          book.designs = []; // while deserialization, adding default in designs
-        });
-      } else {
-        setBookForPurchase(bookSet);
-        setSelectedNotebook(bookSet[0]);
-      }
-    }
-  }, []);
 
   const applyDesign = (bookDesign) => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
@@ -115,9 +141,9 @@ function Customize() {
           designId: bookDesign.id,
           isCustomizedDesign: false,
         });
-        setIsSave(true);
       }
     });
+    setChanges(true);
     setBookForPurchase([...bookForPurchase]);
   };
 
@@ -136,13 +162,14 @@ function Customize() {
     let result = {
       product_id: generateString(14),
       isAgreeTermsAndConditions: notebookDetails.isAgreeTermsAndConditions,
-      isDesignApplyForAll: notebookDetails.isApplyForAll,
+      isDesignApplyForAll: true,
       resultNotebook: bookForPurchase,
       quantity: Number(bookForPurchase.length),
     };
     sessionStorage.setItem("result", JSON.stringify({ result: result }));
     router.push(`/finalpreviews`);
   };
+
   const handleClearDesign = () => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
     bookForPurchase.map((book) => {
@@ -176,7 +203,9 @@ function Customize() {
         designs: [],
       });
     });
-    setIsSave(false);
+    setChanges(false);
+    sessionStorage.removeItem('result');
+    sessionStorage.removeItem('selectedId');
   };
 
   function generateString(length) {

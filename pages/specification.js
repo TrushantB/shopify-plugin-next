@@ -44,7 +44,7 @@ const Specification = () => {
       specificationValues.quantity % 6 !== 0 ||
       specificationValues.quantity == 0
     ) {
-      console.log("Input value should be multiple of 6");
+      // add alert message
     } else {
       router.push("/customize");
     }

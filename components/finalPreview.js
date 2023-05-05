@@ -3,17 +3,16 @@ import { useRouter } from "next/router";
 import { FadeLoader } from "react-spinners";
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
-  let [result, setResult] = useState();
+  let [result, setResult] = useState({});
   let [count, setCount] = useState();
   let [selected, setSelected] = useState(0);
-  const [target, setTarget] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem("result"));
-    setResult(data.result);
+    setResult({ ...data.result });
     setCount(data.result.quantity);
-
     let count = 0;
     data.result.resultNotebook.map((item) => {
       if (item.designId === null) {
@@ -24,18 +23,23 @@ const FinalPreview = (props) => {
     });
   }, []);
 
-  const handleModifyDesign = (event, index) => {
-    setTarget(index);
-    result.target = index;
-    setResult({ ...result, target: index });
-    router.push(`/customize`);
+  const handleModifyDesign = (event, id) => {
+    sessionStorage.setItem(
+      "selectedId",
+      JSON.stringify({ selectedNotebook: id })
+    );
+    router.push({ pathname: "/customize" });
   };
-  const handleCloseButton = () => {
-    result.target = target;
+  const handleCloseButton = (id) => {
+    sessionStorage.setItem(
+      "selectedId",
+      JSON.stringify({ selectedNotebook: id })
+    );
     router.push(`/customize`);
   };
 
   const handleAddToCartButton = () => {
+    setLoading(true)
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -61,21 +65,17 @@ const FinalPreview = (props) => {
           },
           body: JSON.stringify(add_to_product_data),
         }).then((resp) => {
-          console.log("response", resp);
           if (resp.status === 200) {
             window.location.replace("https://navneetdemo.geexu.org/cart");
-            // setLoading(false);
-            // setIsSave(false);
+            setLoading(false);
           }
         });
       } else {
         alert("invalid Cart ID ");
       }
     } catch (err) {
-      console.log("Error is here", err);
     }
   };
-
   return (
     <>
       <div className="content">
@@ -91,8 +91,8 @@ const FinalPreview = (props) => {
             </h3>
           </div>
           <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 ">
-            {result ? (
-              result.resultNotebook.map((item, index) => {
+            {result && !loading ? (
+              result?.resultNotebook?.map((item, index) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>
                     <img
@@ -102,7 +102,7 @@ const FinalPreview = (props) => {
                     />
                     {item.designId === null ? (
                       <button
-                        onClick={(event) => handleModifyDesign(event, index)}
+                        onClick={(event) => handleModifyDesign(event, item.id)}
                         className=" text-center my-3 "
                       >
                         <i className="fa-light fa-plus text-xl mr-1"></i>
@@ -110,7 +110,7 @@ const FinalPreview = (props) => {
                       </button>
                     ) : (
                       <button
-                        onClick={(event) => handleModifyDesign(event, index)}
+                        onClick={(event) => handleModifyDesign(event, item.id)}
                         className="rounded-full my-3"
                       >
                         <i className="fa-regular fa-pen-to-square mr-1"></i>
@@ -137,7 +137,7 @@ const FinalPreview = (props) => {
           <div className="flex justify-center items-center pt-4 pb-5 ">
             <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-6 ">
               <a
-                onClick={handleCloseButton}
+                onClick={()=>handleCloseButton(result.resultNotebook[0].id)}
                 className="cursor-pointer border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  px-24 text-center py-2.5 rounded-lg"
               >
                 CLOSE

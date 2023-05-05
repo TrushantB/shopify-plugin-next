@@ -33,9 +33,7 @@ const Designer = ({
   };
 
   const handleSelectedImageChange = (newIdx) => {
-    if (bookForPurchase && bookForPurchase.length > 0) {
-      setSelectedNotebook(bookForPurchase[newIdx]);
-    }
+    setSelectedNotebook(bookForPurchase[newIdx]);
   };
   return (
     <div className=" bg-[#ffedc4]  pb-4 py-10  min-h-screen text-center">
@@ -56,50 +54,46 @@ const Designer = ({
                         y={0}
                         className="object-cover"
                       />
-                      {
-                        book?.designs?.map((design, index) => {
-                          if (design.type === IMAGE) {
-                            return (
-                              <DesignImageView
-                                key={index}
-                                design={design}
-                                onChange={onChange}
-                                onSelect={onSelect}
-                                index={index}
-                              />
-                            );
-                          } else {
-                            return (
-                              <DesignTextView
-                                key={index}
-                                design={design}
-                                onChange={onChange}
-                                onSelect={onSelect}
-                                index={index}
-                                selectedTransform={selectedTransform}
-                              />
-                            );
-                          }
-                        })
-                      }
+                      {book?.designs?.map((design, index) => {
+                        if (design.type === IMAGE) {
+                          return (
+                            <DesignImageView
+                              key={index}
+                              design={design}
+                              onChange={onChange}
+                              onSelect={onSelect}
+                              index={index}
+                            />
+                          );
+                        } else {
+                          return (
+                            <DesignTextView
+                              key={index}
+                              design={design}
+                              onChange={onChange}
+                              onSelect={onSelect}
+                              index={index}
+                              selectedTransform={selectedTransform}
+                            />
+                          );
+                        }
+                      })}
                     </Group>
                   </Layer>
                 );
               }
             })}
-            {
-              notebookDetails?.specifications?.binding === SPIRAL && (
-                <Layer>
-                  <URLImage
-                    src={SPIRAL_IMAGE}
-                    width={50}
-                    x={-17}
-                    height={370}
-                    y={-10}
-                  />
-                </Layer>
-              )
-            }
+            {notebookDetails?.specifications?.binding === SPIRAL && (
+              <Layer>
+                <URLImage
+                  src={SPIRAL_IMAGE}
+                  width={50}
+                  x={-17}
+                  height={370}
+                  y={-10}
+                />
+              </Layer>
+            )}
           </Stage>
 
           <DesignAction
@@ -119,8 +113,5 @@ const Designer = ({
     </div>
   );
 };
-
-
-
 
 export default Designer;

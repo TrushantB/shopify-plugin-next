@@ -122,7 +122,6 @@ const DesignTextView = ({
             "bottom-right",
           ]}
           onTransform={(e) => {
-            console.log(e);
           }}
           boundBoxFunc={(oldBox, newBox) => {
             if (newBox.width < 5 || newBox.height < 5) {
