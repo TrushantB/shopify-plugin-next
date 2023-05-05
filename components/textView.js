@@ -37,6 +37,45 @@ const DesignTextView = ({
       trRef?.current?.getLayer().batchDraw();
     }
   }, [selectedTransform]);
+
+  const onDragMove = (e) => {
+    const x = (e.target.x() + e.target.width()) > 300 ? 300 - e.target.width() : e.target.x() > 0 ? e.target.x() : 0;
+    const y = (e.target.y() + e.target.height()) > 350 ? 350 - e.target.height() : e.target.y() > 0 ? e.target.y() : 0;
+    shapeRef.current.x(x);
+    shapeRef.current.y(y);
+    const _design = {
+      ...design,
+      x,
+      y,
+    };
+    onChange(_design, index);
+  }
+  const onTransformEnd = (e) => {
+    const node = shapeRef.current;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+    node.scaleX(1);
+    node.scaleY(1);
+    const _design = {
+      ...design,
+      x: e.target.x(),
+      y: e.target.y(),
+      x: node.x(),
+      y: node.y(),
+      rotation: e.target.rotation(),
+      width: Math.max(5, node.width() * scaleX),
+      height: Math.max((node.height() / textLines) * scaleY),
+    };
+    onChange(_design, index);
+  }
+  const boundBoxFunc = (oldBox, newBox) => {
+    const isBoundaryX = 300 < newBox.width + newBox.x;
+    const isBoundaryY = 350 < newBox.height + newBox.y;
+    if (newBox.width < 10 || newBox.height < 10 || isBoundaryX || isBoundaryY) {
+      return oldBox;
+    }
+    return newBox;
+  }
   return (
     <React.Fragment>
       {!editableText ? (
@@ -49,6 +88,7 @@ const DesignTextView = ({
           y={design.y}
           fill={design.color}
           lineHeight={1}
+          rotation={design.rotation || 0}
           onClick={(e) => {
             onSelect(e, index);
           }}
@@ -56,46 +96,10 @@ const DesignTextView = ({
             await onSelect(e, null);
             setEditableText(true);
           }}
-          onDragMove={(e) => {
-            const x = (e.target.x() + design.width) > 300 ? 300 - design.width : e.target.x() > 0 ? e.target.x() : 0;
-            const y = (e.target.y() + design.height * textLines) > 350 ? 350 - design.height * textLines : e.target.y() > 0 ? e.target.y() : 0;
-            shapeRef.current.x(x);
-            shapeRef.current.y(y);
-            const _design = {
-              ...design,
-              x,
-              y,
-            };
-            onChange(_design, index);
-          }}
-          onDragEnd={(e) => {
-            const _design = {
-              ...design,
-              x: e.target.x(),
-              y: e.target.y(),
-            };
-            onChange(_design, index);
-          }}
-          onTransformEnd={(e) => {
-            const node = shapeRef.current;
-            const scaleX = node.scaleX();
-            const scaleY = node.scaleY();
-            node.scaleX(1);
-            node.scaleY(1);
-            const _design = {
-              ...design,
-              x: e.target.x(),
-              y: e.target.y(),
-              x: node.x(),
-              y: node.y(),
-              width: Math.max(5, node.width() * scaleX),
-              height: Math.max((node.height() / textLines) * scaleY),
-            };
-            onChange(_design, index);
-          }}
+          onDragMove={onDragMove}
+          onTransformEnd={onTransformEnd}
           fontFamily="system-ui, -apple-system,' Segoe UI', Roboto,'Helvetica Neue','Noto Sans','Liberation Sans', Arial, sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'"
           fontStyle="400"
-
         />
       ) : (
         <Html
@@ -116,7 +120,6 @@ const DesignTextView = ({
             value={inputValue}
             className="bg-transparent "
             onChange={handleChange}
-            // onKeyUp={handleKeyUp}
             autoFocus
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -141,26 +144,8 @@ const DesignTextView = ({
             "bottom-left",
             "bottom-right",
           ]}
-          onDragMove={(e) => {
-            const x = (e.target.x() + design.width) > 300 ? 300 - design.width : e.target.x() > 0 ? e.target.x() : 0;
-            const y = (e.target.y() + design.height * textLines) > 350 ? 350 - design.height * textLines : e.target.y() > 0 ? e.target.y() : 0;
-            shapeRef.current.x(x);
-            shapeRef.current.y(y);
-            const _design = {
-              ...design,
-              x,
-              y,
-            };
-            onChange(_design, index);
-          }}
-          boundBoxFunc={(oldBox, newBox) => {
-            const isBoundaryX = 300 < newBox.width + newBox.x;
-            const isBoundaryY = 350 < newBox.height + newBox.y;
-            if (newBox.width < 10 || newBox.height < 10 || isBoundaryX || isBoundaryY) {
-              return oldBox;
-            }
-            return newBox;
-          }}
+          onDragMove={onDragMove}
+          boundBoxFunc={(oldBox, newBox) => boundBoxFunc(oldBox, newBox)}
         />
       )}
     </React.Fragment>
