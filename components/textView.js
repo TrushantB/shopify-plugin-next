@@ -22,9 +22,10 @@ const DesignTextView = ({
     setEditableText(false);
     const _design = {
       ...design,
-      text: inputValue,
+      text: `${inputValue}`.trim(),
     };
     onChange(_design, index);
+    setInputValue(`${inputValue}`.trim())
   };
   const handleFocus = (event) => {
     event.target.setSelectionRange(inputValue.length, inputValue.length);
@@ -47,12 +48,25 @@ const DesignTextView = ({
           x={design.x}
           y={design.y}
           fill={design.color}
+          lineHeight={1}
           onClick={(e) => {
             onSelect(e, index);
           }}
           onDblClick={async (e) => {
             await onSelect(e, null);
             setEditableText(true);
+          }}
+          onDragMove={(e) => {
+            const x = (e.target.x() + design.width) > 300 ? 300 - design.width : e.target.x() > 0 ? e.target.x() : 0;
+            const y = (e.target.y() + design.height * textLines) > 350 ? 350 - design.height * textLines : e.target.y() > 0 ? e.target.y() : 0;
+            shapeRef.current.x(x);
+            shapeRef.current.y(y);
+            const _design = {
+              ...design,
+              x,
+              y,
+            };
+            onChange(_design, index);
           }}
           onDragEnd={(e) => {
             const _design = {
@@ -79,6 +93,9 @@ const DesignTextView = ({
             };
             onChange(_design, index);
           }}
+          fontFamily="system-ui, -apple-system,' Segoe UI', Roboto,'Helvetica Neue','Noto Sans','Liberation Sans', Arial, sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'"
+          fontStyle="400"
+
         />
       ) : (
         <Html
@@ -86,18 +103,18 @@ const DesignTextView = ({
             style: {
               opacity: 1,
               position: "absolute",
-              left: `${design.x - design.x / design.width}px`,
-              top: `${design.y - design.y / design.height}px`,
+              left: `${design.x}px`,
+              top: `${design.y}px`,
               border: 0,
               padding: 0,
               margin: 0,
-              color: `${design.color}`,
+              color: `${design.color}`
             },
           }}
         >
           <textarea
             value={inputValue}
-            className="bg-transparent"
+            className="bg-transparent "
             onChange={handleChange}
             // onKeyUp={handleKeyUp}
             autoFocus
@@ -108,6 +125,9 @@ const DesignTextView = ({
               height: `${design.height * textLines}px`,
               width: "100%",
               resize: "none",
+              padding: 0,
+              lineHeight: 1,
+              border: 0,
             }}
           />
         </Html>
@@ -121,10 +141,22 @@ const DesignTextView = ({
             "bottom-left",
             "bottom-right",
           ]}
-          onTransform={(e) => {
+          onDragMove={(e) => {
+            const x = (e.target.x() + design.width) > 300 ? 300 - design.width : e.target.x() > 0 ? e.target.x() : 0;
+            const y = (e.target.y() + design.height * textLines) > 350 ? 350 - design.height * textLines : e.target.y() > 0 ? e.target.y() : 0;
+            shapeRef.current.x(x);
+            shapeRef.current.y(y);
+            const _design = {
+              ...design,
+              x,
+              y,
+            };
+            onChange(_design, index);
           }}
           boundBoxFunc={(oldBox, newBox) => {
-            if (newBox.width < 5 || newBox.height < 5) {
+            const isBoundaryX = 300 < newBox.width + newBox.x;
+            const isBoundaryY = 350 < newBox.height + newBox.y;
+            if (newBox.width < 10 || newBox.height < 10 || isBoundaryX || isBoundaryY) {
               return oldBox;
             }
             return newBox;
