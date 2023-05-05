@@ -64,7 +64,7 @@ const FinalPreview = (props) => {
             "Access-Control-Allow-Origin": "*",
           },
         }).then((resp) => {
-        console.log({resp});
+        console.log(resp.data);
         });
 
         fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
