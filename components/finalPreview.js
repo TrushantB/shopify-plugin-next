@@ -67,9 +67,10 @@ const FinalPreview = (props) => {
         }).then((resp) => {
           const myJSON = JSON.stringify(resp);
           localStorage.setItem('cart',myJSON);
+          
         console.log(resp);
+        alert('ok');
         });
-
         fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
           method: "POST",
           headers: {
