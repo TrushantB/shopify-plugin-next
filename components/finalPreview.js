@@ -71,8 +71,8 @@ const FinalPreview = (props) => {
           count_item = result;
         });
         const cartProduct = count_item + quantity;
-        console.log(cartProduct);
-        if(cartProduct){
+        console.log(typeof cartProduct);
+        if(cartProduct <=100){
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
           method: "POST",
           headers: {
