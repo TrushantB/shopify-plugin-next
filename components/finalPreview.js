@@ -86,15 +86,14 @@ const FinalPreview = (props) => {
             setLoading(false);
           }
         });
+      }else{
+        toast.error('Cart is full');
+        }
       } else {
         toast.alert('Invalid cart');
       }
-    }else{
-    toast.error('Cart is full');
-    }
     } catch (err) {
     }
- 
   };
   return (
     <>
