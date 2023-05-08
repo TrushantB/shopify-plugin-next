@@ -49,27 +49,15 @@ const FinalPreview = (props) => {
         status: "active",
         vendor: "navneet",
         product_type: "customised",
-        product_type: "Snowboard",
         "variants": [
           {
-            "title": "Default Title",
+            "title": "Navneet book",
             "price": "50.00",
-            "inventory_quantity": 10,
-            "old_inventory_quantity": 0,
-            // "presentment_prices": [
-            //   {
-            //     "price": {
-            //       "amount": "50.00",
-            //       "currency_code": "USD"
-            //     },
-            //     "compare_at_price": null
-            //   }
-            // ],
-          }
+            "position": 1,
+            "inventory_quantity": 1,
+          },
         ],
       },
-            
-
     };
     try {
       const cookies = document.cookie.split("; ");
