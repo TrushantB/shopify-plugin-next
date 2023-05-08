@@ -41,6 +41,7 @@ const FinalPreview = (props) => {
 
   const handleAddToCartButton = async () => {
     setLoading(true)
+    setFlag(true);
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -97,10 +98,12 @@ const FinalPreview = (props) => {
         });
       }else{
         setLoading(false);
+        setFlag(false)
         toast.error('Cart can not store more than 100 products');
         }
       } else {
         setLoading(false);
+        setFlag(false)
         toast.error('Invalid cart');
       }
     } catch (err) {

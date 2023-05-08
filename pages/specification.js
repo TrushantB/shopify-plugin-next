@@ -1,15 +1,14 @@
 import Image from "next/image";
 import cover from "@/public/cover.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
+import {specification} from '../lib/constants'
 
-// import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 const Specification = () => {
-  const [specifications, setSpecifications] = useState([]);
+  const [specifications, setSpecifications] = useState(specification.data);
   const [isMore, setIsMore] = useState(false);
-  const [specificationValues, setSpecificationValues] = useState({});
+  const [specificationValues, setSpecificationValues] = useState(specification.defaultValues);
   const router = useRouter();
   const handleChange = (event) => {
     if (event.target.id >= 25) {
@@ -28,13 +27,14 @@ const Specification = () => {
       [event.target.name]: event.target.value,
     });
   };
-  useEffect(() => {
-    axios.get("/api/specifications").then((response) => {
-      setSpecifications(response.data.data);
-      setSpecificationValues(response.data.defaultValues);
-    });
-    sessionStorage.clear("result");
-  }, []);
+  // useEffect(() => {
+  //   // console.log(specification.data);
+  //   // axios.get("/api/specification").then((response) => {
+  //     setSpecifications(specification.data);
+  //     setSpecificationValues(specification.defaultValues);
+  //   // });
+  //   sessionStorage.clear("result");
+  // }, []);
 
   const submitSpecifications = () => {
     sessionStorage.setItem(
