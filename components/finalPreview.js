@@ -55,7 +55,7 @@ const FinalPreview = (props) => {
     try {
       const cookies = document.cookie.split("; ");
       let count_item;
-      let quantity = add_to_product_data.product.quantity;
+      let quantity = parseInt(add_to_product_data.product.quantity);
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
@@ -71,7 +71,7 @@ const FinalPreview = (props) => {
           count_item = result;
           console.log(typeof count_item , count_item);
         });
-        console.log(typeof quantity);
+        console.log(typeof quantity,quantity);
         const cartProduct = parseInt(count_item) + parseInt(quantity);
         console.log(typeof cartProduct,cartProduct);
         if(cartProduct <=100){
