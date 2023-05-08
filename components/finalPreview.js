@@ -151,8 +151,8 @@ const FinalPreview = (props) => {
               })
             ) : (
               <>
-                {" "}
                 <FadeLoader
+                className="flex items-center"
                   color="#36d7b7"
                   height={18}
                   loading
