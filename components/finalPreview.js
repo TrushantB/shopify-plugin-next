@@ -91,7 +91,7 @@ const FinalPreview = (props) => {
         }
       } else {
         setLoading(false);
-        toast.alert('Invalid cart');
+        toast.error('Invalid cart');
       }
     } catch (err) {
     }
