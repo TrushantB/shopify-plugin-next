@@ -92,6 +92,7 @@ const FinalPreview = (props) => {
           if (resp.status === 200) {
             window.location.replace("https://navneet.geexu.org/cart");
             setLoading(false);
+            toast.success('Product successfully added');
           }
         });
       }else{
