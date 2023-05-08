@@ -108,7 +108,7 @@ const FinalPreview = (props) => {
           },
         }).then((resp) => resp.json())
         .then((result)=>{
-          count_item = result;
+          count_item = result.item_count;
           console.log(result);
         });
         const cartProduct = count_item + quantity;
