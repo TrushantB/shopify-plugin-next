@@ -80,17 +80,17 @@ const FinalPreview = (props) => {
           }
         ],
         "images": [
-           {
-            "width": 110,
-            "height": 140,
-            "position": 1,
-            "alt": null,
-            "src": "https://cdn.shopify.com/s/files/1/0723/9424/4388/files/image-018_e23c91f9-7df2-4700-b1cc-3b596dd2d07f.jpg?v=1683530149",
+          {
+            "width": 123,
+            "height": 456,
+            "src": "https://picsum.photos/200",
             "variant_ids": [],
-          }
+            "admin_graphql_api_id": "gid://shopify/ProductImage/850703190"
+          },
         ],
-        "image": "https://cdn.shopify.com/s/files/1/0723/9424/4388/files/image-018_e23c91f9-7df2-4700-b1cc-3b596dd2d07f.jpg?v=1683530149",
       },
+            
+
     };
     try {
       const cookies = document.cookie.split("; ");
