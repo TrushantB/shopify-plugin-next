@@ -50,6 +50,7 @@ const FinalPreview = (props) => {
         vendor: "navneet",
         product_type: "customised",
         product_type: "Snowboard",
+        price:2500,
       },
     };
     try {
@@ -87,7 +88,7 @@ const FinalPreview = (props) => {
         });
       }else{
         setLoading(false);
-        toast.error('Cart is full');
+        toast.error('Cart can not store more than 100 products');
         }
       } else {
         setLoading(false);
