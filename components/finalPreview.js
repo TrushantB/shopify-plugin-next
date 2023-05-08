@@ -70,7 +70,7 @@ const FinalPreview = (props) => {
         .then((result)=>{
           count_item = result;
         });
-        const cartProduct = count_item + quantity;
+        const cartProduct = count_item + parseInt(quantity);
         console.log(typeof cartProduct,cartProduct);
         if(cartProduct <=100){
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
