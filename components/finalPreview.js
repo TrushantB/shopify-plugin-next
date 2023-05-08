@@ -50,18 +50,35 @@ const FinalPreview = (props) => {
         vendor: "navneet",
         product_type: "customised",
         product_type: "Snowboard",
-        price:2500,
-        product_has_only_default_variant: false,
-        gift_card: false,
-        final_price: 2500,
-        final_line_price: 5000,
-        featured_image: {
-          aspect_ratio: 1.046,
-          alt: "Example T-Shirt",
-          height: 822,
-          url: "https://cdn.shopify.com/s/files/1/0723/9424/4388/products/345-3452055_kids-shopping-png-transparent-png.png?v=1678455607",
-          width: 860
-      },
+        "variants": [
+          {
+            "title": "Default Title",
+            "price": "50.00",
+            "sku": "",
+            "position": 1,
+            "inventory_policy": "deny",
+            "compare_at_price": null,
+            "fulfillment_service": "manual",
+            "inventory_management": null,
+            "taxable": true,
+            "barcode": null,
+            "grams": 10,
+            "image_id": null,
+            "weight": 10,
+            "weight_unit": "lb",
+            "inventory_quantity": 10,
+            "old_inventory_quantity": 0,
+            "presentment_prices": [
+              {
+                "price": {
+                  "amount": "50.00",
+                  "currency_code": "USD"
+                },
+                "compare_at_price": null
+              }
+            ],
+          }
+        ],
       },
     };
     try {
