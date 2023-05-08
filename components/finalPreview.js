@@ -89,6 +89,7 @@ const FinalPreview = (props) => {
           }
         });
       }else{
+        setLoading(false);
         toast.error('Cart is full');
         }
       } else {
