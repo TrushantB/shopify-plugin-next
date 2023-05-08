@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FadeLoader } from "react-spinners";
-import { json } from "body-parser";
+import { Toaster, toast } from "react-hot-toast";
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState({});
@@ -67,6 +67,7 @@ const FinalPreview = (props) => {
         }).then((resp) => {
           const myJSON = JSON.stringify(resp);
           localStorage.setItem('cart',myJSON);
+          console.log(myJSON);
           
         console.log(resp);
         alert('ok');
@@ -85,7 +86,7 @@ const FinalPreview = (props) => {
           }
         });
       } else {
-        alert("invalid Cart ID ");
+        toast.alert('Invalid cart');
       }
     } catch (err) {
     }
@@ -173,6 +174,7 @@ const FinalPreview = (props) => {
           </div>
         </div>
       </div>
+      <Toaster/>
     </>
   );
 };
