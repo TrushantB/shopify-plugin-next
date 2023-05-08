@@ -54,6 +54,8 @@ const FinalPreview = (props) => {
     };
     try {
       const cookies = document.cookie.split("; ");
+      let count_item;
+      let quantity = add_to_product_data.product.quantity;
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
@@ -67,6 +69,8 @@ const FinalPreview = (props) => {
         }).then((resp) => resp.json())
         .then((result)=>{
           console.log(result);
+          count_item = result;
+          console.log(count_item,quantity);
           alert('ok');
         });
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
