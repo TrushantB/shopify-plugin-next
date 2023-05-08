@@ -151,8 +151,8 @@ const FinalPreview = (props) => {
               })
             ) : (
               <>
+              <div className="flex items-center">
                 <FadeLoader
-                className="flex items-center"
                   color="#36d7b7"
                   height={18}
                   loading
@@ -160,6 +160,7 @@ const FinalPreview = (props) => {
                   radius={0}
                   width={3}
                 />
+                </div>
               </>
             )}
           </div>
