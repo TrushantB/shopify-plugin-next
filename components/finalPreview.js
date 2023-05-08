@@ -64,9 +64,10 @@ const FinalPreview = (props) => {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
-        }).then((resp) => {
-        console.log(resp);
-        alert('ok');
+        }).then((resp) => resp.json())
+        .then((result)=>{
+          console.log(result);
+          alert('ok');
         });
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
           method: "POST",
