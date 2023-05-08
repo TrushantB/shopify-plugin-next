@@ -79,7 +79,16 @@ const FinalPreview = (props) => {
             ],
           }
         ],
-        "images": [],
+        "images": [
+           {
+            "width": 110,
+            "height": 140,
+            "position": 1,
+            "alt": null,
+            "src": "https://cdn.shopify.com/s/files/1/0723/9424/4388/files/image-018_e23c91f9-7df2-4700-b1cc-3b596dd2d07f.jpg?v=1683530149",
+            "variant_ids": [],
+          }
+        ],
         "image": "https://cdn.shopify.com/s/files/1/0723/9424/4388/files/image-018_e23c91f9-7df2-4700-b1cc-3b596dd2d07f.jpg?v=1683530149",
       },
     };
