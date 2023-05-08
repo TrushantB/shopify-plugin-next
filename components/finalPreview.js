@@ -55,6 +55,13 @@ const FinalPreview = (props) => {
         gift_card: false,
         final_price: 2500,
         final_line_price: 5000,
+        featured_image: {
+          aspect_ratio: 1.046,
+          alt: "Example T-Shirt",
+          height: 822,
+          url: "https://cdn.shopify.com/s/files/1/0723/9424/4388/products/345-3452055_kids-shopping-png-transparent-png.png?v=1678455607",
+          width: 860
+      },
       },
     };
     try {
