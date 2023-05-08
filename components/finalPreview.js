@@ -51,6 +51,10 @@ const FinalPreview = (props) => {
         product_type: "customised",
         product_type: "Snowboard",
         price:2500,
+        product_has_only_default_variant: false,
+        gift_card: false,
+        final_price: 2500,
+        final_line_price: 5000,
       },
     };
     try {
