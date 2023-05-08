@@ -124,7 +124,7 @@ const FinalPreview = (props) => {
             </h3>
           </div>
             {result && !loading ? (
-          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 " >
+          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-scroll flex-wrap sm:px-16 " >
              { result?.resultNotebook?.map((item, index) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>

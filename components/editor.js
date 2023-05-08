@@ -136,7 +136,7 @@ export default function Editor({
           <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-4 pt-2">
             PICK YOUR DESIGN TEMPLATE
           </label>
-          <div className="grid gap-4 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] hover:overflow-y-scroll">
+          <div className="grid gap-4 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll">
             {designTemplates.map((design) => {
               return (
                 <div

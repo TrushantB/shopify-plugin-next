@@ -27,14 +27,6 @@ const Specification = () => {
       [event.target.name]: event.target.value,
     });
   };
-  // useEffect(() => {
-  //   // console.log(specification.data);
-  //   // axios.get("/api/specification").then((response) => {
-  //     setSpecifications(specification.data);
-  //     setSpecificationValues(specification.defaultValues);
-  //   // });
-  //   sessionStorage.clear("result");
-  // }, []);
 
   const submitSpecifications = () => {
     sessionStorage.setItem(
@@ -53,8 +45,6 @@ const Specification = () => {
 
   return (
     <>
-      {/* <Header /> */}
-
       <div className=" items-center h-full  grid  grid-cols-1 lg:grid-cols-2">
         <div className=" bg-[#ffedc4] book  p-8  h-full flex items-center justify-center ">
           <Image src={cover} height={450} width={350} />
@@ -160,8 +150,6 @@ const Specification = () => {
           </div>
         </div>
       </div>
-
-      {/* <Footer /> */}
     </>
   );
 };
