@@ -52,31 +52,19 @@ const FinalPreview = (props) => {
         product_type: "Snowboard",
         "variants": [
           {
-            // "title": "Default Title",
-            // "price": "50.00",
-            // "sku": "",
-            // "position": 1,
-            // "inventory_policy": "deny",
-            // "compare_at_price": null,
-            // "fulfillment_service": "manual",
-            // "inventory_management": null,
-            // "taxable": true,
-            // "barcode": null,
-            // "grams": 10,
-            // "image_id": null,
-            // "weight": 10,
-            // "weight_unit": "lb",
-            // "inventory_quantity": 10,
-            // "old_inventory_quantity": 0,
-            "presentment_prices": [
-              {
-                "price": {
-                  "amount": "50.00",
-                  "currency_code": "USD"
-                },
-                "compare_at_price": null
-              }
-            ],
+            "title": "Default Title",
+            "price": "50.00",
+            "inventory_quantity": 10,
+            "old_inventory_quantity": 0,
+            // "presentment_prices": [
+            //   {
+            //     "price": {
+            //       "amount": "50.00",
+            //       "currency_code": "USD"
+            //     },
+            //     "compare_at_price": null
+            //   }
+            // ],
           }
         ],
       },
