@@ -70,6 +70,7 @@ const FinalPreview = (props) => {
         .then((result)=>{
           count_item = result;
         });
+        console.log(typeof cartProduct,typeof quantity,typeof count_item,cartProduct,quantity,count_item);
         const cartProduct = parseInt(count_item) + parseInt(quantity);
         console.log(typeof cartProduct,cartProduct);
         if(cartProduct <=100){
