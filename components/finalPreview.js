@@ -120,13 +120,13 @@ const FinalPreview = (props) => {
               {selected}/{count} NOTEBOOK SELECTED IN PACK
             </h3>
           </div>
-          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 ">
             {result && !loading ? (
-              result?.resultNotebook?.map((item, index) => {
+          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-auto flex-wrap sm:px-16 " >
+             { result?.resultNotebook?.map((item, index) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>
                     <img
-                      className="w-11/12 h-full mx-auto object-cover object-center"
+                      className="w-11/12 max-h-80 mx-auto object-cover object-center"
                       src={item.url}
                       alt="image"
                     />
@@ -148,11 +148,13 @@ const FinalPreview = (props) => {
                       </button>
                     )}
                   </div>
+          
                 );
-              })
+              })}
+              </div>
             ) : (
               <>
-              <div className="flex items-center justify-center w-100">
+              <div className="flex items-center justify-center p-10">
                 <FadeLoader
                   color="#36d7b7"
                   height={18}
@@ -164,7 +166,6 @@ const FinalPreview = (props) => {
                 </div>
               </>
             )}
-          </div>
           <div className="flex justify-center items-center pt-4 pb-5 ">
             <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-6 ">
               <a
