@@ -69,11 +69,8 @@ const FinalPreview = (props) => {
         }).then((resp) => resp.json())
         .then((result)=>{
           count_item = result;
-          console.log('count  item',typeof count_item , count_item);
         });
-        console.log('quantity',typeof quantity,quantity);
-        const cartProduct = parseInt(count_item) + parseInt(quantity);
-        console.log('cart product',typeof cartProduct,cartProduct);
+        const cartProduct = count_item + quantity;
         if(cartProduct <=100){
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
           method: "POST",
@@ -93,6 +90,7 @@ const FinalPreview = (props) => {
         toast.error('Cart is full');
         }
       } else {
+        setLoading(false);
         toast.alert('Invalid cart');
       }
     } catch (err) {
