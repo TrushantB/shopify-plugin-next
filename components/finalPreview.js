@@ -39,7 +39,7 @@ const FinalPreview = (props) => {
     router.push(`/customize`);
   };
 
-  const handleAddToCartButton = () => {
+  const handleAddToCartButton = async () => {
     setLoading(true)
     const add_to_product_data = {
       product: {
@@ -60,7 +60,7 @@ const FinalPreview = (props) => {
         (element) => element.substring(0, 4) === "cart"
       );
       if (cartId.length !== 0) {
-        fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
+        await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -69,11 +69,11 @@ const FinalPreview = (props) => {
         }).then((resp) => resp.json())
         .then((result)=>{
           count_item = result;
-          console.log(typeof count_item , count_item);
+          console.log('count  item',typeof count_item , count_item);
         });
-        console.log(typeof quantity,quantity);
+        console.log('quantity',typeof quantity,quantity);
         const cartProduct = parseInt(count_item) + parseInt(quantity);
-        console.log(typeof cartProduct,cartProduct);
+        console.log('cart product',typeof cartProduct,cartProduct);
         if(cartProduct <=100){
         fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
           method: "POST",
