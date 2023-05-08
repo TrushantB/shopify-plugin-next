@@ -58,21 +58,17 @@ const FinalPreview = (props) => {
         (element) => element.substring(0, 4) === "cart"
       );
       if (cartId.length !== 0) {
-        fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
+        fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
         }).then((resp) => {
-          const myJSON = JSON.stringify(resp);
-          localStorage.setItem('cart',myJSON);
-          console.log(myJSON);
-          
         console.log(resp);
         alert('ok');
         });
-        fetch(`https://navneetbackend.geexu.org/cart?${cartId[0]}`, {
+        fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
