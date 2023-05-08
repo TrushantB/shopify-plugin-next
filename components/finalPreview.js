@@ -79,6 +79,8 @@ const FinalPreview = (props) => {
             ],
           }
         ],
+        "images": [],
+        "image": "https://cdn.shopify.com/s/files/1/0723/9424/4388/files/image-018_e23c91f9-7df2-4700-b1cc-3b596dd2d07f.jpg?v=1683530149",
       },
     };
     try {
