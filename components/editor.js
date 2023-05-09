@@ -18,6 +18,8 @@ export default function Editor({
   const [color, setColor] = useState();
   const [fillColor, setFillColor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeColorIndex,setActiveColorIndex] = useState(0)
+  const defaultColor = ['#1c1c1c','#ef4444','#4d982c','#420420','#092c86'];
 
   const ref = useRef(null);
   const handleColorPicker = () => {
@@ -191,41 +193,21 @@ export default function Editor({
               </div>
 
               <div className="flex flex-wrap items-center py-4">
+              {defaultColor.map((color,index)=>{
+                return(
                 <div
+                key={index}
                   onClick={(event) => {
-                    handleTextColor(event, "blue");
-                    setColor("blue");
+                    handleTextColor(event, color);
+                    setColor(color);
+                    setActiveColorIndex(index)
                   }}
-                  className="w-12 m-2 h-12 bg-blue-900 "
+                  className={`w-12 m-2 h-12 rounded-xl ${index==activeColorIndex? 'activeColor': ''}`}
+                  style={{backgroundColor:color}}
                 ></div>
-                <div
-                  onClick={(event) => {
-                    handleTextColor(event, "purple");
-                    setColor("purple");
-                  }}
-                  className="w-12 m-2 h-12 bg-purple-900 "
-                ></div>
-                <div
-                  onClick={(event) => {
-                    handleTextColor(event, "red");
-                    setColor("red");
-                  }}
-                  className="w-12 m-2 h-12 bg-red-900 "
-                ></div>
-                <div
-                  onClick={(event) => {
-                    handleTextColor(event, "green");
-                    setColor("green");
-                  }}
-                  className="w-12 m-2 h-12 bg-green-900 "
-                ></div>
-                <div
-                  onClick={(event) => {
-                    handleTextColor(event, "yellow");
-                    setColor("yellow");
-                  }}
-                  className="w-12 m-2 h-12 bg-yellow-300 "
-                ></div>
+                )
+              })
+              }
                 <div className="flex flex-col">
                   {!fillColor ? (
                     <span onClick={handleColorPicker}>

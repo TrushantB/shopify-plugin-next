@@ -256,7 +256,6 @@ function Customize() {
 
   return (
     <React.Fragment>
-      {/* <Header /> */}
       {!loading ? (
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <Designer
@@ -293,7 +292,6 @@ function Customize() {
           <h3>Adding product to cart</h3>
         </div>
       )}
-      {/* <Footer /> */}
     </React.Fragment>
   );
 }
