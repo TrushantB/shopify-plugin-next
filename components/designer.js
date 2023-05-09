@@ -63,6 +63,7 @@ const Designer = ({
                               onChange={onChange}
                               onSelect={onSelect}
                               index={index}
+                              selectedTransform={selectedTransform}
                             />
                           );
                         } else {

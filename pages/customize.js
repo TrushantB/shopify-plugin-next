@@ -107,26 +107,26 @@ function Customize() {
     await setImage(URL.createObjectURL(event.target.files[0]));
     let imageSize = event.target.files[0].size;
     imageSize = imageSize / 1024;
-    if(imageSize > 1024){
-     bookForPurchase.map((book) => {
-      if (book.id === selectedNotebook.id) {
-        const design = {
-          type: "image",
-          isDragging: false,
-          width: 300 / 3,
-          height: 350 / 3,
-          x: 100,
-          y: 100,
-          url: URL.createObjectURL(event.target.files[0]),
-        };
-        book.designs.push(design);
-        setSelectedNotebook({ ...selectedNotebook });
-        setChanges(true);
-      }
-    });
-  }else{
-    toast.error("Image size should be greater than 1 MB")
-  }
+    if (imageSize > 1024) {
+      bookForPurchase.map((book) => {
+        if (book.id === selectedNotebook.id) {
+          const design = {
+            type: "image",
+            isDragging: false,
+            width: 300 / 3,
+            height: 350 / 3,
+            x: 100,
+            y: 100,
+            url: URL.createObjectURL(event.target.files[0]),
+          };
+          book.designs.push(design);
+          setSelectedNotebook({ ...selectedNotebook });
+          setChanges(true);
+        }
+      });
+    } else {
+      toast.error("Image size should be greater than 1 MB")
+    }
   };
 
   const applyDesign = (bookDesign) => {

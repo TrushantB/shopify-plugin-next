@@ -69,8 +69,8 @@ const DesignTextView = ({
     onChange(_design, index);
   }
   const boundBoxFunc = (oldBox, newBox) => {
-    const isBoundaryX = 300 < newBox.width + newBox.x;
-    const isBoundaryY = 350 < newBox.height + newBox.y;
+    const isBoundaryX = 300 < newBox.width + newBox.x ? true : newBox.x < 8 ? true : false;
+    const isBoundaryY = 350 < newBox.height + newBox.y ? true : newBox.y < 0 ? true : false;
     if (newBox.width < 10 || newBox.height < 10 || isBoundaryX || isBoundaryY) {
       return oldBox;
     }
