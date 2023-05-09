@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Image, Transformer } from "react-konva";
 import useImage from "use-image";
 
@@ -20,6 +20,45 @@ const DesignImageView = ({
     }
   }, [selectedTransform]);
 
+  const onDragMove = (e) => {
+    const x = (e.target.x() + e.target.width()) > 300 ? 300 - e.target.width() : e.target.x() > 0 ? e.target.x() : 0;
+    const y = (e.target.y() + e.target.height()) > 350 ? 350 - e.target.height() : e.target.y() > 0 ? e.target.y() : 0;
+    shapeRef.current.x(x);
+    shapeRef.current.y(y);
+    const _design = {
+      ...design,
+      x,
+      y,
+    };
+    onChange(_design, index);
+  }
+  const onTransformEnd = (e) => {
+    const node = shapeRef.current;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+    node.scaleX(1);
+    node.scaleY(1);
+    const _design = {
+      ...design,
+      x: e.target.x(),
+      y: e.target.y(),
+      x: node.x(),
+      y: node.y(),
+      rotation: e.target.rotation(),
+      width: Math.max(5, node.width() * scaleX),
+      height: Math.max((node.height()) * scaleY),
+    };
+    onChange(_design, index);
+  }
+  const boundBoxFunc = (oldBox, newBox) => {
+    const isBoundaryX = 300 < newBox.width + newBox.x ? true : newBox.x < 8 ? true : false;
+    const isBoundaryY = 350 < newBox.height + newBox.y ? true : newBox.y < 0 ? true : false;
+    if (newBox.width < 10 || newBox.height < 10 || isBoundaryX || isBoundaryY) {
+      return oldBox;
+    }
+    return newBox;
+  }
+
   return (
     <React.Fragment>
       <Image
@@ -30,51 +69,17 @@ const DesignImageView = ({
         height={design.height}
         x={design.x}
         y={design.y}
-        onClick={onSelect}
-        onTap={onSelect}
-        onDragEnd={(e) => {
-          const _design = {
-            ...design,
-            x: e.target.x(),
-            y: e.target.y(),
-          };
-          onChange(_design, index);
+        onClick={(e) => {
+          onSelect(e, index);
         }}
-        onTransformEnd={(e) => {
-          // transformer is changing scale of the node
-          // and NOT its width or height
-          // but in the store we have only width and height
-          // to match the data better we will reset scale on transform end
-          const node = shapeRef.current;
-          const scaleX = node.scaleX();
-          const scaleY = node.scaleY();
-
-          // we will reset it back
-          node.scaleX(1);
-          node.scaleY(1);
-          const _design = {
-            ...design,
-            x: e.target.x(),
-            y: e.target.y(),
-            x: node.x(),
-            y: node.y(),
-            // set minimal value
-            width: Math.max(5, node.width() * scaleX),
-            height: Math.max(node.height() * scaleY),
-          };
-          onChange(_design, index);
-        }}
+        onDragMove={onDragMove}
+        onTransformEnd={onTransformEnd}
       />
-      {selectedTransform && ( //lectedIndex
+      {selectedTransform === index && ( //lectedIndex
         <Transformer
           ref={trRef}
-          boundBoxFunc={(oldBox, newBox) => {
-            // limit resize
-            if (newBox.width < 5 || newBox.height < 5) {
-              return oldBox;
-            }
-            return newBox;
-          }}
+          onDragMove={onDragMove}
+          boundBoxFunc={(oldBox, newBox) => boundBoxFunc(oldBox, newBox)}
         />
       )}
     </React.Fragment>
