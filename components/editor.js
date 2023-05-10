@@ -50,11 +50,11 @@ export default function Editor({
   };
 
   return (
-    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center h-screen overflow-y-scroll">
-      <div className="px-4  lg:px-10  h-full w-10/12 mx-auto">
+    <div className=" py-10 lg:py-0  flex items-center  justify-center">
+      <div className="px-4  lg:px-10  h-full w-10/12 mx-auto ">
         <div className="flex items-center justify-center pb-10 gap-x-3 ">
           <div>
-            <h5 className="flex justify-center items-center mb-2 text-2xl lg:text-3xl font-bold text-gray-800">
+            <h5 className="flex justify-center items-center my-2 text-2xl lg:text-3xl font-bold text-gray-800">
               CUSTOMISE YOUR NOTEBOOK
             </h5>
           </div>
@@ -138,7 +138,7 @@ export default function Editor({
           <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-4 pt-2">
             PICK YOUR DESIGN TEMPLATE
           </label>
-          <div className="grid gap-4 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-blue-300 overflow-y-scroll">
+          <div className="grid gap-4 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] scrollbar ">
             {designTemplates.map((design) => {
               return (
                 <div
@@ -161,7 +161,7 @@ export default function Editor({
           <div className="grid   my-3 py-3 pt-4 ">
             <div className="mb-2 w-full">
               <div className="mb-2  flex items-center flex-col flex-sm-row ">
-                <label className=" uppercase tracking-wide inline-block text-gray-700 text-xl font-bold w-3/12 ">
+                <label className=" uppercase tracking-wide inline-block text-gray-700 text-xl font-bold lg:w-3/12 py-4 lg:py-0">
                   Add Text
                 </label>
                 <div className="flex flex-col flex-sm-row items-center gap-3 sm:gap-0  text-center w-9/12   ">
@@ -176,7 +176,7 @@ export default function Editor({
                         setText("");
                       }
                     }}
-                    className=" border border-gray-300 text-black text-sm   focus:ring-blue-500 rounded focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                    className=" border border-gray-300 text-black text-sm   focus:ring-blue-500 rounded focus:border-blue-500 block w-full pt-3 pb-3 pl-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pr-[120px]"
                     placeholder="Enter your text here"
                     required
                   />
@@ -185,7 +185,7 @@ export default function Editor({
                       handleAddtext(text);
                       setText("");
                     }}
-                    className="bg-[#fbb900]  py-3 text-black sm:-ml-[130px] w-full sm:w-[initial]  md:py-3 px-5 rounded text-xs md:text-base  "
+                    className="bg-[#fbb900]  py-[14px] text-black sm:-ml-[130px] w-full sm:w-[initial]  md:py-[14px] px-[41px] rounded text-xs md:text-base"
                   >
                     ADD
                   </button>
