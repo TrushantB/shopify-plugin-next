@@ -50,7 +50,7 @@ export default function Editor({
   };
 
   return (
-    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center h-screen overflow-scroll">
+    <div className=" py-10 lg:py-0 min-h-0 lg:min-h-screen flex items-center  justify-center h-screen overflow-y-scroll">
       <div className="px-4  lg:px-10  h-full w-10/12 mx-auto">
         <div className="flex items-center justify-center pb-10 gap-x-3 ">
           <div>

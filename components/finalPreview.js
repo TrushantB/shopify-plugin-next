@@ -129,7 +129,7 @@ const FinalPreview = (props) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>
                     <img
-                      className="w-11/12 max-h-80 mx-auto object-cover object-center"
+                      className="w-9/12 min-h-[230px] max-h-[230px] h-full mx-auto object-cover object-center"
                       src={item.url}
                       alt="image"
                     />
