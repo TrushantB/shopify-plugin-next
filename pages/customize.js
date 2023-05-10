@@ -13,6 +13,7 @@ const Editor = dynamic(() => import("@/components/editor"), {
 });
 import { designTemplates } from "@/lib/constants";
 import { useRouter } from "next/router";
+import { generateString } from "@/lib/generateId";
 
 function Customize() {
   const router = useRouter();
@@ -23,8 +24,7 @@ function Customize() {
   const [loading, setLoading] = useState(false);
   const [changes, setChanges] = useState(false);
   const [imageSize, setImageSize] = useState(false);
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 
   const [bookForPurchase, setBookForPurchase] = useState([]);
 
@@ -48,7 +48,7 @@ function Customize() {
           Number(notebookDetails.specifications.quantity)
         )
       ).map((id) => ({
-        id,
+        id: generateString(14),
         url: sampleImage,
         isCustomizedDesign: true,
         designId: null,
@@ -60,7 +60,7 @@ function Customize() {
           sessionStorage.getItem("selectedId")
         );
         const selectedBook = data.result.resultNotebook.filter(
-          (item) => item.id === selectedNotebook.selectedNotebook
+          (item) => item.id === selectedNotebook?.selectedNotebook
         );
         setSelectedNotebook(selectedBook[0]);
         setBookForPurchase(data.result.resultNotebook);
@@ -107,7 +107,7 @@ function Customize() {
     await setImage(URL.createObjectURL(event.target.files[0]));
     let imageSize = event.target.files[0].size;
     imageSize = imageSize / 1024;
-    if (imageSize > 1024) {
+    if (true || imageSize > 1024) {
       bookForPurchase.map((book) => {
         if (book.id === selectedNotebook.id) {
           const design = {
@@ -158,7 +158,7 @@ function Customize() {
       book.designId = selectedNotebook.designId;
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
-      book.id = generateString(14);
+      // book.id = generateString(14);
     });
     let result = {
       product_id: generateString(14),
@@ -209,16 +209,6 @@ function Customize() {
     sessionStorage.removeItem('selectedId');
   };
 
-  function generateString(length) {
-    let result = " ";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-  }
-
   const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
@@ -235,6 +225,8 @@ function Customize() {
         designId: selectedNotebook.designId,
         url: selectedNotebook.url,
         id: 0,
+        previewURL: selectedNotebook.previewURL,
+
         ...rest,
       });
     } else {
@@ -244,6 +236,7 @@ function Customize() {
           designId: book.designId,
           url: book.url,
           designs: book.designs,
+          previewURL: book.previewURL,
           ...rest,
         });
       });

@@ -9,10 +9,10 @@ const BookCarousel = ({
   useEffect(() => {
     if (initialSlide === null || initialSlide === -1) {
       setInitialSlide(
-        bookForPurchase.findIndex((book) => book.id === selectedNotebook.id)
+        bookForPurchase.findIndex((book) => book.id === selectedNotebook?.id)
       );
     }
-  }, [selectedNotebook.id, bookForPurchase, initialSlide]);
+  }, [selectedNotebook?.id, bookForPurchase, initialSlide]);
   return (
     <div>
       {initialSlide !== null && initialSlide !== -1 && (
@@ -49,20 +49,18 @@ const BookCarousel = ({
               <div className="relative  p-3.5" key={idx}>
                 <>
                   <img
-                    className={`${
-                      book.id === selectedNotebook?.id
-                        ? "active"
-                        : "border-slate-400 border-dashed border-2"
-                    } w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center`}
+                    className={`${book.id === selectedNotebook?.id
+                      ? "active"
+                      : "border-slate-400 border-dashed border-2"
+                      } w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center`}
                     onClick={() => handleSelectedImageChange(book.id)}
-                    src={book.url}
+                    src={book.previewURL}
                   />
                   <span
-                    className={`${
-                      book.id === selectedNotebook?.id
-                        ? "bg-blue-600"
-                        : "bg-zinc-400"
-                    }  absolute left-0.5 top-1 py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
+                    className={`${book.id === selectedNotebook?.id
+                      ? "bg-blue-600"
+                      : "bg-zinc-400"
+                      }  absolute left-0.5 top-1 py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
                   >
                     {idx + 1}
                   </span>

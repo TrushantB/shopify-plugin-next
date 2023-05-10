@@ -21,6 +21,7 @@ export class URLImage extends Component {
     loadImage() {
         this.image = new window.Image();
         this.image.src = this.props.src;
+        this.image.alt = "image";
         this.image.addEventListener("load", this.handleLoad);
     }
     handleLoad = () => {

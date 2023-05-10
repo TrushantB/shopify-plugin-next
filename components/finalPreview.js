@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FadeLoader } from "react-spinners";
 import { Toaster, toast } from "react-hot-toast";
+import { createPDF } from "@/lib/generatePDF";
+import firebase from '../lib/firebase.js'
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState({});
   let [count, setCount] = useState();
   let [selected, setSelected] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [fileUrl, setFileUrl] = useState(null);
 
   const router = useRouter();
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem("result"));
-    setResult({ ...data.result });
+    const notebookDetails = JSON.parse(sessionStorage.getItem("notebookDetails"));
+    setResult({ ...data.result, specifications: notebookDetails.specifications });
     setCount(data.result.quantity);
     let count = 0;
     data.result.resultNotebook.map((item) => {
@@ -75,31 +79,29 @@ const FinalPreview = (props) => {
             "Access-Control-Allow-Origin": "*",
           },
         }).then((resp) => resp.json())
-        .then((result)=>{
-          count_item = result.item_count;
-          console.log(result);
-        });
+          .then((result) => {
+            count_item = result.item_count;
+          });
         const cartProduct = count_item + quantity;
-        console.log(cartProduct);
-        if(cartProduct <=100){
-        fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify(add_to_product_data),
-        }).then((resp) => {
-          if (resp.status === 200) {
-            window.location.replace("https://navneet.geexu.org/cart");
-            setLoading(false);
-            toast.success('Product successfully added');
-          }
-        });
-      }else{
-        setLoading(false);
-        setFlag(false)
-        toast.error('Cart can not store more than 100 products');
+        if (cartProduct <= 100) {
+          fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(add_to_product_data),
+          }).then((resp) => {
+            if (resp.status === 200) {
+              window.location.replace("https://navneet.geexu.org/cart");
+              setLoading(false);
+              toast.success('Product successfully added');
+            }
+          });
+        } else {
+          setLoading(false);
+          setFlag(false)
+          toast.error('Cart can not store more than 100 products');
         }
       } else {
         setLoading(false);
@@ -109,6 +111,34 @@ const FinalPreview = (props) => {
     } catch (err) {
     }
   };
+  const handleGeneratePDF = async () => {
+    const file = await createPDF(result);
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child("customize-book.pdf");
+
+    fileRef.put(file).then((snapshot) => {
+      console.log("File uploaded successfully");
+      fileRef.getDownloadURL().then(url => {
+        setFileUrl(url);
+      });
+    });
+  }
+  const handleDownload = () => {
+    if (!fileUrl) {
+      return;
+    }
+
+    fetch(fileUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "customize-book.pdf";
+        a.click();
+      });
+  };
+  console.log(result?.resultNotebook);
   return (
     <>
       <div className="content">
@@ -123,14 +153,14 @@ const FinalPreview = (props) => {
               {selected}/{count} NOTEBOOK SELECTED IN PACK
             </h3>
           </div>
-            {result && !loading ? (
-          <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-scroll flex-wrap sm:px-16 " >
-             { result?.resultNotebook?.map((item, index) => {
+          {result && !loading ? (
+            <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-scroll flex-wrap sm:px-16 " >
+              {result?.resultNotebook?.map((item, index) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>
                     <img
                       className="w-11/12 max-h-80 mx-auto object-cover object-center"
-                      src={item.url}
+                      src={item.previewURL || item.url}
                       alt="image"
                     />
                     {item.designId === null ? (
@@ -151,12 +181,12 @@ const FinalPreview = (props) => {
                       </button>
                     )}
                   </div>
-          
+
                 );
               })}
-              </div>
-            ) : (
-              <>
+            </div>
+          ) : (
+            <>
               <div className="flex items-center justify-center p-10">
                 <FadeLoader
                   color="#36d7b7"
@@ -166,13 +196,13 @@ const FinalPreview = (props) => {
                   radius={0}
                   width={3}
                 />
-                </div>
-              </>
-            )}
+              </div>
+            </>
+          )}
           <div className="flex justify-center items-center pt-4 pb-5 ">
             <div className="flex flex-col sm:flex-row justify-evenly md:justify-start col-span-3 gap-6 ">
               <a
-                onClick={()=>handleCloseButton(result.resultNotebook[0].id)}
+                onClick={() => handleCloseButton(result.resultNotebook[0].id)}
                 className="cursor-pointer border-2 font-bold  border-[#0035ff]  rounded text-base md:text-xl  px-24 text-center py-2.5 rounded-lg"
               >
                 CLOSE
@@ -191,10 +221,26 @@ const FinalPreview = (props) => {
                 </a>
               )}
             </div>
+            <button
+              onClick={handleGeneratePDF}
+              className="rounded-full m-3"
+            >
+              <i className="fa fa-upload mr-1"></i>
+              <span className="font-semibold text-sm">UPLOAD</span>
+            </button>
+            {fileUrl &&
+              <button
+                onClick={handleDownload}
+                className="rounded-full m-3"
+              >
+                <i className="fa fa-download mr-1"></i>
+                <span className="font-semibold text-sm">DOWNLOAD</span>
+              </button>
+            }
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </>
   );
 };
