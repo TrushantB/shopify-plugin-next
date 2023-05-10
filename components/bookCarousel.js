@@ -14,13 +14,13 @@ const BookCarousel = ({
     }
   }, [selectedNotebook.id, bookForPurchase, initialSlide]);
   return (
-    <div>
+    <div >
       {initialSlide !== null && initialSlide !== -1 && (
         <Slider
           className="pt-14 mx-lg-5 px-lg-4 px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
           focusOnSelect={true}
           initialSlide={initialSlide || 0}
-          variableWidth={true}
+          // variableWidth={true}
           slidesToShow={5}
           swipeToSlide={true}
           beforeChange={(prev, next) => {
@@ -62,7 +62,7 @@ const BookCarousel = ({
                       book.id === selectedNotebook?.id
                         ? "bg-blue-600"
                         : "bg-zinc-400"
-                    }  absolute left-0.5 top-1 py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
+                    }  absolute  left-[18%] top-[3%] lg:left-[5%] py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
                   >
                     {idx + 1}
                   </span>
