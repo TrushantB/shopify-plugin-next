@@ -30,7 +30,7 @@ const CanvasComponent = ({
 
     return (
         <>
-            <Stage width={300} height={350} ref={stageRef} className={className} key={book.id}>
+            <Stage width={300} height={350} ref={stageRef} className={`${className}`} key={book.id}>
                 <Layer  >
                     <Group>
                         <URLImage

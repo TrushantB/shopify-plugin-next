@@ -37,17 +37,17 @@ body {
   position: relative;
 }
 
-.carousel__images {
+.carousel_images {
   display: flex;
   max-width: 100%;
   overflow-x: hidden;
 }
 
-.carousel__image-selected {
+.carousel_image-selected {
   border: 3px solid #ffa700 !important;
 }
 
-.carousel__image {
+.carousel_image {
   margin-right: 10px;
   height: 150px;
   min-width: 150px;
@@ -57,7 +57,7 @@ body {
   background-size: cover;
 }
 
-.carousel__button {
+.carousel_button {
   position: absolute;
   top: 40%;
   background-color: white;
@@ -66,11 +66,11 @@ body {
   font-weight: bold;
 }
 
-.carousel__button-left {
+.carousel_button-left {
   left: 10px;
 }
 
-.carousel__button-right {
+.carousel_button-right {
   right: 10px;
 }
 /* img,
@@ -99,16 +99,16 @@ video {
 }
 .slick-next:before {
   content: "";
-  height: 1.5 rem;
+  height: 1.5rem;
   width: 1.5rem;
   display: block;
   color: #2a9fd8;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232a9fd8' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z' /%3E%3C/svg%3E");
   background-repeat: no-repeat;
 }
-.slick-next {
-  right: -22px;
-}
+/* .slick-next {
+  right: 22px;
+} */
 .slick-prev:before {
   content: "";
   height: 1.5rem;
@@ -118,10 +118,21 @@ video {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232a9fd8' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z' /%3E%3C/svg%3E");
   background-repeat: no-repeat;
 }
-.slick-prev {
-  left: -15;
+/* .slick-prev {
+  left: -15px;
+} */
+@media screen and (max-width:991px) {
+  .slick-next {
+    right: -12px;
+    top: 65%;
+  }
+  .slick-prev {
+    left: -12px;
+    top: 65%;
+    
+  }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .slick-prev {
     left: -37px;
   }
@@ -136,4 +147,7 @@ video {
 }
 .active {
   @apply hover:bg-blue-700 text-white font-bold border-blue-600 rounded border-2;
+}
+.activeColor{
+  border:2px solid rgb(57, 247, 181);
 }

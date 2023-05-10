@@ -6,9 +6,7 @@ const FinalPreviews = () => {
   return (
     <>
       <div className="wrapper">
-        {/* <Header /> */}
         <FinalPreview />
-        {/* <Footer /> */}
       </div>
     </>
   );

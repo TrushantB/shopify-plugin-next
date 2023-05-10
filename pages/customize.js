@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { FadeLoader } from "react-spinners";
 import toast, { Toaster } from 'react-hot-toast';
-const sampleImage =
-  "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
+const sampleImage = "/dummy-book-image.jpeg";
 
 const Designer = dynamic(() => import("@/components/designer"), {
   ssr: false,
@@ -249,7 +248,6 @@ function Customize() {
 
   return (
     <React.Fragment>
-      {/* <Header /> */}
       {!loading ? (
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <Designer
@@ -286,7 +284,6 @@ function Customize() {
           <h3>Adding product to cart</h3>
         </div>
       )}
-      {/* <Footer /> */}
     </React.Fragment>
   );
 }
