@@ -51,7 +51,7 @@ const Specification = () => {
         <div className=" bg-[#ffedc4] book  p-8  h-full flex items-center justify-center ">
           <Image src={cover} height={450} width={350} />
         </div>
-        <div className="py-16 px-14 h-screen mx-auto overflow-scroll">
+        <div className="py-16 px-14 h-screen mx-auto overflow-y-scroll">
           <div className="text-center mb-10 py-3  leading-10">
             <h4 className="font-bold text-2xl  lg:text-3xl text-gray-900">
               CHOOSE YOUR NOTEBOOK TYPE

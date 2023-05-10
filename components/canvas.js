@@ -1,5 +1,5 @@
 import { IMAGE, SPIRAL, SPIRAL_IMAGE } from "@/lib/constants";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Stage, Layer, Group } from "react-konva";
 import { URLImage } from "./utils";
 import DesignImageView from "./imageView";
@@ -27,10 +27,21 @@ const CanvasComponent = ({
         });
         setBookForPurchase([...bookForPurchase]);
     }
-
+    useEffect(() => {
+        if (selectedNotebook?.id === book?.id) {
+            console.log("Captured");
+            generatePreviewImage()
+        }
+    }, [selectedNotebook?.updatedAt])
     return (
         <>
-            <Stage width={300} height={350} ref={stageRef} className={`${className}`} key={book.id}>
+            <Stage
+                width={300}
+                height={350}
+                ref={stageRef}
+                className={`${className}`}
+                key={book.id}
+            >
                 <Layer  >
                     <Group>
                         <URLImage
@@ -84,7 +95,7 @@ const CanvasComponent = ({
                     )
                 }
             </Stage>
-            <button className={className} onClick={generatePreviewImage}>DONE</button>
+            {/* <button className={className} onClick={generatePreviewImage}>DONE</button> */}
         </>
     )
 }

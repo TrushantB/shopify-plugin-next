@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 const BookCarousel = ({
-  handleSelectedImageChange,
+  handleSelectedNotebook,
   bookForPurchase,
   selectedNotebook,
 }) => {
@@ -24,7 +24,7 @@ const BookCarousel = ({
           slidesToShow={5}
           swipeToSlide={true}
           beforeChange={(prev, next) => {
-            handleSelectedImageChange(next);
+            handleSelectedNotebook(next);
           }}
           responsive={[
             {
@@ -53,13 +53,12 @@ const BookCarousel = ({
                       ? "active"
                       : "border-slate-400 border-dashed border-2"
                       } w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center`}
-                    onClick={() => handleSelectedImageChange(book.id)}
                     src={book.previewURL}
                   />
                   <span
                     className={`${book.id === selectedNotebook?.id
-                        ? "bg-blue-600"
-                        : "bg-zinc-400"
+                      ? "bg-blue-600"
+                      : "bg-zinc-400"
                       }  absolute  left-[18%] top-[3%] lg:left-[5%] py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
                   >
                     {idx + 1}

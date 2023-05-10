@@ -138,7 +138,6 @@ const FinalPreview = (props) => {
         a.click();
       });
   };
-  console.log(result?.resultNotebook);
   return (
     <>
       <div className="content">

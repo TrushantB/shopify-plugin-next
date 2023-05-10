@@ -62,6 +62,9 @@ function Customize() {
           (item) => item.id === selectedNotebook?.selectedNotebook
         );
         setSelectedNotebook(selectedBook[0]);
+        setTimeout(() => {
+          setSelectedNotebook({ ...selectedBook[0], updatedAt: new Date() })
+        }, 100);
         setBookForPurchase(data.result.resultNotebook);
       } else {
         setBookForPurchase(bookSet);
@@ -94,13 +97,10 @@ function Customize() {
           isSelected: false,
         };
         book.designs.push(design);
-        setSelectedNotebook({ ...selectedNotebook });
+        setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
       }
     });
     setChanges(true);
-  };
-  const handleTextColor = (event, param) => {
-    setColor(param);
   };
   const handleAddImage = async (event) => {
     await setImage(URL.createObjectURL(event.target.files[0]));
@@ -119,7 +119,7 @@ function Customize() {
             url: URL.createObjectURL(event.target.files[0]),
           };
           book.designs.push(design);
-          setSelectedNotebook({ ...selectedNotebook });
+          setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
           setChanges(true);
         }
       });
@@ -127,6 +127,10 @@ function Customize() {
       toast.error("Image size should be greater than 1 MB")
     }
   };
+  const handleTextColor = (event, param) => {
+    setColor(param);
+  };
+
 
   const applyDesign = (bookDesign) => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
@@ -140,7 +144,17 @@ function Customize() {
           url: bookDesign.url,
           designId: bookDesign.id,
           isCustomizedDesign: false,
+          updatedAt: new Date()
         });
+        setTimeout(() => {
+          setSelectedNotebook({
+            ...selectedNotebook,
+            url: bookDesign.url,
+            designId: bookDesign.id,
+            isCustomizedDesign: false,
+            updatedAt: new Date()
+          })
+        }, 100);
       }
     });
     setChanges(true);
@@ -268,6 +282,8 @@ function Customize() {
             handleAddtext={handleAddtext}
             handleAddImage={handleAddImage}
             handleTextColor={handleTextColor}
+            selectedNotebook={selectedNotebook}
+            setSelectedNotebook={setSelectedNotebook}
           />
           <Toaster />
         </div>
