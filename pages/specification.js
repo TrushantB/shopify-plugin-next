@@ -1,9 +1,9 @@
 import Image from "next/image";
 import cover from "@/public/cover.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
-import {specification} from '../lib/constants'
+import { specification } from '../lib/constants'
 
 const Specification = () => {
   const [specifications, setSpecifications] = useState(specification.data);
@@ -42,7 +42,9 @@ const Specification = () => {
       router.push("/customize");
     }
   };
-
+  useEffect(() => {
+    sessionStorage.clear();
+  }, [])
   return (
     <>
       <div className=" items-center h-full  grid  grid-cols-1 lg:grid-cols-2">
@@ -93,7 +95,7 @@ const Specification = () => {
                               className="peer"
                               onChange={(e) => handleInputChange(e)}
                             />
-                            <Toaster/>
+                            <Toaster />
                           </>
                         ) : (
                           <>

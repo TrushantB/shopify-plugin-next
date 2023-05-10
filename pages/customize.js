@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { FadeLoader } from "react-spinners";
 import toast, { Toaster } from 'react-hot-toast';
-const sampleImage =
-  "http://www.ultimatesource.toys/wp-content/uploads/2013/11/dummy-image-square-1.jpg";
+const sampleImage = "/dummy-book-image.jpeg";
 
 const Designer = dynamic(() => import("@/components/designer"), {
   ssr: false,
@@ -13,6 +12,7 @@ const Editor = dynamic(() => import("@/components/editor"), {
 });
 import { designTemplates } from "@/lib/constants";
 import { useRouter } from "next/router";
+import { generateString } from "@/lib/generateId";
 
 function Customize() {
   const router = useRouter();
@@ -23,8 +23,7 @@ function Customize() {
   const [loading, setLoading] = useState(false);
   const [changes, setChanges] = useState(false);
   const [imageSize, setImageSize] = useState(false);
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 
   const [bookForPurchase, setBookForPurchase] = useState([]);
 
@@ -48,7 +47,7 @@ function Customize() {
           Number(notebookDetails.specifications.quantity)
         )
       ).map((id) => ({
-        id,
+        id: generateString(14),
         url: sampleImage,
         isCustomizedDesign: true,
         designId: null,
@@ -60,9 +59,12 @@ function Customize() {
           sessionStorage.getItem("selectedId")
         );
         const selectedBook = data.result.resultNotebook.filter(
-          (item) => item.id === selectedNotebook.selectedNotebook
+          (item) => item.id === selectedNotebook?.selectedNotebook
         );
         setSelectedNotebook(selectedBook[0]);
+        setTimeout(() => {
+          setSelectedNotebook({ ...selectedBook[0], updatedAt: new Date() })
+        }, 100);
         setBookForPurchase(data.result.resultNotebook);
       } else {
         setBookForPurchase(bookSet);
@@ -95,19 +97,16 @@ function Customize() {
           isSelected: false,
         };
         book.designs.push(design);
-        setSelectedNotebook({ ...selectedNotebook });
+        setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
       }
     });
     setChanges(true);
-  };
-  const handleTextColor = (event, param) => {
-    setColor(param);
   };
   const handleAddImage = async (event) => {
     await setImage(URL.createObjectURL(event.target.files[0]));
     let imageSize = event.target.files[0].size;
     imageSize = imageSize / 1024;
-    if (imageSize > 1024) {
+    if (true || imageSize > 1024) {
       bookForPurchase.map((book) => {
         if (book.id === selectedNotebook.id) {
           const design = {
@@ -120,7 +119,7 @@ function Customize() {
             url: URL.createObjectURL(event.target.files[0]),
           };
           book.designs.push(design);
-          setSelectedNotebook({ ...selectedNotebook });
+          setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
           setChanges(true);
         }
       });
@@ -128,6 +127,10 @@ function Customize() {
       toast.error("Image size should be greater than 1 MB")
     }
   };
+  const handleTextColor = (event, param) => {
+    setColor(param);
+  };
+
 
   const applyDesign = (bookDesign) => {
     setNotebookDetails({ ...notebookDetails, isApplyForAll: false });
@@ -141,7 +144,17 @@ function Customize() {
           url: bookDesign.url,
           designId: bookDesign.id,
           isCustomizedDesign: false,
+          updatedAt: new Date()
         });
+        setTimeout(() => {
+          setSelectedNotebook({
+            ...selectedNotebook,
+            url: bookDesign.url,
+            designId: bookDesign.id,
+            isCustomizedDesign: false,
+            updatedAt: new Date()
+          })
+        }, 100);
       }
     });
     setChanges(true);
@@ -158,7 +171,7 @@ function Customize() {
       book.designId = selectedNotebook.designId;
       book.isCustomizedDesign = selectedNotebook.isCustomizedDesign;
       book.designs = selectedNotebook.designs;
-      book.id = generateString(14);
+      // book.id = generateString(14);
     });
     let result = {
       product_id: generateString(14),
@@ -209,16 +222,6 @@ function Customize() {
     sessionStorage.removeItem('selectedId');
   };
 
-  function generateString(length) {
-    let result = " ";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-  }
-
   const handleResult = async () => {
     const resultNotebook = [];
     const { quantity, ...rest } = notebookDetails.specifications;
@@ -235,6 +238,8 @@ function Customize() {
         designId: selectedNotebook.designId,
         url: selectedNotebook.url,
         id: 0,
+        previewURL: selectedNotebook.previewURL,
+
         ...rest,
       });
     } else {
@@ -244,6 +249,7 @@ function Customize() {
           designId: book.designId,
           url: book.url,
           designs: book.designs,
+          previewURL: book.previewURL,
           ...rest,
         });
       });
@@ -276,6 +282,8 @@ function Customize() {
             handleAddtext={handleAddtext}
             handleAddImage={handleAddImage}
             handleTextColor={handleTextColor}
+            selectedNotebook={selectedNotebook}
+            setSelectedNotebook={setSelectedNotebook}
           />
           <Toaster />
         </div>

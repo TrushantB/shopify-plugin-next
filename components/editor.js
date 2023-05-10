@@ -10,7 +10,7 @@ export default function Editor({
   notebookDetails,
   handleAddtext,
   handleTextColor,
-  handleAddImage,
+  handleAddImage
 }) {
   const [text, setText] = useState("");
   const router = useRouter();
@@ -18,8 +18,8 @@ export default function Editor({
   const [color, setColor] = useState();
   const [fillColor, setFillColor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeColorIndex,setActiveColorIndex] = useState(0)
-  const defaultColor = ['#1c1c1c','#ef4444','#4d982c','#420420','#092c86'];
+  const [activeColorIndex, setActiveColorIndex] = useState(0)
+  const defaultColor = ['#1c1c1c', '#ef4444', '#4d982c', '#420420', '#092c86'];
 
   const ref = useRef(null);
   const handleColorPicker = () => {
@@ -138,7 +138,7 @@ export default function Editor({
           <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-4 pt-2">
             PICK YOUR DESIGN TEMPLATE
           </label>
-          <div className="grid gap-4 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] scrollbar ">
+          <div className="grid gap-3 lg:gap-3 md:gap-5 grid-cols-2  md:grid-cols-5 overflow-y-auto h-[240px] scrollbar ">
             {designTemplates.map((design) => {
               return (
                 <div
@@ -193,21 +193,21 @@ export default function Editor({
               </div>
 
               <div className="flex flex-wrap items-center py-4">
-              {defaultColor.map((color,index)=>{
-                return(
-                <div
-                key={index}
-                  onClick={(event) => {
-                    handleTextColor(event, color);
-                    setColor(color);
-                    setActiveColorIndex(index)
-                  }}
-                  className={`w-12 m-2 h-12 rounded-xl ${index==activeColorIndex? 'activeColor': ''}`}
-                  style={{backgroundColor:color}}
-                ></div>
-                )
-              })
-              }
+                {defaultColor.map((color, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={(event) => {
+                        handleTextColor(event, color);
+                        setColor(color);
+                        setActiveColorIndex(index)
+                      }}
+                      className={`w-12 m-2 h-12 rounded-xl ${index == activeColorIndex ? 'activeColor' : ''}`}
+                      style={{ backgroundColor: color }}
+                    ></div>
+                  )
+                })
+                }
                 <div className="flex flex-col">
                   {!fillColor ? (
                     <span onClick={handleColorPicker}>
