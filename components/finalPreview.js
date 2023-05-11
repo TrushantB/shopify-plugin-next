@@ -58,6 +58,8 @@ const FinalPreview = (props) => {
           {
             "title": "Navneet book",
             "price": "50.00",
+            "discounted_price": '30.00',
+            "original_price": '50.00',
             "position": 1,
             "inventory_quantity": 1,
           },
