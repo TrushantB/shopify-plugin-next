@@ -25,24 +25,18 @@ const Designer = ({
         book.designs[index] = data;
       }
     });
-    setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() })
+    setSelectedNotebook({ ...selectedNotebook })
     setBookForPurchase([...bookForPurchase]);
   };
 
   const handleSelectedNotebook = (newIdx) => {
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
-
-      setTimeout(() => {
-        setSelectedNotebook({ ...bookForPurchase[newIdx], updatedAt: new Date() })
-      }, 1000);
-
     }
   };
 
   const handleDeleteSelected = () => {
     selectedNotebook.designs.splice(selectedTransform, 1);
-    selectedNotebook.updatedAt = new Date();
     setSelectedTransform(null);
   }
 
@@ -62,22 +56,23 @@ const Designer = ({
         <div className="selected-image flex justify-center flex-col gap-10 items-center  ">
           {
             bookForPurchase.map((book, index) => {
-              return (
-                <CanvasComponent
-                  key={index}
-                  bookForPurchase={bookForPurchase}
-                  onChange={onChange}
-                  onSelect={onSelect}
-                  selectedTransform={selectedTransform}
-                  notebookDetails={notebookDetails}
-                  selectedNotebook={selectedNotebook}
-                  book={book}
-                  className={selectedNotebook?.id !== book.id ? 'd-none' : ''}
-                  setBookForPurchase={setBookForPurchase}
-                  setSelectedNotebook={setSelectedNotebook}
-                  handleDeleteSelected={handleDeleteSelected}
-                />
-              )
+              if (selectedNotebook?.id === book.id) {
+                return (
+                  <CanvasComponent
+                    key={index}
+                    bookForPurchase={bookForPurchase}
+                    onChange={onChange}
+                    onSelect={onSelect}
+                    selectedTransform={selectedTransform}
+                    notebookDetails={notebookDetails}
+                    selectedNotebook={selectedNotebook}
+                    book={book}
+                    setBookForPurchase={setBookForPurchase}
+                    setSelectedNotebook={setSelectedNotebook}
+                    handleDeleteSelected={handleDeleteSelected}
+                  />
+                )
+              }
 
             })
           }

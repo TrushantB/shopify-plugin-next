@@ -4,6 +4,7 @@ import { FadeLoader } from "react-spinners";
 import { Toaster, toast } from "react-hot-toast";
 import { createPDF } from "@/lib/generatePDF";
 import firebase from '../lib/firebase.js'
+import BookCanvas from "./bookCanvas.js";
 const FinalPreview = (props) => {
   const [flag, setFlag] = useState(false);
   let [result, setResult] = useState({});
@@ -11,6 +12,7 @@ const FinalPreview = (props) => {
   let [selected, setSelected] = useState(0);
   const [loading, setLoading] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
+  const [isApplyCaptured, setIsApplyCaptured] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -43,9 +45,9 @@ const FinalPreview = (props) => {
     router.push(`/customize`);
   };
 
-  const handleAddToCartButton = async () => {
-    setLoading(true)
-    setFlag(true);
+  const handleComplateIamgeCapturing = async () => {
+    setIsApplyCaptured(false);
+    handleGeneratePDF();
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -110,34 +112,36 @@ const FinalPreview = (props) => {
       }
     } catch (err) {
     }
+  }
+
+  const handleAddToCartButton = () => {
+    setFlag(true);
+    setLoading(true)
+    setIsApplyCaptured(true);
   };
+
+  const sendMail = async (url) => {
+    const response = await fetch("/api/sendgrid", {
+      method: "POST",
+      body: JSON.stringify({ url })
+    });
+    const jsonData = await response.json();
+  }
+
   const handleGeneratePDF = async () => {
     const file = await createPDF(result);
     const storageRef = firebase.storage().ref();
     const fileRef = storageRef.child("customize-book.pdf");
 
     fileRef.put(file).then((snapshot) => {
-      console.log("File uploaded successfully");
       fileRef.getDownloadURL().then(url => {
+        console.log("File uploaded successfully", url);
         setFileUrl(url);
+        sendMail(url);
       });
     });
   }
-  const handleDownload = () => {
-    if (!fileUrl) {
-      return;
-    }
 
-    fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "customize-book.pdf";
-        a.click();
-      });
-  };
   return (
     <>
       <div className="content">
@@ -146,22 +150,31 @@ const FinalPreview = (props) => {
             FINAL PREVIEW
           </h1>
         </div>
-        <div className="main">
+        <div className="main relative ">
           <div className="px-[12px] md:px-[70px] text-xl font-semibold my-4 ">
             <h3>
               {selected}/{count} NOTEBOOK SELECTED IN PACK
             </h3>
           </div>
-          {result && !loading ? (
-            <div className=" grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-scroll flex-wrap sm:px-16 " >
+          {result && (
+            <div className={`${loading ? 'opacity-5' : ''}  grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-1 md:gap-7 h-72 overflow-y-scroll flex-wrap sm:px-16 `} >
               {result?.resultNotebook?.map((item, index) => {
                 return (
                   <div className="flex items-center  flex-col " key={index}>
-                    <img
+                    <BookCanvas
+                      book={item}
+                      width={180}
+                      height={220}
+                      isApplyCaptured={isApplyCaptured}
+                      handleComplateIamgeCapturing={handleComplateIamgeCapturing}
+                      totalBooks={result?.resultNotebook.length}
+                      index={index}
+                    />
+                    {/* <img
                       className="w-9/12 min-h-[230px] max-h-[230px] h-full mx-auto object-cover object-center"
                       src={item.previewURL || item.url}
                       alt="image"
-                    />
+                    /> */}
                     {item.designId === null ? (
                       <button
                         onClick={(event) => handleModifyDesign(event, item.id)}
@@ -184,9 +197,10 @@ const FinalPreview = (props) => {
                 );
               })}
             </div>
-          ) : (
+          )}
+          {loading && (
             <>
-              <div className="flex items-center justify-center p-10">
+              <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
                   color="#36d7b7"
                   height={18}
@@ -220,22 +234,6 @@ const FinalPreview = (props) => {
                 </a>
               )}
             </div>
-            <button
-              onClick={handleGeneratePDF}
-              className="rounded-full m-3"
-            >
-              <i className="fa fa-upload mr-1"></i>
-              <span className="font-semibold text-sm">UPLOAD</span>
-            </button>
-            {fileUrl &&
-              <button
-                onClick={handleDownload}
-                className="rounded-full m-3"
-              >
-                <i className="fa fa-download mr-1"></i>
-                <span className="font-semibold text-sm">DOWNLOAD</span>
-              </button>
-            }
           </div>
         </div>
       </div>
