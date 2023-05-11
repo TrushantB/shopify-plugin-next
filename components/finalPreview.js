@@ -49,7 +49,7 @@ const FinalPreview = (props) => {
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
-        properties: result.resultNotebook,
+        properties: [],
         quantity: result.quantity,
         status: "active",
         vendor: "navneet",
