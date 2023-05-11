@@ -51,7 +51,7 @@ const FinalPreview = (props) => {
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
-        properties: result.resultNotebook,
+        properties: [],
         quantity: result.quantity,
         status: "active",
         vendor: "navneet",
@@ -174,8 +174,8 @@ const FinalPreview = (props) => {
                       className="w-9/12 min-h-[230px] max-h-[230px] h-full mx-auto object-cover object-center"
                       src={item.previewURL || item.url}
                       alt="image"
-                    /> */}
-                    {item.designId === null ? (
+                />*/}
+                    {item.designId === null && item.designs.length === 0 ? (
                       <button
                         onClick={(event) => handleModifyDesign(event, item.id)}
                         className=" text-center my-3 "

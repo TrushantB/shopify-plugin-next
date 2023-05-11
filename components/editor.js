@@ -19,7 +19,7 @@ export default function Editor({
   const [fillColor, setFillColor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeColorIndex, setActiveColorIndex] = useState(0)
-  const defaultColor = ['#1c1c1c', '#ef4444', '#4d982c', '#420420', '#092c86'];
+  const defaultColor = ['#1c1c1c', '#ef4444', '#4d982c', '#B0DAFF', '#F9D949'];
 
   const ref = useRef(null);
   const handleColorPicker = () => {
@@ -121,13 +121,13 @@ export default function Editor({
           className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
         // onClick={handleAddImage}
         >
-          <input
-            className="text-black p-2 "
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={(event) => handleAddImage(event)}
-          />
+          <div class="text-black p-2">
+    <label for="file-input" className="flex items-center cursor-pointer text-xl">
+        <img className="h-[30px] mr-3" alt="image" src="https://img.icons8.com/?size=512&id=RXegk50IKV5u&format=png"/>
+        <span>UPLOAD YOUR IMAGE</span>
+    </label>
+    <input className="d-none" id="file-input" type="file" onChange={(event) => handleAddImage(event)}/>
+</div>
         </div>
         <div>
           <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">

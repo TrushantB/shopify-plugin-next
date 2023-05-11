@@ -103,7 +103,7 @@ function Customize() {
     await setImage(URL.createObjectURL(event.target.files[0]));
     let imageSize = event.target.files[0].size;
     imageSize = imageSize / 1024;
-    if (true || imageSize > 1024) {
+    if (imageSize > 1024) {
       bookForPurchase.map((book) => {
         if (book.id === selectedNotebook.id) {
           const design = {
@@ -118,6 +118,7 @@ function Customize() {
           book.designs.push(design);
           setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
           setChanges(true);
+          // console.log();
         }
       });
     } else {
@@ -267,6 +268,8 @@ function Customize() {
             handleAllClearDesign={handleAllClearDesign}
             notebookDetails={notebookDetails}
             setBookForPurchase={setBookForPurchase}
+            color={color}
+
           />
           <Editor
             designTemplates={designTemplates}
