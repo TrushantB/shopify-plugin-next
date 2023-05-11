@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DesignAction from "./designAction";
 import BookCarousel from "./bookCarousel";
 import CanvasComponent from "./canvas";
@@ -12,13 +12,19 @@ const Designer = ({
   handleClearDesign,
   notebookDetails,
   setBookForPurchase,
+  color
 }) => {
   const [selectedTransform, setSelectedTransform] = useState(null);
 
   const onSelect = (event, index) => {
     setSelectedTransform(index === selectedTransform ? null : index);
   };
-
+useEffect(()=>{
+  if(selectedTransform !== null && selectedNotebook.designs[selectedTransform]?.type == 'text'){
+    selectedNotebook.designs[selectedTransform].color = color;
+    setSelectedNotebook({...selectedNotebook})
+  } 
+},[color])
   const onChange = (data, index) => {
     bookForPurchase.map((book) => {
       if (selectedNotebook.id === book.id) {

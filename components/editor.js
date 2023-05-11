@@ -19,7 +19,7 @@ export default function Editor({
   const [fillColor, setFillColor] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeColorIndex, setActiveColorIndex] = useState(0)
-  const defaultColor = ['#1c1c1c', '#ef4444', '#4d982c', '#420420', '#092c86'];
+  const defaultColor = ['#1c1c1c', '#ef4444', '#4d982c', '#B0DAFF', '#F9D949'];
 
   const ref = useRef(null);
   const handleColorPicker = () => {

@@ -274,6 +274,8 @@ function Customize() {
             handleAllClearDesign={handleAllClearDesign}
             notebookDetails={notebookDetails}
             setBookForPurchase={setBookForPurchase}
+            color={color}
+            
           />
           <Editor
             designTemplates={designTemplates}
