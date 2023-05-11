@@ -121,13 +121,13 @@ export default function Editor({
           className="flex border-2 border-[#fbc11c] border-dashed rounded text-white items-center justify-center text-center gap-2 p-1 cursor-pointer"
         // onClick={handleAddImage}
         >
-          <input
-            className="text-black p-2 "
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={(event) => handleAddImage(event)}
-          />
+          <div class="text-black p-2">
+    <label for="file-input" className="flex items-center cursor-pointer text-xl">
+        <img className="h-[30px] mr-3" alt="image" src="https://img.icons8.com/?size=512&id=RXegk50IKV5u&format=png"/>
+        <span>UPLOAD YOUR IMAGE</span>
+    </label>
+    <input className="d-none" id="file-input" type="file" onChange={(event) => handleAddImage(event)}/>
+</div>
         </div>
         <div>
           <label className="flex justify-center items-center uppercase tracking-wide text-gray-700 text-xl font-bold mb-2 pt-10">

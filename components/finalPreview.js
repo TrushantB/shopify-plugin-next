@@ -20,7 +20,7 @@ const FinalPreview = (props) => {
     setCount(data.result.quantity);
     let count = 0;
     data.result.resultNotebook.map((item) => {
-      if (item.designId === null) {
+      if (item.designId === null ) {
         setFlag(true);
       } else {
         setSelected(++count);
@@ -58,8 +58,6 @@ const FinalPreview = (props) => {
           {
             "title": "Navneet book",
             "price": "50.00",
-            "discounted_price": '30.00',
-            "original_price": '50.00',
             "position": 1,
             "inventory_quantity": 1,
           },
@@ -164,7 +162,7 @@ const FinalPreview = (props) => {
                       src={item.previewURL || item.url}
                       alt="image"
                     />
-                    {item.designId === null ? (
+                    {item.designId === null && item.designs.length === 0? (
                       <button
                         onClick={(event) => handleModifyDesign(event, item.id)}
                         className=" text-center my-3 "
