@@ -93,6 +93,7 @@ function Customize() {
           color: color,
           isSelected: false,
         };
+        book.designId = generateString(14);
         book.designs.push(design);
         setSelectedNotebook({ ...selectedNotebook });
       }
@@ -115,9 +116,11 @@ function Customize() {
             y: 100,
             url: URL.createObjectURL(event.target.files[0]),
           };
+          book.designId = generateString(14);
           book.designs.push(design);
-          setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date() });
+          setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date()});
           setChanges(true);
+          console.log({selectedNotebook});
           // console.log();
         }
       });
