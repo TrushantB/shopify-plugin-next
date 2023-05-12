@@ -97,7 +97,6 @@ const FinalPreview = (props) => {
              handleGeneratePDF();
               // window.location.replace("https://navneet.geexu.org/cart");
               // setLoading(false);
-              toast.success('Product successfully added');
             }
           });
         } else {
@@ -143,6 +142,7 @@ const FinalPreview = (props) => {
         setFileUrl(url);
         sendMail(url);
         setLoading(false);
+        toast.success('Product successfully added');
         window.location.replace("https://navneet.geexu.org/cart");
       });
     });
