@@ -113,13 +113,17 @@ const FinalPreview = (props) => {
     }
   }
 
-  const handleAddToCartButton = async() => {
+  const handleAddToCartButton = async () => {
     setLoading(true)
-    setIsApplyCaptured(true);
     setFlag(true);
     await handleGeneratePDF();
 
   };
+  useEffect(() => {
+    if (loading) {
+      setIsApplyCaptured(true);
+    }
+  }, [loading])
 
   const sendMail = async (url) => {
     const response = await fetch("/api/sendgrid", {
@@ -142,15 +146,19 @@ const FinalPreview = (props) => {
       });
     });
   }
+  console.log(isApplyCaptured);
 
   return (
     <>
       <div className="content">
-        <div>
-          <h1 className="flex justify-center items-center mb-4 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
-            FINAL PREVIEW
-          </h1>
-        </div>
+        {
+          isApplyCaptured &&
+          <div>
+            <h1 className="flex justify-center items-center mb-4 text-2xl lg:text-3xl pt-10 font-bold text-gray-800">
+              FINAL PREVIEW
+            </h1>
+          </div>
+        }
         <div className="main relative ">
           <div className="px-[12px] md:px-[70px] text-xl font-semibold my-4 ">
             <h3>
@@ -199,7 +207,9 @@ const FinalPreview = (props) => {
               })}
             </div>
           )}
+<<<<<<< feature/konva-changes
           {(loading || isApplyCaptured ) && (
+>>>>>>> main
             <>
               <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
