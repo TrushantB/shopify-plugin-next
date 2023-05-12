@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import BookCanvas from "./bookCanvas";
 const BookCarousel = ({
   handleSelectedNotebook,
   bookForPurchase,
   selectedNotebook,
 }) => {
   const [initialSlide, setInitialSlide] = useState(null);
+
   useEffect(() => {
     if (initialSlide === null || initialSlide === -1) {
       setInitialSlide(
@@ -13,6 +15,7 @@ const BookCarousel = ({
       );
     }
   }, [selectedNotebook?.id, bookForPurchase, initialSlide]);
+
   return (
     <div >
       {initialSlide !== null && initialSlide !== -1 && (
@@ -48,12 +51,14 @@ const BookCarousel = ({
             bookForPurchase.map((book, idx) => (
               <div className="relative  p-3.5" key={idx}>
                 <>
-                  <img
-                    className={`${book.id === selectedNotebook?.id
-                      ? "active"
-                      : "border-slate-400 border-dashed border-2"
-                      } w-14 h-16 sm:w-24 sm:h-28 md:w-20 mx-auto md:h-28 object-cover flex justify-center items-center`}
-                    src={book.previewURL}
+                  <BookCanvas
+                    book={book}
+                    height={120}
+                    width={100}
+                    index={idx}
+                    totalBooks={bookForPurchase.length}
+                    handleComplateIamgeCapturing={() => { }}
+                    isApplyCaptured={false}
                   />
                   <span
                     className={`${book.id === selectedNotebook?.id

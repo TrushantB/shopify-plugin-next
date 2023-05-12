@@ -75,7 +75,7 @@ const DesignImageView = ({
         onDragMove={onDragMove}
         onTransformEnd={onTransformEnd}
       />
-      {selectedTransform === index && ( //lectedIndex
+      {selectedTransform === index && (
         <Transformer
           ref={trRef}
           onDragMove={onDragMove}

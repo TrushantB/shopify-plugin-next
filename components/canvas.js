@@ -6,40 +6,19 @@ import DesignImageView from "./imageView";
 import DesignTextView from "./textView";
 
 const CanvasComponent = ({
-    bookForPurchase,
     onChange,
     onSelect,
     selectedTransform,
     notebookDetails,
-    selectedNotebook,
     book,
-    className,
-    setBookForPurchase
 }) => {
     const stageRef = useRef();
-    const generatePreviewImage = () => {
-        const dataURL = stageRef.current.toDataURL();
-        bookForPurchase.map((bookItem) => {
-            if (bookItem.id === selectedNotebook.id) {
-                bookItem.previewURL = dataURL;
-                return bookItem
-            }
-        });
-        setBookForPurchase([...bookForPurchase]);
-    }
-    useEffect(() => {
-        if (selectedNotebook?.id === book?.id) {
-            console.log("Captured");
-            generatePreviewImage()
-        }
-    }, [selectedNotebook?.updatedAt])
     return (
         <>
             <Stage
                 width={300}
                 height={350}
                 ref={stageRef}
-                className={`${className}`}
                 key={book.id}
             >
                 <Layer  >
@@ -95,7 +74,6 @@ const CanvasComponent = ({
                     )
                 }
             </Stage>
-            {/* <button className={className} onClick={generatePreviewImage}>DONE</button> */}
         </>
     )
 }

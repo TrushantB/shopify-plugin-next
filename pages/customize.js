@@ -62,9 +62,6 @@ function Customize() {
           (item) => item.id === selectedNotebook?.selectedNotebook
         );
         setSelectedNotebook(selectedBook[0]);
-        setTimeout(() => {
-          setSelectedNotebook({ ...selectedBook[0], updatedAt: new Date() })
-        }, 100);
         setBookForPurchase(data.result.resultNotebook);
       } else {
         setBookForPurchase(bookSet);
@@ -97,7 +94,7 @@ function Customize() {
           isSelected: false,
         };
         book.designs.push(design);
-        setSelectedNotebook({ ...selectedNotebook, updatedAt: new Date()});
+        setSelectedNotebook({ ...selectedNotebook });
       }
     });
     setChanges(true);
@@ -239,8 +236,6 @@ function Customize() {
         designId: selectedNotebook.designId,
         url: selectedNotebook.url,
         id: 0,
-        previewURL: selectedNotebook.previewURL,
-
         ...rest,
       });
     } else {
@@ -250,7 +245,6 @@ function Customize() {
           designId: book.designId,
           url: book.url,
           designs: book.designs,
-          previewURL: book.previewURL,
           ...rest,
         });
       });
@@ -275,7 +269,7 @@ function Customize() {
             notebookDetails={notebookDetails}
             setBookForPurchase={setBookForPurchase}
             color={color}
-            
+
           />
           <Editor
             designTemplates={designTemplates}
