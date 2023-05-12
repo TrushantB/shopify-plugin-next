@@ -47,6 +47,7 @@ const FinalPreview = (props) => {
 
   const handleComplateIamgeCapturing = async () => {
     setIsApplyCaptured(false);
+    handleGeneratePDF();
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -116,7 +117,6 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = async () => {
     setLoading(true)
     setFlag(true);
-    await handleGeneratePDF();
 
   };
   useEffect(() => {
@@ -207,9 +207,7 @@ const FinalPreview = (props) => {
               })}
             </div>
           )}
-<<<<<<< feature/konva-changes
           {(loading || isApplyCaptured ) && (
->>>>>>> main
             <>
               <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
