@@ -47,7 +47,6 @@ const FinalPreview = (props) => {
 
   const handleComplateIamgeCapturing = async () => {
     setIsApplyCaptured(false);
-    handleGeneratePDF();
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -95,6 +94,7 @@ const FinalPreview = (props) => {
             body: JSON.stringify(add_to_product_data),
           }).then(async (resp) => {
             if (resp.status === 200) {
+             handleGeneratePDF();
               // window.location.replace("https://navneet.geexu.org/cart");
               setLoading(false);
               toast.success('Product successfully added');
@@ -143,6 +143,7 @@ const FinalPreview = (props) => {
         console.log("File uploaded successfully", url);
         setFileUrl(url);
         sendMail(url);
+        window.location.replace("https://navneet.geexu.org/cart");
       });
     });
   }
