@@ -92,9 +92,9 @@ const FinalPreview = (props) => {
               "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify(add_to_product_data),
-          }).then((resp) => {
+          }).then(async (resp) => {
             if (resp.status === 200) {
-              handleGeneratePDF();
+              await handleGeneratePDF();
               window.location.replace("https://navneet.geexu.org/cart");
               setLoading(false);
               toast.success('Product successfully added');
@@ -198,7 +198,7 @@ const FinalPreview = (props) => {
               })}
             </div>
           )}
-          {loading && (
+          {(loading || isApplyCaptured ) && (
             <>
               <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
