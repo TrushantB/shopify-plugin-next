@@ -106,6 +106,7 @@ const FinalPreview = (props) => {
         }
       } else {
         setFlag(false)
+        setLoading(false);
         toast.error('Invalid cart');
       }
     } catch (err) {
@@ -147,8 +148,6 @@ const FinalPreview = (props) => {
       });
     });
   }
-  console.log(isApplyCaptured);
-
   return (
     <>
       <div className="content">
@@ -208,7 +207,7 @@ const FinalPreview = (props) => {
               })}
             </div>
           )}
-          {(loading || isApplyCaptured ) && (
+          {(loading) && (
             <>
               <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
