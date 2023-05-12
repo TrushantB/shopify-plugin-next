@@ -95,7 +95,7 @@ const FinalPreview = (props) => {
             body: JSON.stringify(add_to_product_data),
           }).then(async (resp) => {
             if (resp.status === 200) {
-              window.location.replace("https://navneet.geexu.org/cart");
+              // window.location.replace("https://navneet.geexu.org/cart");
               setLoading(false);
               toast.success('Product successfully added');
             }
