@@ -123,7 +123,7 @@ function Customize() {
         }
       });
     } else {
-      toast.error("Image size should be greater than 1 MB")
+      toast.error("Image size should be greater than 100 KB")
     }
   };
   const handleTextColor = (event, param) => {
