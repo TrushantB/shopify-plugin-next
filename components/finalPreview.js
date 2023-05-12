@@ -96,7 +96,7 @@ const FinalPreview = (props) => {
             if (resp.status === 200) {
              handleGeneratePDF();
               // window.location.replace("https://navneet.geexu.org/cart");
-              setLoading(false);
+              // setLoading(false);
               toast.success('Product successfully added');
             }
           });
@@ -106,7 +106,6 @@ const FinalPreview = (props) => {
           toast.error('Cart can not store more than 100 products');
         }
       } else {
-        setLoading(false);
         setFlag(false)
         toast.error('Invalid cart');
       }
@@ -143,6 +142,7 @@ const FinalPreview = (props) => {
         console.log("File uploaded successfully", url);
         setFileUrl(url);
         sendMail(url);
+        setLoading(false);
         window.location.replace("https://navneet.geexu.org/cart");
       });
     });
