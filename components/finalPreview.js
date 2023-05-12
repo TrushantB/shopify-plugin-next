@@ -95,9 +95,12 @@ const FinalPreview = (props) => {
           }).then(async (resp) => {
             if (resp.status === 200) {
               await handleGeneratePDF();
-              window.location.replace("https://navneet.geexu.org/cart");
-              setLoading(false);
-              toast.success('Product successfully added');
+              setTimeout(()=>{
+                window.location.replace("https://navneet.geexu.org/cart");
+                setLoading(false);
+                toast.success('Product successfully added');
+              },1000)
+
             }
           });
         } else {
