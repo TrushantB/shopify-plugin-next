@@ -39,6 +39,7 @@ useEffect(()=>{
     if (bookForPurchase && bookForPurchase.length > 0) {
       setSelectedNotebook(bookForPurchase[newIdx]);
     }
+    setSelectedTransform(null);
   };
 
   const handleDeleteSelected = () => {

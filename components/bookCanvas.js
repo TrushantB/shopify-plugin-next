@@ -12,7 +12,8 @@ const BookCanvas = ({
     isApplyCaptured = false,
     handleComplateIamgeCapturing,
     totalBooks,
-    index
+    index,
+    className
 }) => {
     const stageRef = useRef();
     useEffect(() => {
@@ -28,7 +29,7 @@ const BookCanvas = ({
         }
     }, [isApplyCaptured])
     return (
-        <>
+        <div className={className}>
             <Stage
                 width={width}
                 height={height}
@@ -92,7 +93,7 @@ const BookCanvas = ({
                     </Group>
                 </Layer>
             </Stage>
-        </>
+        </div>
     )
 }
 export default BookCanvas;

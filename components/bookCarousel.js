@@ -7,7 +7,7 @@ const BookCarousel = ({
   selectedNotebook,
 }) => {
   const [initialSlide, setInitialSlide] = useState(null);
-
+  const [selectedIndex,setSelectedIndex] = useState(0);
   useEffect(() => {
     if (initialSlide === null || initialSlide === -1) {
       setInitialSlide(
@@ -28,21 +28,22 @@ const BookCarousel = ({
           swipeToSlide={true}
           beforeChange={(prev, next) => {
             handleSelectedNotebook(next);
+            // setSelectedIndex(next);
           }}
           responsive={[
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                initialSlide: 4,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                initialSlide: 3,
               },
             },
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 2,
+                slidesToScroll: 2,
               },
             },
           ]}
@@ -51,6 +52,7 @@ const BookCarousel = ({
             bookForPurchase.map((book, idx) => (
               <div className="relative  p-3.5" key={idx}>
                 <>
+                {/* const className = {selectedIndex===idx ? 'active':'' } */}
                   <BookCanvas
                     book={book}
                     height={120}
@@ -59,6 +61,7 @@ const BookCarousel = ({
                     totalBooks={bookForPurchase.length}
                     handleComplateIamgeCapturing={() => { }}
                     isApplyCaptured={false}
+                    className={`${book.id === selectedNotebook?.id ? "active": "border-dashed border-2 w-fit bg-zinc-400" }` }
                   />
                   <span
                     className={`${book.id === selectedNotebook?.id
