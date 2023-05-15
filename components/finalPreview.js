@@ -15,6 +15,7 @@ const FinalPreview = (props) => {
   const [loaderColor, setLoaderColor] = useState('#36d7b7');
   const [loaderMessage, setLoaderMessage] = useState();
   const [isApplyCaptured, setIsApplyCaptured] = useState(false);
+  const [cartCount,setCartCount] = useState();
 
   const router = useRouter();
   useEffect(() => {
@@ -79,19 +80,19 @@ const FinalPreview = (props) => {
       console.log(cartId);
       if (cartId.length !== 0) { 
         console.log('getting cookie'); 
-        setLoaderMessage('Checking cart storage');
-        setLoaderColor('#cc9b14')
-        await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }).then((resp) => resp.json())
-          .then((result) => {
-            count_item = result.item_count;
-          });
-        const cartProduct = count_item + quantity;
+        // setLoaderMessage('Checking cart storage');
+        // setLoaderColor('#cc9b14')
+        // await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        // }).then((resp) => resp.json())
+        //   .then((result) => {
+        //     count_item = result.item_count;
+        //   });
+        const cartProduct = cartCount + quantity;
         if (cartProduct <= 100) {
         setLoaderMessage('Adding product to cart');
           setLoaderColor('#14cc14')
@@ -129,8 +130,20 @@ const FinalPreview = (props) => {
     setLoading(true)
     setFlag(true);
     setLoaderMessage('Creating image for PDF');
-    setLoaderColor('#c1c1c1');
+    setLoaderColor('#ab1830');
+    await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  }).then((resp) => resp.json())
+    .then((result) => {
+      count_item = result.item_count;
+      setCartCount(result.item_count)
+    });
   };
+  console.log('cart count',cartCount)
   useEffect(() => {
     if (loading) {
       setIsApplyCaptured(true);
