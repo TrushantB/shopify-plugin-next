@@ -93,6 +93,7 @@ const FinalPreview = (props) => {
         //     count_item = result.item_count;
         //   });
         const cartProduct = cartCount + quantity;
+        console.log(cartCount,quantity);
         if (cartProduct <= 100) {
         setLoaderMessage('Adding product to cart');
           setLoaderColor('#14cc14')
