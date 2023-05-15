@@ -72,7 +72,8 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
-      if (cartId.length !== 0) {
+      if (cartId.length !== 0) { 
+        console.log('getting cookie'); 
         await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
           method: "GET",
           headers: {
@@ -83,6 +84,8 @@ const FinalPreview = (props) => {
           .then((result) => {
             count_item = result.item_count;
           });
+        console.log('checking cart quantity'); 
+
         const cartProduct = count_item + quantity;
         if (cartProduct <= 100) {
           fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
@@ -95,6 +98,8 @@ const FinalPreview = (props) => {
           }).then(async (resp) => {
             if (resp.status === 200) {
              handleGeneratePDF();
+        console.log('add product in cart'); 
+
               // window.location.replace("https://navneet.geexu.org/cart");
               // setLoading(false);
             }
@@ -116,7 +121,6 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = async () => {
     setLoading(true)
     setFlag(true);
-
   };
   useEffect(() => {
     if (loading) {
@@ -144,6 +148,8 @@ const FinalPreview = (props) => {
         sendMail(url);
         setLoading(false);
         toast.success('Product successfully added');
+        console.log('successfull'); 
+
         window.location.replace("https://navneet.geexu.org/cart");
       });
     });
