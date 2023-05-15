@@ -13,6 +13,7 @@ const FinalPreview = (props) => {
   const [loading, setLoading] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
   const [loaderColor, setLoaderColor] = useState('#36d7b7');
+  const [loaderMessage, setLoaderMessage] = useState();
   const [isApplyCaptured, setIsApplyCaptured] = useState(false);
 
   const router = useRouter();
@@ -78,7 +79,7 @@ const FinalPreview = (props) => {
       console.log(cartId);
       if (cartId.length !== 0) { 
         console.log('getting cookie'); 
-        toast.success('Checking cart storage');
+        setLoaderMessage('Checking cart storage');
         setLoaderColor('#cc9b14')
         await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
           method: "GET",
@@ -92,8 +93,8 @@ const FinalPreview = (props) => {
           });
         const cartProduct = count_item + quantity;
         if (cartProduct <= 100) {
-          toast.success('Adding product to cart');
-          setLoaderColor('#cc9b14')
+        setLoaderMessage('Adding product to cart');
+          setLoaderColor('#14cc14')
           fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
             method: "POST",
             headers: {
@@ -127,8 +128,7 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = async () => {
     setLoading(true)
     setFlag(true);
-    console.log('add to cart');
-    toast.success('Creating image for PDF')
+    setLoaderMessage('Creating image for PDF');
     setLoaderColor('#c1c1c1');
   };
   useEffect(() => {
@@ -231,6 +231,7 @@ const FinalPreview = (props) => {
                   radius={0}
                   width={3}
                 />
+                <span>{loaderMessage}</span>
               </div>
             </>
           )}
