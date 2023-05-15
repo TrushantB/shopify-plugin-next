@@ -72,7 +72,7 @@ const FinalPreview = (props) => {
     };
     try {
       const cookies = document.cookie.split("; ");
-      let count_item;
+      // let count_item;
       let quantity = parseInt(add_to_product_data.product.quantity);
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
@@ -132,8 +132,8 @@ const FinalPreview = (props) => {
     setLoaderMessage('Creating image for PDF');
     setLoaderColor('#ab1830');
     const cookies = document.cookie.split("; ");
-    let count_item;
-    let quantity = parseInt(add_to_product_data.product.quantity);
+    // let count_item;
+    // let quantity = parseInt(add_to_product_data.product.quantity);
     const cartId = cookies.filter(
       (element) => element.substring(0, 4) === "cart"
     );
@@ -145,7 +145,7 @@ const FinalPreview = (props) => {
     },
   }).then((resp) => resp.json())
     .then((result) => {
-      count_item = result.item_count;
+      // count_item = result.item_count;
       setCartCount(result.item_count)
     });
   };
