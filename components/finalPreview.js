@@ -129,9 +129,6 @@ const FinalPreview = (props) => {
 
   const handleAddToCartButton = async () => {
     setLoading(true)
-    setFlag(true);
-    setLoaderMessage('Creating image for PDF');
-    setLoaderColor('#ab1830');
     const cookies = document.cookie.split("; ");
     // let count_item;
     // let quantity = parseInt(add_to_product_data.product.quantity);
@@ -150,6 +147,10 @@ const FinalPreview = (props) => {
       setCartCount(result.item_count)
     });
   };
+    setFlag(true);
+    setLoaderMessage('Creating image for PDF');
+    setLoaderColor('#ab1830');
+
   console.log('cart count',cartCount)
   useEffect(() => {
     if (loading) {
