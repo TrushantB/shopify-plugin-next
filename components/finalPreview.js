@@ -222,7 +222,8 @@ const FinalPreview = (props) => {
           )}
           {(loading) && (
             <>
-              <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
+              <div className=" absolute z-10 top-1/3 left-1/3 right-1/3 flex items-center justify-center p-12">
+                <div>
                 <FadeLoader
                   color={loaderColor}
                   height={18}
@@ -231,8 +232,9 @@ const FinalPreview = (props) => {
                   radius={0}
                   width={3}
                 />
-                <span>{loaderMessage}</span>
-              </div>
+                <span className="relative font-bold text-black">{loaderMessage}</span>
+                </div>
+                </div>
             </>
           )}
           <div className="flex justify-center items-center pt-4 pb-5 ">
