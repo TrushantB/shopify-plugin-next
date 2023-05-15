@@ -11,9 +11,9 @@ const Specification = () => {
   const [specificationValues, setSpecificationValues] = useState(specification.defaultValues);
   const router = useRouter();
   const handleChange = (event) => {
-    if (event.target.id >= 25) {
+    if(event.target.id > 24){
       setIsMore(true);
-    } else {
+      }else if(event.target.id<=24){
       setIsMore(false);
     }
     setSpecificationValues({
@@ -42,6 +42,7 @@ const Specification = () => {
       router.push("/customize");
     }
   };
+
   useEffect(() => {
     sessionStorage.clear();
   }, [])
