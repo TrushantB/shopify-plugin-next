@@ -15,7 +15,6 @@ const FinalPreview = (props) => {
   const [loaderColor, setLoaderColor] = useState('#36d7b7');
   const [loaderMessage, setLoaderMessage] = useState();
   const [isApplyCaptured, setIsApplyCaptured] = useState(false);
-  const [cartCount,setCartCount] = useState();
 
   const router = useRouter();
   useEffect(() => {
@@ -72,7 +71,7 @@ const FinalPreview = (props) => {
     };
     try {
       const cookies = document.cookie.split("; ");
-      // let count_item;
+      let count_item;
       let quantity = parseInt(add_to_product_data.product.quantity);
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
@@ -80,20 +79,19 @@ const FinalPreview = (props) => {
       console.log(cartId);
       if (cartId.length !== 0) { 
         console.log('getting cookie'); 
-        // setLoaderMessage('Checking cart storage');
-        // setLoaderColor('#cc9b14')
-        // await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
-        //   method: "GET",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     "Access-Control-Allow-Origin": "*",
-        //   },
-        // }).then((resp) => resp.json())
-        //   .then((result) => {
-        //     count_item = result.item_count;
-        //   });
-        const cartProduct = cartCount + quantity;
-        console.log(cartCount,quantity);
+        setLoaderMessage('Checking cart storage');
+        setLoaderColor('#cc9b14')
+        await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }).then((resp) => resp.json())
+          .then((result) => {
+            count_item = result.item_count;
+          });
+        const cartProduct = count_item + quantity;
         if (cartProduct <= 100) {
         setLoaderMessage('Adding product to cart');
           setLoaderColor('#14cc14')
@@ -129,29 +127,10 @@ const FinalPreview = (props) => {
 
   const handleAddToCartButton = async () => {
     setLoading(true)
-    const cookies = document.cookie.split("; ");
-    // let count_item;
-    // let quantity = parseInt(add_to_product_data.product.quantity);
-    const cartId = cookies.filter(
-      (element) => element.substring(0, 4) === "cart"
-    );
-    await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  }).then((resp) => resp.json())
-    .then((result) => {
-      // count_item = result.item_count;
-      setCartCount(result.item_count)
-    });
-  };
     setFlag(true);
     setLoaderMessage('Creating image for PDF');
     setLoaderColor('#ab1830');
-
-  console.log('cart count',cartCount)
+  };
   useEffect(() => {
     if (loading) {
       setIsApplyCaptured(true);
