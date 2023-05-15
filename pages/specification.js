@@ -35,9 +35,11 @@ const Specification = () => {
     );
     if (
       specificationValues.quantity % 6 !== 0 ||
-      specificationValues.quantity == 0
+      specificationValues.quantity == 0 
     ) {
       toast.error("Book quantity should be multiple of 6");
+    }else if(specificationValues.quantity > 100){
+      toast.error("Book quantity can not be greater than 100");
     } else {
       router.push("/customize");
     }
