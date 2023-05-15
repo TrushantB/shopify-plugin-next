@@ -20,7 +20,7 @@ const BookCarousel = ({
     <div >
       {initialSlide !== null && initialSlide !== -1 && (
         <Slider
-          className="pt-14 mx-lg-5 px-lg-4 px-0 mx-0 pt-lg-2 flex justify-center items-center carousel "
+          className="pt-14 mx-lg-5 px-0 mx-0  flex justify-center items-center carousel box-border "
           focusOnSelect={true}
           initialSlide={initialSlide || 0}
           // variableWidth={true}
@@ -50,13 +50,13 @@ const BookCarousel = ({
         >
           {bookForPurchase &&
             bookForPurchase.map((book, idx) => (
-              <div className="relative  p-3.5" key={idx}>
+              <div className="relative p-3.5 box-border"  key={idx}>
                 <>
                 {/* const className = {selectedIndex===idx ? 'active':'' } */}
                   <BookCanvas
                     book={book}
                     height={120}
-                    width={100}
+                    width={90}
                     index={idx}
                     totalBooks={bookForPurchase.length}
                     handleComplateIamgeCapturing={() => { }}
@@ -67,7 +67,7 @@ const BookCarousel = ({
                     className={`${book.id === selectedNotebook?.id
                       ? "bg-blue-600"
                       : "bg-zinc-400"
-                      }  absolute  left-[18%] top-[3%] lg:left-[5%] py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs `}
+                      }  absolute  left-[15%] top-[3%] md:left-[12%] lg:left-[5%] py-0.5 px-1.5 ml-1 rounded-sm text-white text-bold inline-block z-10 text-xs spanClass`}
                   >
                     {idx + 1}
                   </span>

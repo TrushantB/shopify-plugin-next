@@ -29,7 +29,7 @@ const BookCanvas = ({
         }
     }, [isApplyCaptured])
     return (
-        <div className={className}>
+        <div className={`${className} mx-auto`}>
             <Stage
                 width={width}
                 height={height}

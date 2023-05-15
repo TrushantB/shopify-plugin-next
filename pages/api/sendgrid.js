@@ -372,7 +372,7 @@ ul.social li{
 </html>`
     try {
         await sendgrid.send({
-            to: "arvind.alawa@geexu.in", // Your email where you'll receive emails
+            to: "arvind@setoo.co", // Your email where you'll receive emails
             from: {
                 email: process.env.SENDGRID_EMAIL,
                 name: process.env.SENDGRID_NAME,

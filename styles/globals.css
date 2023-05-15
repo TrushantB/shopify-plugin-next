@@ -155,6 +155,9 @@ video {
     top: 65%;
     
   }
+  .spanClass{
+  left: 5px;
+}
 }
 @media screen and (min-width: 992px) {
   .slick-prev {
