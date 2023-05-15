@@ -12,6 +12,7 @@ const FinalPreview = (props) => {
   let [selected, setSelected] = useState(0);
   const [loading, setLoading] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
+  const [loaderColor, setLoaderColor] = useState('#36d7b7');
   const [isApplyCaptured, setIsApplyCaptured] = useState(false);
 
   const router = useRouter();
@@ -47,6 +48,8 @@ const FinalPreview = (props) => {
 
   const handleComplateIamgeCapturing = async () => {
     setIsApplyCaptured(false);
+
+    console.log("hey2");
     const add_to_product_data = {
       product: {
         title: "Navneet Custom Book",
@@ -72,8 +75,11 @@ const FinalPreview = (props) => {
       const cartId = cookies.filter(
         (element) => element.substring(0, 4) === "cart"
       );
+      console.log(cartId);
       if (cartId.length !== 0) { 
         console.log('getting cookie'); 
+        toast.success('Checking cart storage');
+        setLoaderColor('#cc9b14')
         await fetch(`https://navneetbackend.geexu.org/cart/count?${cartId[0]}`, {
           method: "GET",
           headers: {
@@ -84,10 +90,10 @@ const FinalPreview = (props) => {
           .then((result) => {
             count_item = result.item_count;
           });
-        console.log('checking cart quantity'); 
-
         const cartProduct = count_item + quantity;
         if (cartProduct <= 100) {
+          toast.success('Adding product to cart');
+          setLoaderColor('#cc9b14')
           fetch(`https://navneetbackend.geexu.org/cart/add?${cartId[0]}`, {
             method: "POST",
             headers: {
@@ -121,6 +127,9 @@ const FinalPreview = (props) => {
   const handleAddToCartButton = async () => {
     setLoading(true)
     setFlag(true);
+    console.log('add to cart');
+    toast.success('Creating image for PDF')
+    setLoaderColor('#c1c1c1');
   };
   useEffect(() => {
     if (loading) {
@@ -148,8 +157,6 @@ const FinalPreview = (props) => {
         sendMail(url);
         setLoading(false);
         toast.success('Product successfully added');
-        console.log('successfull'); 
-
         window.location.replace("https://navneet.geexu.org/cart");
       });
     });
@@ -217,7 +224,7 @@ const FinalPreview = (props) => {
             <>
               <div className=" absolute z-10 top-1/4 left-1/3 right-1/3 flex items-center justify-center p-10">
                 <FadeLoader
-                  color="#36d7b7"
+                  color={loaderColor}
                   height={18}
                   loading
                   margin={13}
